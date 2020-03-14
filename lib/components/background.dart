@@ -4,7 +4,7 @@ import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
 
 class Background extends SpriteComponent {
-  final double aspectRatio = 1125 / 14073;
+  final double aspectRatio = 14073 / 1125;
 
   Background() : super.fromSprite(null, null, new Sprite('bg/background.png')) {
     this.anchor = Anchor.bottomLeft;
