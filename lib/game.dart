@@ -12,12 +12,13 @@ class CoronaJump extends BaseGame {
   Size screenSize;
   World world = new World();
   Player player;
-  Platform platform;
 
   CoronaJump() {
     add(new Background());
-    add(platform = new Platform(world, 0, -75));
-    world.add(platform.body);
+
+    // DEBUG platform
+    //add(new Platform(world, 0, -75));
+    //world.add(platform.body);
 
     // player
     add(player = new Player(world));
@@ -26,6 +27,7 @@ class CoronaJump extends BaseGame {
 
   @override
   void render(Canvas canvas) {
+    // move canvas origin to bottomCenter
     canvas.translate(0.5 * screenSize.width, screenSize.height);
     super.render(canvas);
     world.render(canvas);
