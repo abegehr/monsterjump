@@ -25,20 +25,30 @@ class PlatformBody extends BodyComponent {
   }
 
   void _createBody() {
-    final shape = new CircleShape(); //TODO
-    shape.radius = 0.5 * 72;
-    shape.p.x = 0.0;
+    final shape = new EdgeShape();
+    final x = sprite.x;
+    final y = sprite.y;
+    final hw = 0.5 * sprite.width;
+    shape.set(new Vector2(x - hw, y), new Vector2(x + hw, y));
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
-    fixtureDef.restitution = 0.0;
-    fixtureDef.density = 0.05;
-    fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
     bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.type = BodyType.STATIC;
 
     this.body = world.createBody(bodyDef)
       ..createFixtureFromFixtureDef(fixtureDef);
+  }
+
+  @override
+  void render(Canvas canvas) {
+    //DEBUG
+    EdgeShape shape = body.getFixtureList().getShape();
+    print("platform 1 ${shape.vertex1}");
+    print("platform 2 ${shape.vertex2}");
+    Paint paint = Paint()..color = const Color(0xFFFF0000);
+    canvas.drawLine(Offset(shape.vertex1.x, shape.vertex1.y),
+        Offset(shape.vertex2.x, shape.vertex2.y), paint);
   }
 }
