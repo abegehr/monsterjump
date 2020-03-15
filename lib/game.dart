@@ -1,4 +1,6 @@
 import 'dart:ui';
+//import 'package:coronajump/level.dart';
+import 'package:coronajump/level.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -13,11 +15,11 @@ class CoronaJump extends BaseGame {
   World world = new World();
   Player player;
   Platform platform;
+  Level level;
 
   CoronaJump() {
     add(new Background());
-    add(platform = new Platform(world, 0, -75));
-    world.add(platform.body);
+    add(new Level(world));
 
     // player
     add(player = new Player(world));
