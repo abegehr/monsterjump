@@ -1,4 +1,5 @@
 class Globals {
-  static double ptm = 1e-1;
-  static double ptm_inv = 1 / ptm;
+  // Box2D pixels to meters
+  static double ptm = 0.05;
+  static double mtp = 1 / ptm;
 }

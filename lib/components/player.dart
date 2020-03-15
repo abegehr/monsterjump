@@ -76,7 +76,7 @@ class PlayerBody extends BodyComponent {
   @override
   void update(num t) {
     // update sprite position
-    sprite.x = body.position.x * Globals.ptm_inv;
-    sprite.y = body.position.y * Globals.ptm_inv;
+    sprite.x = body.position.x * Globals.mtp;
+    sprite.y = body.position.y * Globals.mtp;
   }
 }
