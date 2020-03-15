@@ -7,7 +7,7 @@ import 'package:flame/components/composed_component.dart';
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
-    World world;
+  World world;
 
   Level(this.world) : super() {
     addPlatform(0,-175);
