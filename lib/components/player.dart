@@ -1,26 +1,46 @@
 import 'dart:ui';
-import 'package:flame/flame.dart';
+import 'package:flame/components/component.dart';
+import 'package:flame/sprite.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
 
-class Player extends BodyComponent {
-  Size screenSize;
-  static const num PLAYER_RADIUS = 24.0;
-  Image image;
+const num SIZE = 48;
 
-  Player(Box2DComponent box) : super(box) {
-    _loadImage();
-    _createBody();
+class Player extends SpriteComponent {
+  Size screenSize;
+  BodyComponent body;
+
+  Player() : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {}
+
+  @override
+  void update(double t) {
+    if (this.y < -0.5 * screenSize.height) {
+      print("!!!DEAD!!!"); //TODO
+    }
   }
 
-  void _loadImage() {
-    Flame.images.load("virus/virus.png").then((img) => image = img);
+  @override
+  void resize(Size size) {
+    screenSize = size;
+    super.resize(size);
+
+    x = 0.5 * screenSize.width;
+    y = 100;
+    body.body.setTransform(new Vector2(0, 100 - size.height * 0.5), 0);
+  }
+}
+
+class PlayerBody extends BodyComponent {
+  SpriteComponent sprite;
+
+  PlayerBody(box, this.sprite) : super(box) {
+    _createBody();
   }
 
   void _createBody() {
     final shape = new CircleShape();
-    shape.radius = PLAYER_RADIUS;
+    shape.radius = 0.5 * SIZE;
     shape.p.x = 0.0;
 
     final fixtureDef = new FixtureDef();
@@ -39,25 +59,8 @@ class Player extends BodyComponent {
 
   @override
   void update(double t) {
-    if (body.position.y < -0.5 * screenSize.height) {
-      //print("!!!DEAD!!!"); //TODO
-    }
-  }
-
-  @override
-  void renderCircle(Canvas canvas, Offset center, double radius) {
-    if (image == null) return;
-
-    paintImage(
-        canvas: canvas,
-        image: image,
-        rect: new Rect.fromCircle(center: center, radius: radius));
-  }
-
-  @override
-  void resize(Size size) {
-    screenSize = size;
-    super.resize(size);
-    body.setTransform(new Vector2(0, 100 - size.height * 0.5), 0);
+    // update sprite position
+    sprite.x = body.position.x;
+    sprite.y = body.position.y;
   }
 }
