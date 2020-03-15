@@ -7,12 +7,12 @@ import 'package:coronajump/components/player.dart';
 
 class CoronaJump extends BaseGame {
   World world = new World();
-  Player player = new Player();
+  Player player;
 
   CoronaJump() {
     add(new Background());
     // player
-    add(player);
+    add(player = new Player(world));
     world.add(player.body);
   }
 

@@ -9,9 +9,11 @@ const double SIZE = 48;
 
 class Player extends SpriteComponent {
   Size screenSize;
-  BodyComponent body;
+  PlayerBody body;
 
-  Player() : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {}
+  Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
+    body = PlayerBody(box, this);
+  }
 
   @override
   void update(double t) {
