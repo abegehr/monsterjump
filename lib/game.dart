@@ -49,9 +49,7 @@ class CoronaJump extends BaseGame {
     // move up camera so player stays in lower screen half
     camera = new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
 
-    if (player.y > camera.y) {
-      print("!!!DEAD!!!"); //TODO gameover
-    }
+    if (player.y > camera.y) player.die();
   }
 
   @override
