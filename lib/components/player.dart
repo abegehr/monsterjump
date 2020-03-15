@@ -5,7 +5,7 @@ import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
 
-const num SIZE = 48;
+const double SIZE = 48;
 
 class Player extends SpriteComponent {
   Size screenSize;
