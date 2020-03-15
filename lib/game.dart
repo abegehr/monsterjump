@@ -50,7 +50,9 @@ class CoronaJump extends BaseGame {
     world.update(t);
 
     // move up camera so player stays in lower screen half
-    camera = new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
+    if (screenSize != null)
+      camera =
+          new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
 
     if (player.y > camera.y) player.die();
   }
