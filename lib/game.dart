@@ -29,6 +29,7 @@ class CoronaJump extends BaseGame {
   void render(Canvas canvas) {
     // move canvas origin to bottomCenter
     canvas.translate(0.5 * screenSize.width, screenSize.height);
+
     super.render(canvas);
     world.render(canvas);
   }
@@ -41,8 +42,6 @@ class CoronaJump extends BaseGame {
     // move up camera?
     camera = new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
   }
-
-  void handleTap(Offset position) {}
 
   @override
   void resize(Size size) {
