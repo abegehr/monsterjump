@@ -23,8 +23,7 @@ class Player extends SpriteComponent {
   void jump() {
     if (!dead) {
       print("jump!"); //DEBUG
-      body.body.applyLinearImpulse(
-          new Vector2(0, -100 * body.body.mass), body.body.worldCenter, true);
+      body.body.linearVelocity = new Vector2(0, -Globals.jumpVY);
     }
   }
 
