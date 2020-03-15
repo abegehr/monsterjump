@@ -5,6 +5,7 @@ import 'package:flame/anchor.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/semantics.dart';
 
 const num SIZE = 48.0;
 
@@ -59,7 +60,12 @@ class PlayerBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    return null;
+    //DEBUG
+    CircleShape shape = body.getFixtureList().getShape();
+    print("player body.position: ${body.position}");
+    print("player shape ${shape.p} ${shape.radius}");
+    Paint paint = Paint()..color = const Color(0xFFFF0000);
+    canvas.drawCircle(Offset(body.position.x, body.position.y), shape.radius, paint);
   }
 
   @override
