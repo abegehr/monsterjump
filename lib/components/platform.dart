@@ -41,9 +41,4 @@ class PlatformBody extends BodyComponent {
     this.body = world.createBody(bodyDef)
       ..createFixtureFromFixtureDef(fixtureDef);
   }
-
-  @override
-  void render(Canvas canvas) {
-    return null;
-  }
 }
