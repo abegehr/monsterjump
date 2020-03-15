@@ -49,7 +49,6 @@ class CJContactFilter extends ContactFilter {
           return false;
         } else {
           // player touched down on platform -> jump
-          print("jump ${playerBody.mass}");
 
           /*playerBody.applyLinearImpulse(new Vector2(0, -24 * playerBody.mass),
               playerBody.worldCenter, true);*/
