@@ -4,7 +4,7 @@ import 'package:box2d_flame/box2d.dart';
 class World extends Box2DComponent {
   CJContactFilter contactFilter = CJContactFilter();
 
-  World() : super(gravity: 100);
+  World() : super(gravity: 10);
 
   @override
   void initializeWorld() {
@@ -46,6 +46,13 @@ class CJContactFilter extends ContactFilter {
         if (playerVY < 0 || playerBottomY > platformY + tol) {
           // player is moving up or playerBottom is below platform w/ tol
           return false;
+        } else {
+          // player touched down on platform -> jump
+          print("jump ${playerBody.mass}");
+
+          playerBody.applyLinearImpulse(new Vector2(0, -100 * playerBody.mass),
+              playerBody.worldCenter, true);
+          /*playerBody.linearVelocity = new Vector2(0, -100);*/
         }
       }
     }

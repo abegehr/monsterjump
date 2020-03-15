@@ -22,8 +22,8 @@ class Player extends SpriteComponent {
   void jump() {
     if (!dead) {
       print("jump!"); //DEBUG
-      body.body.applyLinearImpulse(new Vector2(0, -5000), new Vector2(0, 0),
-          true); //TODO parameter tuning
+      body.body.applyLinearImpulse(
+          new Vector2(0, -100 * body.body.mass), body.body.worldCenter, true);
     }
   }
 
@@ -51,7 +51,7 @@ class PlayerBody extends BodyComponent {
     fixtureDef.shape = shape;
     fixtureDef.restitution = 0.0;
     fixtureDef.density = 0.05;
-    fixtureDef.friction = 0.2;
+    fixtureDef.friction = 0.0;
     final bodyDef = new BodyDef();
     bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
