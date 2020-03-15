@@ -5,6 +5,7 @@ import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
 
 class Player extends BodyComponent {
+  Size screenSize;
   static const num PLAYER_RADIUS = 24.0;
   Image image;
 
@@ -28,12 +29,19 @@ class Player extends BodyComponent {
     fixtureDef.density = 0.05;
     fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
+    bodyDef.position = new Vector2(0.0, 0.0);
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
-    bodyDef.position = new Vector2(0.0, 15.0);
     bodyDef.type = BodyType.DYNAMIC;
 
     this.body = world.createBody(bodyDef)
       ..createFixtureFromFixtureDef(fixtureDef);
+  }
+
+  @override
+  void update(double t) {
+    if (body.position.y < -0.5 * screenSize.height) {
+      print("!!!DEAD!!!"); //TODO
+    }
   }
 
   @override
@@ -48,6 +56,8 @@ class Player extends BodyComponent {
 
   @override
   void resize(Size size) {
-    body.setTransform(new Vector2(size.width * 0.5, size.height - 100), 0);
+    screenSize = size;
+    super.resize(size);
+    body.setTransform(new Vector2(0, 100 - size.height * 0.5), 0);
   }
 }
