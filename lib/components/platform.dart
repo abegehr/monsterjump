@@ -26,10 +26,8 @@ class PlatformBody extends BodyComponent {
 
   void _createBody() {
     final shape = new EdgeShape();
-    final x = sprite.x;
-    final y = sprite.y;
     final hw = 0.5 * sprite.width;
-    shape.set(new Vector2(x - hw, y), new Vector2(x + hw, y));
+    shape.set(new Vector2(-hw, 0), new Vector2(hw, 0));
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
