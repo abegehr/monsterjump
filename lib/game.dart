@@ -31,8 +31,14 @@ class CoronaJump extends BaseGame {
     // move canvas origin to bottomCenter
     canvas.translate(0.5 * screenSize.width, screenSize.height);
 
+    // render BaseGame
     super.render(canvas);
+
+    // render Box2D incl. camera offset
+    canvas.translate(-camera.x, -camera.y);
     world.render(canvas);
+    canvas.restore();
+    canvas.save();
   }
 
   @override
