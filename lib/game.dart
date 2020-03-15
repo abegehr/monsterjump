@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:coronajump/level.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -6,7 +7,6 @@ import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
-import 'package:coronajump/components/platform.dart';
 
 class CoronaJump extends BaseGame {
   Size screenSize;
@@ -17,13 +17,7 @@ class CoronaJump extends BaseGame {
     world.initializeWorld();
 
     add(new Background());
-
-    // DEBUG platforms
-    for (int i = 1; i <= 100; i++) {
-      Platform platform = new Platform(world, 0, -100.0 * i);
-      add(platform);
-      world.add(platform.body);
-    }
+    add(new Level(world));
 
     // player
     add(player = new Player(world));
