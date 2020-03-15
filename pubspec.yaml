@@ -50,6 +50,7 @@ flutter:
   assets:
     - assets/images/bg/background.png
     - assets/images/virus/virus.png
+    - assets/images/platform/platform.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
