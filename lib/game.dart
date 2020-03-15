@@ -17,7 +17,7 @@ class CoronaJump extends BaseGame {
     add(new Background());
 
     // DEBUG platform
-    Platform platform = new Platform(world, 0, -75)
+    Platform platform = new Platform(world, 0, -75);
     add(platform);
     world.add(platform.body);
 
