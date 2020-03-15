@@ -1,6 +1,5 @@
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:coronajump/components/player.dart';
-import 'package:coronajump/components/background.dart';
 
 class World extends Box2DComponent {
   Player player;

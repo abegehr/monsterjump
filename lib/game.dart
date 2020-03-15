@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:coronajump/world.dart';
+import 'package:coronajump/components/background.dart';
 
 class CoronaJump extends BaseGame {
   World world = World();
 
   CoronaJump() {
+    add(new Background());
     world.initializeWorld();
   }
 
