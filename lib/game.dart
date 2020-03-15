@@ -23,7 +23,7 @@ class CoronaJump extends BaseGame {
   }
 
   @override
-  void update(double t) {
+  void update(num t) {
     super.update(t);
     world.update(t);
   }

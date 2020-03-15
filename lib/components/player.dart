@@ -5,7 +5,7 @@ import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
 
-const double SIZE = 48;
+const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
   Size screenSize;
@@ -16,7 +16,7 @@ class Player extends SpriteComponent {
   }
 
   @override
-  void update(double t) {
+  void update(num t) {
     if (this.y < -0.5 * screenSize.height) {
       print("!!!DEAD!!!"); //TODO
     }
@@ -60,8 +60,14 @@ class PlayerBody extends BodyComponent {
   }
 
   @override
-  void update(double t) {
+  void render(Canvas canvas) {
+    return null;
+  }
+
+  @override
+  void update(num t) {
     // update sprite position
+    print(body.position);
     sprite.x = body.position.x;
     sprite.y = body.position.y;
   }
