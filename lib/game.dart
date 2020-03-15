@@ -14,6 +14,8 @@ class CoronaJump extends BaseGame {
   Player player;
 
   CoronaJump() {
+    world.initializeWorld();
+
     add(new Background());
 
     // DEBUG platforms
