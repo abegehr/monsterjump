@@ -37,6 +37,7 @@ class Player extends SpriteComponent {
 
 class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
+  Fixture fixture;
 
   PlayerBody(box, this.sprite) : super(box) {
     _createBody();
@@ -56,8 +57,8 @@ class PlayerBody extends BodyComponent {
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
     bodyDef.type = BodyType.DYNAMIC;
 
-    this.body = world.createBody(bodyDef)
-      ..createFixtureFromFixtureDef(fixtureDef);
+    this.body = world.createBody(bodyDef);
+    this.fixture = body.createFixtureFromFixtureDef(fixtureDef);
   }
 
   @override
