@@ -2,47 +2,42 @@ import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/anchor.dart';
-import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
+import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/painting.dart';
 
 const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
-  Size screenSize;
   PlayerBody body;
+  bool dead = false;
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
+    x = 0;
+    y = -160;
     body = PlayerBody(box, this);
   }
 
-  jump() {
-    print("jump!"); //DEBUG
-    body.body.applyLinearImpulse(
-        new Vector2(0, -5000), new Vector2(0, 0), true); //TODO parameter tuning
-  }
-
-  @override
-  void update(num t) {
-    if (this.y > 0) {
-      print("!!!DEAD!!!"); //TODO gameover
+  void jump() {
+    if (!dead) {
+      print("jump!"); //DEBUG
+      body.body.applyLinearImpulse(new Vector2(0, -5000), new Vector2(0, 0),
+          true); //TODO parameter tuning
     }
   }
 
-  @override
-  void resize(Size size) {
-    screenSize = size;
-    super.resize(size);
-
-    x = 0;
-    y = -160;
-    body.body.setTransform(new Vector2(x, y), 0);
+  void die() {
+    if (!dead) {
+      dead = true;
+      print("!!!DIED!!!"); //DEBUG
+    }
   }
 }
 
 class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
+  Fixture fixture;
 
   PlayerBody(box, this.sprite) : super(box) {
     _createBody();
@@ -51,7 +46,6 @@ class PlayerBody extends BodyComponent {
   void _createBody() {
     final shape = new CircleShape();
     shape.radius = 0.5 * SIZE;
-    shape.p.x = 0.0;
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
@@ -59,17 +53,22 @@ class PlayerBody extends BodyComponent {
     fixtureDef.density = 0.05;
     fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
-    bodyDef.position = new Vector2(0.0, 0.0);
+    bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
     bodyDef.type = BodyType.DYNAMIC;
 
-    this.body = world.createBody(bodyDef)
-      ..createFixtureFromFixtureDef(fixtureDef);
+    body = world.createBody(bodyDef);
+    fixture = body.createFixtureFromFixtureDef(fixtureDef);
+    fixture.userData = {'type': "player"};
   }
 
   @override
   void render(Canvas canvas) {
-    return null;
+    //DEBUG
+    CircleShape shape = body.getFixtureList().getShape();
+    Paint paint = Paint()..color = const Color(0x99FF0000);
+    canvas.drawCircle(
+        Offset(body.position.x, body.position.y), shape.radius, paint);
   }
 
   @override
