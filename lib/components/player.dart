@@ -13,14 +13,14 @@ class Player extends SpriteComponent {
   PlayerBody body;
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
-    anchor = Anchor.bottomCenter;
+    anchor = Anchor.center;
     body = PlayerBody(box, this);
   }
 
   jump() {
     print("jump!"); //DEBUG
-    body.body.applyLinearImpulse(new Vector2(0, -10000), new Vector2(0, 0),
-        true); //TODO parameter tuning
+    body.body.applyLinearImpulse(
+        new Vector2(0, -5000), new Vector2(0, 0), true); //TODO parameter tuning
   }
 
   @override
@@ -36,7 +36,7 @@ class Player extends SpriteComponent {
     super.resize(size);
 
     x = 0;
-    y = -200;
+    y = -160;
     body.body.setTransform(new Vector2(x, y), 0);
   }
 }
@@ -75,7 +75,6 @@ class PlayerBody extends BodyComponent {
   @override
   void update(num t) {
     // update sprite position
-    print(body.position);
     sprite.x = body.position.x;
     sprite.y = body.position.y;
   }
