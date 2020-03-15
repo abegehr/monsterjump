@@ -19,7 +19,7 @@ class Player extends SpriteComponent {
     body = PlayerBody(box, this);
   }
 
-  jump() {
+  void jump() {
     if (!dead) {
       print("jump!"); //DEBUG
       body.body.applyLinearImpulse(new Vector2(0, -5000), new Vector2(0, 0),
@@ -27,7 +27,7 @@ class Player extends SpriteComponent {
     }
   }
 
-  die() {
+  void die() {
     if (!dead) {
       dead = true;
       print("!!!DIED!!!"); //DEBUG
