@@ -1,3 +1,4 @@
+import 'package:coronajump/utils/globals.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 
@@ -50,9 +51,9 @@ class CJContactFilter extends ContactFilter {
           // player touched down on platform -> jump
           print("jump ${playerBody.mass}");
 
-          playerBody.applyLinearImpulse(new Vector2(0, -100 * playerBody.mass),
-              playerBody.worldCenter, true);
-          /*playerBody.linearVelocity = new Vector2(0, -100);*/
+          /*playerBody.applyLinearImpulse(new Vector2(0, -24 * playerBody.mass),
+              playerBody.worldCenter, true);*/
+          playerBody.linearVelocity = new Vector2(0, -Globals.jumpVY);
         }
       }
     }
