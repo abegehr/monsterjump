@@ -19,6 +19,7 @@ class Platform extends SpriteComponent {
 
 class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
+  Fixture fixture;
 
   PlatformBody(box, this.sprite) : super(box) {
     _createBody();
@@ -35,8 +36,9 @@ class PlatformBody extends BodyComponent {
     bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.type = BodyType.STATIC;
 
-    this.body = world.createBody(bodyDef)
-      ..createFixtureFromFixtureDef(fixtureDef);
+    body = world.createBody(bodyDef);
+    fixture = body.createFixtureFromFixtureDef(fixtureDef);
+    fixture.userData = {'type': "platform"};
   }
 
   @override

@@ -57,8 +57,9 @@ class PlayerBody extends BodyComponent {
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
     bodyDef.type = BodyType.DYNAMIC;
 
-    this.body = world.createBody(bodyDef);
-    this.fixture = body.createFixtureFromFixtureDef(fixtureDef);
+    body = world.createBody(bodyDef);
+    fixture = body.createFixtureFromFixtureDef(fixtureDef);
+    fixture.userData = {'type': "player"};
   }
 
   @override

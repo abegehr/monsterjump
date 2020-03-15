@@ -28,7 +28,7 @@ class CoronaJump extends BaseGame {
 
     // player
     add(player = new Player(world));
-    world.addPlayerBody(player.body);
+    world.add(player.body);
   }
 
   @override
