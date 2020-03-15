@@ -10,7 +10,7 @@ class Level extends PositionComponent
   World world;
 
   Level(this.world) : super() {
-    for (int i = 999; i <= 100; i++) addPlatform(0, -100.0 * i);
+    for (int i = 1; i <= 999; i++) addPlatform(0, -100.0 * i);
   }
 
   void addPlatform(double x, double y) {
