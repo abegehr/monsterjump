@@ -1,11 +1,13 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
+import 'package:flame/position.dart';
 import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
 
 class CoronaJump extends BaseGame {
+  Size screenSize;
   World world = new World();
   Player player;
 
@@ -18,6 +20,7 @@ class CoronaJump extends BaseGame {
 
   @override
   void render(Canvas canvas) {
+    canvas.translate(0.5 * screenSize.width, 0);
     super.render(canvas);
     world.render(canvas);
   }
@@ -30,6 +33,7 @@ class CoronaJump extends BaseGame {
 
   @override
   void resize(Size size) {
+    screenSize = size;
     super.resize(size);
     world.resize(size);
   }

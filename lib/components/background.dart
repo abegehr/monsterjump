@@ -7,7 +7,7 @@ class Background extends SpriteComponent {
   final double aspectRatio = 14073 / 1125;
 
   Background() : super.fromSprite(null, null, new Sprite('bg/background.png')) {
-    this.anchor = Anchor.bottomLeft;
+    this.anchor = Anchor.bottomCenter;
     this.x = 0;
   }
 
