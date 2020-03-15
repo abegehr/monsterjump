@@ -5,7 +5,6 @@ import 'package:flame/anchor.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter/semantics.dart';
 
 const num SIZE = 48.0;
 
