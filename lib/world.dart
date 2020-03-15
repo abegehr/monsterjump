@@ -33,9 +33,22 @@ class CJContactFilter extends ContactFilter {
       if (playerFixture != null && platformFixture != null) {
         // player collides with platform
         Body playerBody = playerFixture.getBody();
-        Vector2 playerV = playerBody.linearVelocity;
-        if (playerV.y < 0) {
-          // player is moving up
+        Body platformBody = platformFixture.getBody();
+        Shape playerShape = playerFixture.getShape();
+
+        double playerVY = playerBody.linearVelocity.y;
+        double platformY = platformBody.position.y;
+        double playerRadius = playerShape.radius;
+        double playerY = playerBody.position.y;
+        double playerBottomY = playerY + playerRadius;
+
+        print("playerY $playerY");
+        print("playerBottomY $playerBottomY");
+        print("platformY $platformY");
+
+        double tol = 2;
+        if (playerVY < 0 || playerBottomY > platformY + tol) {
+          // player is moving up or playerBottom is below platform w/ tol
           return false;
         }
       }
