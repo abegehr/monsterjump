@@ -40,7 +40,7 @@ class Player extends BodyComponent {
   @override
   void update(double t) {
     if (body.position.y < -0.5 * screenSize.height) {
-      print("!!!DEAD!!!"); //TODO
+      //print("!!!DEAD!!!"); //TODO
     }
   }
 
