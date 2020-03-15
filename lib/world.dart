@@ -15,6 +15,6 @@ class World extends Box2DComponent {
   @override
   void update(t) {
     super.update(t);
-    cameraFollow(player, horizontal: 0.4, vertical: 0.4);
+    //cameraFollow(player, horizontal: 0.4, vertical: 0.4);
   }
 }
