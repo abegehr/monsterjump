@@ -6,14 +6,19 @@ import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
+import 'package:coronajump/components/platform.dart';
 
 class CoronaJump extends BaseGame {
   Size screenSize;
   World world = new World();
   Player player;
+  Platform platform;
 
   CoronaJump() {
     add(new Background());
+    add(platform = new Platform(world, 0, -75));
+    world.add(platform.body);
+
     // player
     add(player = new Player(world));
     world.add(player.body);
