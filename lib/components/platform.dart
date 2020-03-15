@@ -10,10 +10,10 @@ class Platform extends SpriteComponent {
 
   Platform(box, double x, double y)
       : super.fromSprite(72, 12, new Sprite('platform/platform.png')) {
-    anchor = Anchor.bottomCenter;
-    body = PlatformBody(box, this);
+    anchor = Anchor.topCenter;
     this.x = x;
     this.y = y;
+    body = PlatformBody(box, this);
   }
 }
 
@@ -35,8 +35,8 @@ class PlatformBody extends BodyComponent {
     fixtureDef.density = 0.05;
     fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
-    bodyDef.position = new Vector2(0.0, 0.0);
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
+    bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.type = BodyType.STATIC;
 
     this.body = world.createBody(bodyDef)
