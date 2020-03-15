@@ -9,12 +9,13 @@ import 'package:flutter/painting.dart';
 const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
-  Size screenSize;
   PlayerBody body;
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
     body = PlayerBody(box, this);
+    x = 0;
+    y = -160;
   }
 
   jump() {
@@ -29,16 +30,6 @@ class Player extends SpriteComponent {
       print("!!!DEAD!!!"); //TODO gameover
     }
   }
-
-  @override
-  void resize(Size size) {
-    screenSize = size;
-    super.resize(size);
-
-    x = 0;
-    y = -160;
-    body.body.setTransform(new Vector2(x, y), 0);
-  }
 }
 
 class PlayerBody extends BodyComponent {
@@ -51,7 +42,6 @@ class PlayerBody extends BodyComponent {
   void _createBody() {
     final shape = new CircleShape();
     shape.radius = 0.5 * SIZE;
-    shape.p.x = 0.0;
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
@@ -59,7 +49,7 @@ class PlayerBody extends BodyComponent {
     fixtureDef.density = 0.05;
     fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
-    bodyDef.position = new Vector2(0.0, 0.0);
+    bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.linearVelocity = new Vector2(0.0, 0.0);
     bodyDef.type = BodyType.DYNAMIC;
 
