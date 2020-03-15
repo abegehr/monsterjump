@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
+import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 
@@ -27,5 +28,11 @@ class CoronaJump extends BaseGame {
   void resize(Size size) {
     super.resize(size);
     world.resize(size);
+  }
+
+  @override
+  void onTapUp(TapUpDetails details) {
+    super.onTapUp(details);
+    world.handleTap(details.globalPosition);
   }
 }
