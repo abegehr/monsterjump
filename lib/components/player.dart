@@ -13,9 +13,9 @@ class Player extends SpriteComponent {
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
-    body = PlayerBody(box, this);
     x = 0;
     y = -160;
+    body = PlayerBody(box, this);
   }
 
   jump() {
