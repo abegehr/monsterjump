@@ -11,6 +11,7 @@ const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
   PlayerBody body;
+  bool dead = false;
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
@@ -25,10 +26,10 @@ class Player extends SpriteComponent {
         new Vector2(0, -5000), new Vector2(0, 0), true); //TODO parameter tuning
   }
 
-  @override
-  void update(num t) {
-    if (this.y > 0) {
-      print("!!!DEAD!!!"); //TODO gameover
+  die() {
+    if (!dead) {
+      dead = true;
+      print("!!!DIED!!!"); //DEBUG
     }
   }
 }
