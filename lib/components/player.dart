@@ -27,7 +27,6 @@ class Player extends SpriteComponent {
 
   @override
   void update(num t) {
-    print("player $x $y");
     if (this.y > 0) {
       print("!!!DEAD!!!"); //TODO gameover
     }
@@ -63,7 +62,6 @@ class PlayerBody extends BodyComponent {
   void render(Canvas canvas) {
     //DEBUG
     CircleShape shape = body.getFixtureList().getShape();
-    print("player body.position: ${body.position}");
     Paint paint = Paint()..color = const Color(0xFFFF0000);
     canvas.drawCircle(
         Offset(body.position.x, body.position.y), shape.radius, paint);

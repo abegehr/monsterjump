@@ -45,8 +45,6 @@ class PlatformBody extends BodyComponent {
   void render(Canvas canvas) {
     //DEBUG
     EdgeShape shape = body.getFixtureList().getShape();
-    print("platform 1 ${shape.vertex1}");
-    print("platform 2 ${shape.vertex2}");
     Paint paint = Paint()..color = const Color(0xFFFF0000);
     canvas.drawLine(Offset(shape.vertex1.x, shape.vertex1.y),
         Offset(shape.vertex2.x, shape.vertex2.y), paint);
