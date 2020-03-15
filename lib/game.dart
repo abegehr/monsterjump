@@ -3,13 +3,17 @@ import 'package:flame/game.dart';
 import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
+import 'package:coronajump/components/player.dart';
 
 class CoronaJump extends BaseGame {
-  World world = World();
+  World world = new World();
+  Player player = new Player();
 
   CoronaJump() {
     add(new Background());
-    world.initializeWorld();
+    // player
+    add(player);
+    world.add(player.body);
   }
 
   @override
