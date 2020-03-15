@@ -43,7 +43,7 @@ class PlatformBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    //DEBUG
+    /*
     EdgeShape shape = body.getFixtureList().getShape();
     Paint paint = Paint()..color = const Color(0xFFFF0000);
     canvas.drawLine(
@@ -52,5 +52,6 @@ class PlatformBody extends BodyComponent {
         Offset(body.position.x + shape.vertex2.x,
             body.position.y + shape.vertex2.y),
         paint);
+    */
   }
 }

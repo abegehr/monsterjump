@@ -64,11 +64,12 @@ class PlayerBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    //DEBUG
+    /*
     CircleShape shape = body.getFixtureList().getShape();
     Paint paint = Paint()..color = const Color(0x99FF0000);
     canvas.drawCircle(
         Offset(body.position.x, body.position.y), shape.radius, paint);
+    */
   }
 
   @override
