@@ -42,7 +42,7 @@ class CJContactFilter extends ContactFilter {
         double playerY = playerBody.position.y;
         double playerBottomY = playerY + playerRadius;
 
-        double tol = 2;
+        double tol = 2 * Globals.ptm;
         if (playerVY < 0 || playerBottomY > platformY + tol) {
           // player is moving up or playerBottom is below platform w/ tol
           return false;
