@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
+import 'dart:math';
 import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
@@ -20,7 +21,7 @@ class CoronaJump extends BaseGame {
 
   @override
   void render(Canvas canvas) {
-    canvas.translate(0.5 * screenSize.width, 0);
+    canvas.translate(0.5 * screenSize.width, screenSize.height);
     super.render(canvas);
     world.render(canvas);
   }
@@ -29,7 +30,12 @@ class CoronaJump extends BaseGame {
   void update(num t) {
     super.update(t);
     world.update(t);
+
+    // move up camera?
+    camera = new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
   }
+
+  void handleTap(Offset position) {}
 
   @override
   void resize(Size size) {
@@ -41,6 +47,7 @@ class CoronaJump extends BaseGame {
   @override
   void onTapUp(TapUpDetails details) {
     super.onTapUp(details);
-    world.handleTap(details.globalPosition);
+
+    player.jump(); //DEBUG
   }
 }

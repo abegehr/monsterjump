@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
+import 'package:flame/anchor.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flutter/painting.dart';
@@ -12,13 +13,20 @@ class Player extends SpriteComponent {
   PlayerBody body;
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
+    anchor = Anchor.bottomCenter;
     body = PlayerBody(box, this);
+  }
+
+  jump() {
+    print("jump!"); //DEBUG
+    body.body.applyLinearImpulse(new Vector2(0, -10000), new Vector2(0, 0),
+        true); //TODO parameter tuning
   }
 
   @override
   void update(num t) {
-    if (this.y < -0.5 * screenSize.height) {
-      print("!!!DEAD!!!"); //TODO
+    if (this.y > 0) {
+      print("!!!DEAD!!!"); //TODO gameover
     }
   }
 
@@ -27,9 +35,9 @@ class Player extends SpriteComponent {
     screenSize = size;
     super.resize(size);
 
-    x = 0.5 * screenSize.width;
-    y = 100;
-    body.body.setTransform(new Vector2(0, 100 - size.height * 0.5), 0);
+    x = 0;
+    y = -200;
+    body.body.setTransform(new Vector2(x, y), 0);
   }
 }
 
