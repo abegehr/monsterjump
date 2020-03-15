@@ -21,9 +21,11 @@ class Player extends SpriteComponent {
   }
 
   jump() {
-    print("jump!"); //DEBUG
-    body.body.applyLinearImpulse(
-        new Vector2(0, -5000), new Vector2(0, 0), true); //TODO parameter tuning
+    if (!dead) {
+      print("jump!"); //DEBUG
+      body.body.applyLinearImpulse(new Vector2(0, -5000), new Vector2(0, 0),
+          true); //TODO parameter tuning
+    }
   }
 
   die() {
