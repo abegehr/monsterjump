@@ -19,12 +19,11 @@ class CoronaJump extends BaseGame {
     add(new Background());
 
     // DEBUG platforms
-    Platform platform1 = new Platform(world, 0, -75);
-    add(platform1);
-    world.add(platform1.body);
-    Platform platform2 = new Platform(world, 0, -200);
-    add(platform2);
-    world.add(platform2.body);
+    for (int i = 1; i <= 100; i++) {
+      Platform platform = new Platform(world, 0, -100.0 * i);
+      add(platform);
+      world.add(platform.body);
+    }
 
     // player
     add(player = new Player(world));
