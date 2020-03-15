@@ -35,7 +35,6 @@ class PlatformBody extends BodyComponent {
     fixtureDef.density = 0.05;
     fixtureDef.friction = 0.2;
     final bodyDef = new BodyDef();
-    bodyDef.linearVelocity = new Vector2(0.0, 0.0);
     bodyDef.position = new Vector2(sprite.x, sprite.y);
     bodyDef.type = BodyType.STATIC;
 
