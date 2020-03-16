@@ -34,7 +34,7 @@ dependencies:
   flame: ^0.18.1
 
   # Sensors
-  sensors: ">=0.4.y+x <2.0.0"
+  sensors: ">=0.4.1+10 <2.0.0"
 
 dev_dependencies:
   flutter_test:
