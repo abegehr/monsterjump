@@ -1,10 +1,11 @@
+import 'package:coronajump/utils/globals.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 
 class World extends Box2DComponent {
   CJContactFilter contactFilter = CJContactFilter();
 
-  World() : super(gravity: 100);
+  World() : super(gravity: 10.0);
 
   @override
   void initializeWorld() {
@@ -42,10 +43,16 @@ class CJContactFilter extends ContactFilter {
         double playerY = playerBody.position.y;
         double playerBottomY = playerY + playerRadius;
 
-        double tol = 2;
+        double tol = 2 * Globals.ptm;
         if (playerVY < 0 || playerBottomY > platformY + tol) {
           // player is moving up or playerBottom is below platform w/ tol
           return false;
+        } else {
+          // player touched down on platform -> jump
+
+          /*playerBody.applyLinearImpulse(new Vector2(0, -24 * playerBody.mass),
+              playerBody.worldCenter, true);*/
+          playerBody.linearVelocity = new Vector2(0, -Globals.jumpVY);
         }
       }
     }

@@ -5,6 +5,7 @@ import 'package:flame/anchor.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/painting.dart';
+import 'package:coronajump/utils/globals.dart';
 
 const num SIZE = 48.0;
 
@@ -22,8 +23,7 @@ class Player extends SpriteComponent {
   void jump() {
     if (!dead) {
       print("jump!"); //DEBUG
-      body.body.applyLinearImpulse(new Vector2(0, -5000), new Vector2(0, 0),
-          true); //TODO parameter tuning
+      body.body.linearVelocity = new Vector2(0, -Globals.jumpVY);
     }
   }
 
@@ -45,16 +45,16 @@ class PlayerBody extends BodyComponent {
 
   void _createBody() {
     final shape = new CircleShape();
-    shape.radius = 0.5 * SIZE;
+    shape.radius = 0.5 * SIZE * Globals.ptm;
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
     fixtureDef.restitution = 0.0;
     fixtureDef.density = 0.05;
-    fixtureDef.friction = 0.2;
+    fixtureDef.friction = 0.0;
     final bodyDef = new BodyDef();
-    bodyDef.position = new Vector2(sprite.x, sprite.y);
-    bodyDef.linearVelocity = new Vector2(0.0, 0.0);
+    bodyDef.position =
+        new Vector2(sprite.x * Globals.ptm, sprite.y * Globals.ptm);
     bodyDef.type = BodyType.DYNAMIC;
 
     body = world.createBody(bodyDef);
@@ -64,17 +64,18 @@ class PlayerBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    //DEBUG
+    /*
     CircleShape shape = body.getFixtureList().getShape();
     Paint paint = Paint()..color = const Color(0x99FF0000);
     canvas.drawCircle(
         Offset(body.position.x, body.position.y), shape.radius, paint);
+    */
   }
 
   @override
   void update(num t) {
     // update sprite position
-    sprite.x = body.position.x;
-    sprite.y = body.position.y;
+    sprite.x = body.position.x * Globals.mtp;
+    sprite.y = body.position.y * Globals.mtp;
   }
 }
