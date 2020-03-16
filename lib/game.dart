@@ -6,18 +6,25 @@ import 'dart:math';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
+import 'package:flame/text_config.dart';
 import 'package:coronajump/overlays/menu_overlay.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
+  Background background = new Background();
   World world = new World();
   bool playing = false;
   Player player;
+  double maxHeight = 0;
 
   CoronaJump() {
+    // Box2D
     world.initializeWorld();
 
-    add(new Background());
+    // background
+    add(background);
+
+    // level
     add(new Level(world));
 
     addWidgetOverlay("Menu", MenuOverlay(start: start));
@@ -49,6 +56,12 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     world.render(canvas);
     canvas.restore();
     canvas.save();
+
+    // render score //TODO use Flame TextComponent
+    int score = (maxHeight / 10).floor();
+    const TextConfig config = TextConfig(
+        fontSize: 48.0, color: Color(0xFFFFFFFF), fontFamily: 'Awesome Font');
+    config.render(canvas, "Score: $score", Position(16, 32));
   }
 
   @override
@@ -57,13 +70,19 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     world.update(t);
 
     if (playing) {
-      // move up camera so player stays in lower screen half
-      if (screenSize != null)
-        camera =
-            new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
+      if (screenSize != null) {
+        // update maxHeight
+        maxHeight = min(camera.y, player.y + 0.5 * screenSize.height).abs();
+
+        // move up camera so player stays in lower screen half
+        camera = new Position(0, -maxHeight);
+
+        // update background
+        background.updateMaxHeight(maxHeight);
+      }
 
       // test if player dies
-      if (playing && player.y > camera.y) player.die();
+      if (player.y > camera.y) player.die();
     }
   }
 
