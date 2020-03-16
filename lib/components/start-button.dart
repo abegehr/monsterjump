@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flame/sprite.dart';
 import 'package:coronajump/game.dart';
+import 'package:coronajump/view.dart';
 
 class StartButton {
   final CoronaJump game;
@@ -23,5 +24,7 @@ class StartButton {
 
   void update(double t) {}
 
-  void onTapDown() {}
+  void onTapDown() {
+    game.activeView = View.playing;
+  }
 }
