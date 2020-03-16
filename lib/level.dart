@@ -10,11 +10,11 @@ import 'package:flame/components/composed_component.dart';
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
+  Size screenSize;
   World world;
 
   Level(this.world) : super() {
     //for (int i = 1; i <= 999; i++) addPlatform(0, -100.0 * i);
-    for (int j = 0; j <= 12; j++) generateLevel(j);
   }
 
   void addPlatform(double x, double y) {
@@ -55,20 +55,39 @@ class Level extends PositionComponent
         "; levelEndHeight: " +
         levelEndHeight.toString());
 
-    // TODO generate safe path
+    // generate safe path
+    var rng = new Random();
+    for (int currentHeight = levelStartHeight;
+        currentHeight <= levelEndHeight;) {
+      int x = rng.nextInt((screenSize.width + 72).toInt()) - 72;
+      int nextStep = rng.nextInt(11) + 6;
+      int y = currentHeight + nextStep;
+      addPlatform(x.toDouble(), y.toDouble());
+      print("Generating safe path platform at height " + y.toString());
+      currentHeight = y;
+    }
 
     // generate randomPlatforms
-    var rng = new Random();
     for (int i = 0; i < numRandomPlatforms; i++) {
-      // 72 is the width of platforms 
-      int x = rng.nextInt((250 + 72).toInt()) - 72 - 125; //TODO
+      // 72 is the width of platforms
+      int x = rng.nextInt((screenSize.width + 72).toInt()) - 72;
       int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
-      print("DEBUG generating platform at (" +
+      print("Generating random platform at (" +
           x.toString() +
           "," +
           y.toString() +
           ").");
       addPlatform(x.toDouble(), -y.toDouble());
     }
+  }
+
+  @override
+  void resize(Size size) {
+    screenSize = size;
+    super.resize(size);
+    world.resize(size);
+
+    for (int j = 0; j <= 12; j++)
+      generateLevel(j); //TODO pass screensize from game
   }
 }
