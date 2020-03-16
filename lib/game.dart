@@ -60,11 +60,4 @@ class CoronaJump extends BaseGame {
     super.resize(size);
     world.resize(size);
   }
-
-  @override
-  void onTapUp(TapUpDetails details) {
-    super.onTapUp(details);
-
-    player.jump(); //DEBUG
-  }
 }

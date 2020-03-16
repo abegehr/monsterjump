@@ -20,13 +20,6 @@ class Player extends SpriteComponent {
     body = PlayerBody(box, this);
   }
 
-  void jump() {
-    if (!dead) {
-      print("jump!"); //DEBUG
-      body.body.linearVelocity = new Vector2(0, -Globals.jumpVY);
-    }
-  }
-
   void die() {
     if (!dead) {
       dead = true;
