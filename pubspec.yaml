@@ -33,6 +33,9 @@ dependencies:
   # Flame
   flame: ^0.18.1
 
+  # Sensors
+  sensors: ">=0.4.y+x <2.0.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
