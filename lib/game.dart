@@ -1,5 +1,7 @@
 import 'dart:ui';
 import 'package:coronajump/level.dart';
+import 'package:coronajump/view.dart';
+import 'package:coronajump/views/home-view.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -7,11 +9,19 @@ import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
+import 'package:coronajump/components/start-button.dart';
 
 class CoronaJump extends BaseGame {
   Size screenSize;
+  double tileSize;
   World world = new World();
   Player player;
+
+  View activeView = View.home;
+
+  HomeView homeView;
+
+  StartButton startButton;
 
   CoronaJump() {
     world.initializeWorld();
@@ -24,6 +34,10 @@ class CoronaJump extends BaseGame {
     // player
     add(player = new Player(world));
     world.add(player.body);
+
+    homeView = HomeView(this);
+
+    startButton = StartButton(this);
   }
 
   @override
@@ -39,6 +53,12 @@ class CoronaJump extends BaseGame {
     world.render(canvas);
     canvas.restore();
     canvas.save();
+
+    if (activeView == View.home) homeView.render(canvas);
+
+    if (activeView == View.home || activeView == View.lost) {
+      startButton.render(canvas);
+    }
   }
 
   @override
@@ -59,5 +79,6 @@ class CoronaJump extends BaseGame {
     screenSize = size;
     super.resize(size);
     world.resize(size);
+    tileSize = screenSize.width / 9;
   }
 }
