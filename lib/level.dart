@@ -55,13 +55,13 @@ class Level extends PositionComponent
         "; levelEndHeight: " +
         levelEndHeight.toString());
 
-    //TODO generate safe path
+    // TODO generate safe path
 
     // generate randomPlatforms
     var rng = new Random();
     for (int i = 0; i < numRandomPlatforms; i++) {
-      //72 is the width of platforms
-      int x = rng.nextInt((250 + 72).toInt()) - 72 - 125;
+      // 72 is the width of platforms 
+      int x = rng.nextInt((250 + 72).toInt()) - 72 - 125; //TODO
       int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
       print("DEBUG generating platform at (" +
           x.toString() +
