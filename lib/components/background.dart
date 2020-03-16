@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/composed_component.dart';
@@ -27,12 +28,24 @@ class Background extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
 
-  BackgroundTile tile1;
-  BackgroundTile tile2;
+  Queue<BackgroundTile> queue;
 
   Background() : super() {
-    add(tile1 = new BackgroundTile(0));
-    add(tile1 = new BackgroundTile(0));
+    queue = Queue.from([new BackgroundTile(0), new BackgroundTile(0)]);
+    queue.forEach((tile) => add(tile));
+  }
+
+  updateMaxHeight(double maxHeight) {
+    double tol = 16.0;
+    BackgroundTile lastTile = queue.last;
+    double upperBound = lastTile.y.abs() + lastTile.width * bgAspectRatio - tol;
+    if (upperBound - screenSize.height < maxHeight) {
+      // need to move up a tile
+      BackgroundTile tile = queue.removeFirst();
+      print("background: move up.");
+      tile.y = -upperBound;
+      queue.add(tile);
+    }
   }
 
   @override

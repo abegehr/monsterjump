@@ -64,7 +64,7 @@ class CoronaJump extends BaseGame {
       camera = new Position(0, -maxHeight);
 
       // update background
-
+      background.updateMaxHeight(maxHeight);
     }
 
     // gameover condition
