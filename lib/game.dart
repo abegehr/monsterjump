@@ -51,6 +51,7 @@ class CoronaJump extends BaseGame {
       camera =
           new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
 
+    // gameover condition
     if (player.y > camera.y) player.die();
   }
 
