@@ -42,7 +42,6 @@ class Background extends PositionComponent
     if (upperBound - screenSize.height < maxHeight) {
       // move up the lowest BackgroundTile
       BackgroundTile tile = queue.removeFirst();
-      print("background: move up.");
       tile.y = -upperBound;
       queue.add(tile);
     }
