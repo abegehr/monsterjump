@@ -58,7 +58,7 @@ class Level extends PositionComponent
     // generate safe path
     generatePath(levelStartHeight, levelEndHeight);
     generatePath(levelStartHeight, levelEndHeight);
- 
+
     // generate randomPlatforms
     generateRandomPlatforms(
         numRandomPlatforms, levelStartHeight, levelEndHeight);
@@ -100,7 +100,7 @@ class Level extends PositionComponent
     super.resize(size);
     world.resize(size);
 
-    for (int j = 0; j <= 12; j++)
+    for (int j = 0; j <= 1; j++)
       generateLevel(j); //TODO pass screensize from game
   }
 }
