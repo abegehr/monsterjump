@@ -58,7 +58,7 @@ class Level extends PositionComponent
     // generate safe path
     generatePath(levelStartHeight, levelEndHeight);
     generatePath(levelStartHeight, levelEndHeight);
-
+ 
     // generate randomPlatforms
     generateRandomPlatforms(
         numRandomPlatforms, levelStartHeight, levelEndHeight);
