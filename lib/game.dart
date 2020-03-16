@@ -10,7 +10,7 @@ import 'package:flame/text_config.dart';
 
 class CoronaJump extends BaseGame {
   Size screenSize;
-  Background background;
+  Background background = new Background();
   World world = new World();
   Player player;
   double maxHeight = 0;
@@ -20,7 +20,7 @@ class CoronaJump extends BaseGame {
     world.initializeWorld();
 
     // background
-    add(background = new Background());
+    add(background);
 
     // level
     add(new Level(world));
