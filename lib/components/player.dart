@@ -6,12 +6,15 @@ import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/painting.dart';
 import 'package:coronajump/utils/globals.dart';
+import 'package:sensors/sensors.dart';
 
 const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
   PlayerBody body;
   bool dead = false;
+  double sensorScale = 5;
+  Vector2 acceleration = Vector2.zero();
 
   Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
@@ -20,11 +23,24 @@ class Player extends SpriteComponent {
     body = PlayerBody(box, this);
   }
 
+  void start() {
+    gyroscopeEvents.listen((GyroscopeEvent event) {
+      //Adding up the scaled sensor data to the current acceleration
+      acceleration.add(Vector2(event.y / sensorScale, 0));
+    });
+  }
+
   void die() {
     if (!dead) {
       dead = true;
       print("!!!DIED!!!"); //DEBUG
     }
+  }
+
+  @override
+  void update(double t) {
+    super.update(t);
+    body.body.applyForceToCenter(acceleration);
   }
 }
 

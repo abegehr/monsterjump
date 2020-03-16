@@ -36,6 +36,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
     playing = true;
     addPlayer();
+    player.start();
   }
 
   void addPlayer() {
