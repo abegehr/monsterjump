@@ -40,7 +40,7 @@ class Background extends PositionComponent
     BackgroundTile lastTile = queue.last;
     double upperBound = lastTile.y.abs() + lastTile.width * bgAspectRatio - tol;
     if (upperBound - screenSize.height < maxHeight) {
-      // need to move up a tile
+      // move up the lowest BackgroundTile
       BackgroundTile tile = queue.removeFirst();
       print("background: move up.");
       tile.y = -upperBound;
