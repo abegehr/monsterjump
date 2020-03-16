@@ -7,11 +7,13 @@ import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
 import 'package:flame/text_config.dart';
+import 'package:coronajump/overlays/menu_overlay.dart';
 
-class CoronaJump extends BaseGame {
+class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
   Background background = new Background();
   World world = new World();
+  bool playing = false;
   Player player;
   double maxHeight = 0;
 
@@ -25,7 +27,18 @@ class CoronaJump extends BaseGame {
     // level
     add(new Level(world));
 
-    // player
+    addWidgetOverlay("Menu", MenuOverlay(start: start));
+  }
+
+  void start() {
+    print("START GAME");
+    removeWidgetOverlay("Menu");
+
+    playing = true;
+    addPlayer();
+  }
+
+  void addPlayer() {
     add(player = new Player(world));
     world.add(player.body);
   }
@@ -56,19 +69,21 @@ class CoronaJump extends BaseGame {
     super.update(t);
     world.update(t);
 
-    if (screenSize != null) {
-      // update maxHeight
-      maxHeight = min(camera.y, player.y + 0.5 * screenSize.height).abs();
+    if (playing) {
+      if (screenSize != null) {
+        // update maxHeight
+        maxHeight = min(camera.y, player.y + 0.5 * screenSize.height).abs();
 
-      // move up camera so player stays in lower screen half
-      camera = new Position(0, -maxHeight);
+        // move up camera so player stays in lower screen half
+        camera = new Position(0, -maxHeight);
 
-      // update background
-      background.updateMaxHeight(maxHeight);
+        // update background
+        background.updateMaxHeight(maxHeight);
+      }
+
+      // test if player dies
+      if (player.y > camera.y) player.die();
     }
-
-    // gameover condition
-    if (player.y > camera.y) player.die();
   }
 
   @override
