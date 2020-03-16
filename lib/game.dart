@@ -5,7 +5,6 @@ import 'package:coronajump/views/home-view.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
-import 'package:flutter/gestures.dart';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
