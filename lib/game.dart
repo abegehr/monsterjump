@@ -6,33 +6,32 @@ import 'dart:math';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
-import 'package:flutter/material.dart';
+import 'package:coronajump/overlays/menu_overlay.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
   World world = new World();
+  bool playing = false;
   Player player;
 
   CoronaJump() {
     world.initializeWorld();
 
     add(new Background());
-
-    addWidgetOverlay(
-        "PauseMenu",
-        Center(
-          child: Container(
-            width: 100,
-            height: 100,
-            color: const Color(0xFFFF0000),
-            child: const Center(child: const Text("Paused")),
-          ),
-        ));
-
-    // level
     add(new Level(world));
 
-    // player
+    addWidgetOverlay("Menu", MenuOverlay(start: start));
+  }
+
+  void start() {
+    print("START GAME");
+    removeWidgetOverlay("Menu");
+
+    playing = true;
+    addPlayer();
+  }
+
+  void addPlayer() {
     add(player = new Player(world));
     world.add(player.body);
   }
@@ -57,12 +56,15 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     super.update(t);
     world.update(t);
 
-    // move up camera so player stays in lower screen half
-    if (screenSize != null)
-      camera =
-          new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
+    if (playing) {
+      // move up camera so player stays in lower screen half
+      if (screenSize != null)
+        camera =
+            new Position(0, min(camera.y, player.y + 0.5 * screenSize.height));
 
-    if (player.y > camera.y) player.die();
+      // test if player dies
+      if (playing && player.y > camera.y) player.die();
+    }
   }
 
   @override
