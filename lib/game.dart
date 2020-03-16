@@ -13,7 +13,7 @@ class CoronaJump extends BaseGame {
   Background background;
   World world = new World();
   Player player;
-  double height = 0;
+  double maxHeight = 0;
 
   CoronaJump() {
     // Box2D
@@ -45,7 +45,7 @@ class CoronaJump extends BaseGame {
     canvas.save();
 
     // render score //TODO use Flame TextComponent
-    int score = (height / 10).floor().abs();
+    int score = (maxHeight / 10).floor();
     const TextConfig config = TextConfig(
         fontSize: 48.0, color: Color(0xFFFFFFFF), fontFamily: 'Awesome Font');
     config.render(canvas, "Score: $score", Position(16, 32));
@@ -57,11 +57,11 @@ class CoronaJump extends BaseGame {
     world.update(t);
 
     if (screenSize != null) {
-      // update height
-      height = min(camera.y, player.y + 0.5 * screenSize.height);
+      // update maxHeight
+      maxHeight = min(camera.y, player.y + 0.5 * screenSize.height).abs();
 
       // move up camera so player stays in lower screen half
-      camera = new Position(0, height);
+      camera = new Position(0, -maxHeight);
 
       // update background
 
