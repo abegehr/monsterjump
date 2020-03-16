@@ -6,8 +6,9 @@ import 'dart:math';
 import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
+import 'package:flutter/material.dart';
 
-class CoronaJump extends BaseGame {
+class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
   World world = new World();
   Player player;
@@ -16,6 +17,17 @@ class CoronaJump extends BaseGame {
     world.initializeWorld();
 
     add(new Background());
+
+    addWidgetOverlay(
+        "PauseMenu",
+        Center(
+          child: Container(
+            width: 100,
+            height: 100,
+            color: const Color(0xFFFF0000),
+            child: const Center(child: const Text("Paused")),
+          ),
+        ));
 
     // level
     add(new Level(world));
