@@ -13,7 +13,7 @@ void main() async {
     'virus/virus.png',
     'platform/platform.png',
     'branding/title.png',
-    'ui/start-button'
+    'ui/start-button.png',
   ]);
 
   Util flameUtil = Util();
