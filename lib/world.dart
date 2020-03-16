@@ -52,7 +52,8 @@ class CJContactFilter extends ContactFilter {
 
           /*playerBody.applyLinearImpulse(new Vector2(0, -24 * playerBody.mass),
               playerBody.worldCenter, true);*/
-          playerBody.linearVelocity = new Vector2(0, -Globals.jumpVY);
+          playerBody.linearVelocity =
+              new Vector2(playerBody.linearVelocity.x, -Globals.jumpVY);
         }
       }
     }
