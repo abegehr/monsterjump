@@ -10,14 +10,17 @@ import 'package:flame/text_config.dart';
 
 class CoronaJump extends BaseGame {
   Size screenSize;
+  Background background;
   World world = new World();
   Player player;
   double height = 0;
 
   CoronaJump() {
+    // Box2D
     world.initializeWorld();
 
-    add(new Background());
+    // background
+    add(background = new Background());
 
     // level
     add(new Level(world));
