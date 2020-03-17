@@ -11,10 +11,10 @@ class Level extends PositionComponent
   World world;
   double screenWidth;
 
-  Level(this.world, screenWidth, levelStartHeight, levelEndHeight,
+  Level(this.world, this.screenWidth, levelStartHeight, levelEndHeight,
       numRandomPlatforms, movementSpeed)
       : super() {
-    generateLevel(screenWidth, levelStartHeight, levelEndHeight,
+    generateLevel(levelStartHeight, levelEndHeight,
         numRandomPlatforms, movementSpeed);
   }
 
@@ -24,11 +24,11 @@ class Level extends PositionComponent
     world.add(platform.body);
   }
 
-  void generateLevel(double screenWidth, int levelStartHeight,
+  void generateLevel(int levelStartHeight,
       int levelEndHeight, int numRandomPlatforms, double movementSpeed) {
 
     // generate safe path
-    generatePath(levelStartHeight, levelEndHeight, screenWidth);
+    generatePath(levelStartHeight, levelEndHeight);
 
     // generate randomPlatforms
     generateRandomPlatforms(
@@ -36,7 +36,7 @@ class Level extends PositionComponent
     addPlatform(200.0, -250.0);
   }
 
-  void generatePath(levelStartHeight, levelEndHeight, screenWidth) {
+  void generatePath(levelStartHeight, levelEndHeight) {
     var rng = new Random();
     int currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
@@ -49,7 +49,7 @@ class Level extends PositionComponent
   }
 
   void generateRandomPlatforms(
-      numRandomPlatforms, levelStartHeight, levelEndHeight, screenWidth) {
+      numRandomPlatforms, levelStartHeight, levelEndHeight) {
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
