@@ -99,7 +99,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     if (playing) {
       if (screenSize != null) {
         // update maxHeight
-        maxHeight = min(camera.y, player.y + 0.5 * screenSize.height).abs();
+        maxHeight = min(-maxHeight, player.y + 0.5 * screenSize.height).abs();
 
         // move up camera so player stays in lower screen half
         camera = new Position(0, -maxHeight);
