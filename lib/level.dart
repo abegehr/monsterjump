@@ -23,7 +23,7 @@ class Level extends PositionComponent
 
   void generateLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
-    int levelHeight = (8 - (levelNumber % 3)) * 1000;
+    double levelHeight = (8 - (levelNumber % 3)) * 1000.0;
 
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
@@ -33,12 +33,11 @@ class Level extends PositionComponent
     //TODO set movementSpeed (Anton)
 
     // level bounds in pixel
-    int levelStartHeight = (((levelNumber + 2) ~/ 3 * 8) +
-                ((levelNumber + 1) ~/ 3 * 7) +
-                (levelNumber ~/ 3 * 6))
-            .toInt() *
+    double levelStartHeight = (((levelNumber + 2) ~/ 3 * 8.0) +
+            ((levelNumber + 1) ~/ 3 * 7) +
+            (levelNumber ~/ 3 * 6)) *
         1000;
-    int levelEndHeight = levelStartHeight + levelHeight - 1;
+    double levelEndHeight = levelStartHeight + levelHeight - 1;
 
     print("Level " +
         levelNumber.toString() +
@@ -77,8 +76,8 @@ class Level extends PositionComponent
     }
   }
 
-  void generateRandomPlatforms(double numRandomPlatforms,
-      double levelStartHeight, double levelEndHeight, double width) {
+  void generateRandomPlatforms(int numRandomPlatforms, double levelStartHeight,
+      double levelEndHeight, double width) {
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
