@@ -44,7 +44,6 @@ class LevelWrapper extends PositionComponent
   void resize(Size size) {
     screenSize = size;
     super.resize(size);
-    world.resize(size);
 
     for (int j = 0; j <= 1; j++) buildLevel(j); //TODO pass screensize from game
   }
