@@ -5,7 +5,7 @@ import 'package:box2d_flame/box2d.dart';
 class Box extends Box2DComponent {
   CJContactFilter contactFilter = CJContactFilter();
 
-  Box() : super(gravity: 10.0);
+  Box() : super(gravity: 18.0);
 
   @override
   void initializeWorld() {
