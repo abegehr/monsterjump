@@ -58,7 +58,7 @@ class Level extends PositionComponent
     // generate safe path
     generatePath(levelStartHeight, levelEndHeight);
     generatePath(levelStartHeight, levelEndHeight);
- 
+
     // generate randomPlatforms
     generateRandomPlatforms(
         numRandomPlatforms, levelStartHeight, levelEndHeight);
@@ -85,11 +85,13 @@ class Level extends PositionComponent
       // 72 is the width of platforms
       int x = rng.nextInt((screenSize.width + 72).toInt()) - 72;
       int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
+      /*
       print("Generating random platform at (" +
           x.toString() +
           "," +
           y.toString() +
           ").");
+          */
       addPlatform(x.toDouble(), -y.toDouble());
     }
   }
