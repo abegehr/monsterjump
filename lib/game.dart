@@ -1,7 +1,5 @@
 import 'dart:ui';
-import 'package:coronajump/components/platform.dart';
 import 'package:coronajump/level.dart';
-import 'package:flame/components/component.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
