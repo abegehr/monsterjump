@@ -12,6 +12,7 @@ class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
   Box box;
+  bool willDestroy = false;
 
   Level(this.box) : super() {
     //for (int i = 1; i <= 999; i++) addPlatform(0, -100.0 * i);
@@ -104,5 +105,18 @@ class Level extends PositionComponent
 
     for (int j = 0; j <= 1; j++)
       generateLevel(j); //TODO pass screensize from game
+  }
+
+  void remove() {
+    willDestroy = true;
+    components.forEach((c) {
+      if (c is Platform) c.remove();
+    });
+  }
+
+  @override
+  bool destroy() {
+    print("level.destroy() called.");
+    return willDestroy;
   }
 }

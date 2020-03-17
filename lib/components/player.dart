@@ -12,6 +12,7 @@ const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
   PlayerBody body;
+  bool willDestroy = false;
   double sensorScale = 5;
   Vector2 acceleration = Vector2.zero();
 
@@ -31,15 +32,20 @@ class Player extends SpriteComponent {
   }
 
   @override
-  bool destroy() {
-    body.destroy();
-    return super.destroy();
-  }
-
-  @override
   void update(double t) {
     super.update(t);
     body.body.applyForceToCenter(acceleration);
+  }
+
+  void remove() {
+    willDestroy = true;
+    body.remove();
+  }
+
+  @override
+  bool destroy() {
+    print("player.destroy() called.");
+    return willDestroy;
   }
 }
 
@@ -85,5 +91,9 @@ class PlayerBody extends BodyComponent {
     // update sprite position
     sprite.x = body.position.x * Globals.mtp;
     sprite.y = body.position.y * Globals.mtp;
+  }
+
+  void remove() {
+    box.remove(this);
   }
 }

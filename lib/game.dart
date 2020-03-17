@@ -1,5 +1,7 @@
 import 'dart:ui';
+import 'package:coronajump/components/platform.dart';
 import 'package:coronajump/level.dart';
+import 'package:flame/components/component.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -50,7 +52,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   }
 
   void addPlayer() {
-    add(player = new Player(box));
+    addLater(player = new Player(box));
     box.add(player.body);
   }
 
@@ -61,12 +63,11 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
       // overlays
       addWidgetOverlay("Gameover", GameoverOverlay(start: start));
-
       // player
-      player.destroy();
-
+      player.remove();
       // level
-      level.destroy();
+      level.remove();
+      addLater(level = new Level(box));
     }
   }
 
