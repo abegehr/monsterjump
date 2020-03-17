@@ -53,6 +53,7 @@ class Player extends SpriteComponent {
 class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
+  double screenHalfWidth;
 
   PlayerBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -92,11 +93,26 @@ class PlayerBody extends BodyComponent {
   @override
   void update(num t) {
     // update sprite position
-    sprite.x = body.position.x * Globals.mtp;
     sprite.y = body.position.y * Globals.mtp;
+    double newX = body.position.x * Globals.mtp;
+    // keep player in screen horizontally
+    if (screenHalfWidth != null && newX.abs() > screenHalfWidth) {
+      newX = -newX % screenHalfWidth;
+      body.setTransform(
+          new Vector2(newX * Globals.ptm, body.position.y), body.getAngle());
+      print("newX $newX");
+    }
+    sprite.x = newX;
   }
 
   void remove() {
     box.remove(this);
+  }
+
+  @override
+  void resize(Size size) {
+    print("size $size");
+    screenHalfWidth = 0.5 * size.width;
+    super.resize(size);
   }
 }
