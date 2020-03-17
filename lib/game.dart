@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:coronajump/level.dart';
 import 'package:flame/game.dart';
+import 'package:flame/game/widget_builder.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
 import 'package:coronajump/world.dart';
@@ -10,8 +12,9 @@ import 'package:flame/text_config.dart';
 // overlays
 import 'package:coronajump/overlays/menu_overlay.dart';
 import 'package:coronajump/overlays/gameover_overlay.dart';
+import 'package:flutter/material.dart';
 
-class CoronaJump extends BaseGame with HasWidgetsOverlay {
+class CoronaJump extends BaseGame with CJHasWidgetsOverlay {
   Size screenSize;
   Background background = new Background();
   World world = new World();
@@ -118,5 +121,22 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     screenSize = size;
     super.resize(size);
     world.resize(size);
+  }
+}
+
+// TODO this is tmp until https://github.com/flame-engine/flame/issues/236 is solved
+mixin CJHasWidgetsOverlay on Game {
+  @override
+  final builder = OverlayWidgetBuilder();
+
+  StreamController<OverlayWidget> cjWidgetOverlayController =
+      StreamController();
+
+  void addWidgetOverlay(String overlayName, Widget widget) {
+    cjWidgetOverlayController.sink.add(OverlayWidget(overlayName, widget));
+  }
+
+  void removeWidgetOverlay(String overlayName) {
+    cjWidgetOverlayController.sink.add(OverlayWidget(overlayName, null));
   }
 }
