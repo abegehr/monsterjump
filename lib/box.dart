@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:coronajump/utils/globals.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 
 class Box extends Box2DComponent {
+  Size screenSize;
   CJContactFilter contactFilter = CJContactFilter();
 
   Box() : super(gravity: 18.0);
@@ -10,6 +13,23 @@ class Box extends Box2DComponent {
   @override
   void initializeWorld() {
     world.setContactFilter(contactFilter);
+  }
+
+  void preAdd(BodyComponent c) {
+    if (screenSize != null) c.resize(screenSize);
+  }
+
+  @override
+  void add(BodyComponent c) {
+    //TODO open an issue/PR. This should be part of Box2DComponent implementation the same as BaseGame: https://pub.dev/documentation/flame/latest/game_game/BaseGame/preAdd.html
+    preAdd(c);
+    super.add(c);
+  }
+
+  @override
+  void resize(Size size) {
+    screenSize = size;
+    super.resize(size);
   }
 }
 
