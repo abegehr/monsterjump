@@ -38,6 +38,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     if (!playing) {
       print("START GAME");
       playing = true;
+      maxHeight = 0;
 
       // overlays
       removeWidgetOverlay("Menu");
