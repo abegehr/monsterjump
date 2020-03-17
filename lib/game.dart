@@ -54,13 +54,22 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   }
 
   void gameover() {
-    addWidgetOverlay("Gameover", GameoverOverlay(start: start));
+    if (playing) {
+      print("GAME OVER");
 
-    // player
-    player.destroy();
+      print(
+          "start widgetOverlayController.isClosed: ${widgetOverlayController.isClosed}");
 
-    // level
-    level.destroy();
+      addWidgetOverlay("Gameover", GameoverOverlay(start: start));
+
+      playing = false;
+
+      // player
+      //player.destroy();
+
+      // level
+      //level.destroy();
+    }
   }
 
   @override
