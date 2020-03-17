@@ -6,7 +6,6 @@ import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
-
 import 'level.dart';
 
 class LevelWrapper extends PositionComponent
@@ -37,8 +36,9 @@ class LevelWrapper extends PositionComponent
 
     double screenWidth = screenSize.width;
 
-    Level level = new Level(world, screenWidth, levelStartHeight,
-        levelEndHeight, numRandomPlatforms, movementSpeed);
+    Level level = Level(world, screenWidth, levelStartHeight, levelEndHeight,
+        numRandomPlatforms, movementSpeed);
+    add(level);
   }
 
   @override
