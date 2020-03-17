@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:coronajump/level.dart';
+import 'package:coronajump/levelWrapper.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -25,7 +26,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     add(background);
 
     // level
-    add(new Level(world));
+    add(new LevelWrapper(world));
 
     addWidgetOverlay("Menu", MenuOverlay(start: start));
   }
