@@ -34,6 +34,8 @@ class Player extends SpriteComponent {
   @override
   void update(double t) {
     super.update(t);
+
+    // move with gyroscope
     body.body.applyForceToCenter(acceleration);
   }
 
