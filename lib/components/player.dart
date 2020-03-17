@@ -97,10 +97,9 @@ class PlayerBody extends BodyComponent {
     double newX = body.position.x * Globals.mtp;
     // keep player in screen horizontally
     if (screenHalfWidth != null && newX.abs() > screenHalfWidth) {
-      newX = -newX % screenHalfWidth;
+      newX = -newX;
       body.setTransform(
           new Vector2(newX * Globals.ptm, body.position.y), body.getAngle());
-      print("newX $newX");
     }
     sprite.x = newX;
   }
