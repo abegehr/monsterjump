@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:coronajump/world.dart';
+import 'package:coronajump/box.dart';
+import 'package:coronajump/components/platform.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -10,9 +11,10 @@ import 'level.dart';
 class LevelWrapper extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
-  World world;
+  Box box;
+  bool willDestroy = false;
 
-  LevelWrapper(this.world) : super();
+  LevelWrapper(this.box) : super();
 
   void buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
@@ -38,7 +40,7 @@ class LevelWrapper extends PositionComponent
 
     double screenWidth = screenSize.width;
 
-    Level level = Level(world, screenWidth, levelStartHeight, levelEndHeight,
+    Level level = Level(box, screenWidth, levelStartHeight, levelEndHeight,
         numRandomPlatforms, numPaths, movementSpeed);
     add(level);
   }
@@ -49,5 +51,17 @@ class LevelWrapper extends PositionComponent
     super.resize(size);
 
     for (int j = 0; j <= 1; j++) buildLevel(j); //TODO pass screensize from game
+  }
+
+  void remove() {
+    willDestroy = true;
+    components.forEach((c) {
+      if (c is Platform) c.remove();
+    });
+  }
+
+  @override
+  bool destroy() {
+    return willDestroy;
   }
 }

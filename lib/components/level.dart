@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:coronajump/components/platform.dart';
-import 'package:coronajump/world.dart';
+import 'package:coronajump/box.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -8,10 +8,11 @@ import 'package:flame/components/composed_component.dart';
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
-  World world;
+  Box box;
   double screenWidth;
+  bool willDestroy = false;
 
-  Level(this.world, this.screenWidth, levelStartHeight, levelEndHeight,
+  Level(this.box, this.screenWidth, levelStartHeight, levelEndHeight,
       numRandomPlatforms, numPaths, movementSpeed)
       : super() {
     generateLevel(levelStartHeight, levelEndHeight, numRandomPlatforms,
@@ -19,9 +20,9 @@ class Level extends PositionComponent
   }
 
   void addPlatform(double x, double y) {
-    Platform platform = Platform(world, x, y);
+    Platform platform = Platform(box, x, y);
     add(platform);
-    world.add(platform.body);
+    box.add(platform.body);
   }
 
   void generateLevel(int levelStartHeight, int levelEndHeight,
@@ -62,5 +63,17 @@ class Level extends PositionComponent
           ").");
       addPlatform(x.toDouble(), -y.toDouble());
     }
+  }
+
+  void remove() {
+    willDestroy = true;
+    components.forEach((c) {
+      if (c is Platform) c.remove();
+    });
+  }
+
+  @override
+  bool destroy() {
+    return willDestroy;
   }
 }
