@@ -30,6 +30,12 @@ class Player extends SpriteComponent {
   }
 
   @override
+  bool destroy() {
+    body.destroy();
+    return super.destroy();
+  }
+
+  @override
   void update(double t) {
     super.update(t);
     body.body.applyForceToCenter(acceleration);
