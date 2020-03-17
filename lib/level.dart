@@ -116,7 +116,6 @@ class Level extends PositionComponent
 
   @override
   bool destroy() {
-    print("level.destroy() called.");
     return willDestroy;
   }
 }

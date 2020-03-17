@@ -44,7 +44,6 @@ class Player extends SpriteComponent {
 
   @override
   bool destroy() {
-    print("player.destroy() called.");
     return willDestroy;
   }
 }

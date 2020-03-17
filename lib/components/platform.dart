@@ -25,7 +25,6 @@ class Platform extends SpriteComponent {
 
   @override
   bool destroy() {
-    print("platform.destroy() called.");
     return willDestroy;
   }
 }
