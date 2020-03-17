@@ -12,7 +12,6 @@ const num SIZE = 48.0;
 
 class Player extends SpriteComponent {
   PlayerBody body;
-  bool dead = false;
   double sensorScale = 5;
   Vector2 acceleration = Vector2.zero();
 
@@ -28,13 +27,6 @@ class Player extends SpriteComponent {
       //Adding up the scaled sensor data to the current acceleration
       acceleration.add(Vector2(event.y / sensorScale, 0));
     });
-  }
-
-  void die() {
-    if (!dead) {
-      dead = true;
-      print("!!!DIED!!!"); //DEBUG
-    }
   }
 
   @override
