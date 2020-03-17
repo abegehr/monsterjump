@@ -21,6 +21,9 @@ class LevelWrapper extends PositionComponent
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
+    // amount of safe paths
+    int numPaths = 1;
+
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
     //TODO set movementSpeed (Anton)
@@ -36,7 +39,7 @@ class LevelWrapper extends PositionComponent
     double screenWidth = screenSize.width;
 
     Level level = Level(world, screenWidth, levelStartHeight, levelEndHeight,
-        numRandomPlatforms, movementSpeed);
+        numRandomPlatforms, numPaths, movementSpeed);
     add(level);
   }
 
