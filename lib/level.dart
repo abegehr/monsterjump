@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'dart:ui';
-
 import 'package:coronajump/components/platform.dart';
 import 'package:coronajump/world.dart';
 import 'package:flame/components/component.dart';
@@ -14,7 +13,6 @@ class Level extends PositionComponent
   World world;
 
   Level(this.world) : super() {
-    //for (int i = 1; i <= 999; i++) addPlatform(0, -100.0 * i);
   }
 
   void addPlatform(double x, double y) {
@@ -28,7 +26,7 @@ class Level extends PositionComponent
     int levelHeight = (8 - (levelNumber % 3)) * 1000;
 
     // amount of random platforms
-    int numRandomPlatforms = max(25, 80 - levelNumber * 5);
+    int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
@@ -56,34 +54,34 @@ class Level extends PositionComponent
         levelEndHeight.toString());
 
     // generate safe path
-    generatePath(levelStartHeight, levelEndHeight);
-    generatePath(levelStartHeight, levelEndHeight);
- 
+    generatePath(levelStartHeight, levelEndHeight, screenSize.width);
+
     // generate randomPlatforms
     generateRandomPlatforms(
-        numRandomPlatforms, levelStartHeight, levelEndHeight);
+        numRandomPlatforms, levelStartHeight, levelEndHeight, screenSize.width);
+    addPlatform(200.0, -250.0);
+
+    print(screenSize.toString());
   }
 
-  void generatePath(levelStartHeight, levelEndHeight) {
+  void generatePath(levelStartHeight, levelEndHeight, width) {
     var rng = new Random();
-    for (int currentHeight = levelStartHeight;
-        currentHeight <= levelEndHeight;) {
-      int x = rng.nextInt((screenSize.width + 72).toInt()) - 72;
-      int nextStep = rng.nextInt(11) + 6;
+    int currentHeight = levelStartHeight;
+    while (currentHeight <= levelEndHeight) {
+      int x = (rng.nextInt(width.toInt()) - width / 2).toInt();
+      int nextStep = rng.nextInt(30) + 70;
       int y = currentHeight + nextStep;
-      addPlatform(x.toDouble(), y.toDouble());
-      print("Generating safe path platform at height " + y.toString());
+      addPlatform(x.toDouble(), -y.toDouble());
       currentHeight = y;
     }
   }
 
   void generateRandomPlatforms(
-      numRandomPlatforms, levelStartHeight, levelEndHeight) {
+      numRandomPlatforms, levelStartHeight, levelEndHeight, width) {
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
-      // 72 is the width of platforms
-      int x = rng.nextInt((screenSize.width + 72).toInt()) - 72;
+      int x = (rng.nextInt(width.toInt()) - width / 2).toInt();
       int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
       print("Generating random platform at (" +
           x.toString() +
