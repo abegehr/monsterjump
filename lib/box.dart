@@ -2,10 +2,10 @@ import 'package:coronajump/utils/globals.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 
-class World extends Box2DComponent {
+class Box extends Box2DComponent {
   CJContactFilter contactFilter = CJContactFilter();
 
-  World() : super(gravity: 18.0);
+  Box() : super(gravity: 18.0);
 
   @override
   void initializeWorld() {

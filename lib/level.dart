@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:coronajump/components/platform.dart';
-import 'package:coronajump/world.dart';
+import 'package:coronajump/box.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -10,20 +10,20 @@ import 'package:flame/components/composed_component.dart';
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
-  World world;
+  Box box;
+  bool willDestroy = false;
 
-  Level(this.world) : super() {
-  }
+  Level(this.box) : super();
 
   void addPlatform(double x, double y) {
-    Platform platform = Platform(world, x, y);
+    Platform platform = Platform(box, x, y);
     add(platform);
-    world.add(platform.body);
+    box.add(platform.body);
   }
 
   void generateLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
-    int levelHeight = (8 - (levelNumber % 3)) * 1000;
+    double levelHeight = (8 - (levelNumber % 3)) * 1000.0;
 
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
@@ -33,12 +33,11 @@ class Level extends PositionComponent
     //TODO set movementSpeed (Anton)
 
     // level bounds in pixel
-    int levelStartHeight = (((levelNumber + 2) ~/ 3 * 8) +
-                ((levelNumber + 1) ~/ 3 * 7) +
-                (levelNumber ~/ 3 * 6))
-            .toInt() *
+    double levelStartHeight = (((levelNumber + 2) ~/ 3 * 8.0) +
+            ((levelNumber + 1) ~/ 3 * 7) +
+            (levelNumber ~/ 3 * 6)) *
         1000;
-    int levelEndHeight = levelStartHeight + levelHeight - 1;
+    double levelEndHeight = levelStartHeight + levelHeight - 1;
 
     print("Level " +
         levelNumber.toString() +
@@ -64,31 +63,35 @@ class Level extends PositionComponent
     print(screenSize.toString());
   }
 
-  void generatePath(levelStartHeight, levelEndHeight, width) {
+  void generatePath(
+      double levelStartHeight, double levelEndHeight, double width) {
     var rng = new Random();
-    int currentHeight = levelStartHeight;
+    double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      int x = (rng.nextInt(width.toInt()) - width / 2).toInt();
-      int nextStep = rng.nextInt(30) + 70;
-      int y = currentHeight + nextStep;
-      addPlatform(x.toDouble(), -y.toDouble());
+      double x = (rng.nextDouble() - 0.5) * width;
+      double nextStep = rng.nextDouble() * 30 + 70;
+      double y = currentHeight + nextStep;
+      addPlatform(x, -y);
       currentHeight = y;
     }
   }
 
-  void generateRandomPlatforms(
-      numRandomPlatforms, levelStartHeight, levelEndHeight, width) {
+  void generateRandomPlatforms(int numRandomPlatforms, double levelStartHeight,
+      double levelEndHeight, double width) {
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
-      int x = (rng.nextInt(width.toInt()) - width / 2).toInt();
-      int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
+      double x = (rng.nextDouble() - 0.5) * width;
+      double y = rng.nextDouble() * (levelEndHeight - levelStartHeight) +
+          levelStartHeight;
+      /*
       print("Generating random platform at (" +
           x.toString() +
           "," +
           y.toString() +
           ").");
-      addPlatform(x.toDouble(), -y.toDouble());
+          */
+      addPlatform(x, -y);
     }
   }
 
@@ -96,9 +99,21 @@ class Level extends PositionComponent
   void resize(Size size) {
     screenSize = size;
     super.resize(size);
-    world.resize(size);
+    box.resize(size);
 
     for (int j = 0; j <= 1; j++)
       generateLevel(j); //TODO pass screensize from game
+  }
+
+  void remove() {
+    willDestroy = true;
+    components.forEach((c) {
+      if (c is Platform) c.remove();
+    });
+  }
+
+  @override
+  bool destroy() {
+    return willDestroy;
   }
 }

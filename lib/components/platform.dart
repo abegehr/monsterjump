@@ -8,13 +8,24 @@ import 'package:box2d_flame/box2d.dart';
 
 class Platform extends SpriteComponent {
   PlatformBody body;
+  bool willDestroy = false;
 
-  Platform(box, double x, double y)
+  Platform(Box2DComponent box, double x, double y)
       : super.fromSprite(72, 12, new Sprite('platform/platform.png')) {
     anchor = Anchor.topCenter;
     this.x = x;
     this.y = y;
     body = PlatformBody(box, this);
+  }
+
+  void remove() {
+    willDestroy = true;
+    body.remove();
+  }
+
+  @override
+  bool destroy() {
+    return willDestroy;
   }
 }
 
@@ -22,7 +33,7 @@ class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
 
-  PlatformBody(box, this.sprite) : super(box) {
+  PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
   }
 
@@ -55,5 +66,9 @@ class PlatformBody extends BodyComponent {
             body.position.y + shape.vertex2.y),
         paint);
     */
+  }
+
+  void remove() {
+    box.remove(this);
   }
 }
