@@ -3,45 +3,70 @@ import 'package:coronajump/components/levelWrapper.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
-import 'package:coronajump/world.dart';
+import 'package:coronajump/box.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
 import 'package:flame/text_config.dart';
+// overlays
 import 'package:coronajump/overlays/menu_overlay.dart';
+import 'package:coronajump/overlays/gameover_overlay.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
   Background background = new Background();
-  World world = new World();
+  Box box = new Box();
   bool playing = false;
   Player player;
+  Level level;
   double maxHeight = 0;
 
   CoronaJump() {
     // Box2D
-    world.initializeWorld();
+    box.initializeWorld();
 
     // background
     add(background);
 
     // level
-    add(new LevelWrapper(world));
+    add(level = new LevelWrapper(box));
 
+    // start menu
     addWidgetOverlay("Menu", MenuOverlay(start: start));
   }
 
   void start() {
-    print("START GAME");
-    removeWidgetOverlay("Menu");
+    if (!playing) {
+      print("START GAME");
+      playing = true;
 
-    playing = true;
-    addPlayer();
-    player.start();
+      // overlays
+      removeWidgetOverlay("Menu");
+      removeWidgetOverlay("Gameover");
+
+      // player
+      addPlayer();
+      player.start();
+    }
   }
 
   void addPlayer() {
-    add(player = new Player(world));
-    world.add(player.body);
+    add(player = new Player(box));
+    box.add(player.body);
+  }
+
+  void gameover() {
+    if (playing) {
+      print("GAME OVER");
+      playing = false;
+
+      // overlays
+      addWidgetOverlay("Gameover", GameoverOverlay(start: start));
+      // player
+      player.remove();
+      // level
+      level.remove();
+      addLater(level = new Level(box));
+    }
   }
 
   @override
@@ -54,7 +79,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
     // render Box2D incl. camera offset
     canvas.translate(-camera.x, -camera.y);
-    world.render(canvas);
+    box.render(canvas);
     canvas.restore();
     canvas.save();
 
@@ -68,7 +93,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   @override
   void update(num t) {
     super.update(t);
-    world.update(t);
+    box.update(t);
 
     if (playing) {
       if (screenSize != null) {
@@ -83,7 +108,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       }
 
       // test if player dies
-      if (player.y > camera.y) player.die();
+      if (player.y > camera.y) gameover();
     }
   }
 
@@ -91,6 +116,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   void resize(Size size) {
     screenSize = size;
     super.resize(size);
-    world.resize(size);
+    box.resize(size);
   }
 }

@@ -4,5 +4,5 @@ class Globals {
   static double mtp = 1 / ptm;
 
   // jump
-  static double jumpVY = 13.0;
+  static double jumpVY = 20.0;
 }
