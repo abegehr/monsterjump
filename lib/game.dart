@@ -7,7 +7,9 @@ import 'package:coronajump/world.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
 import 'package:flame/text_config.dart';
+// overlays
 import 'package:coronajump/overlays/menu_overlay.dart';
+import 'package:coronajump/overlays/gameover_overlay.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
