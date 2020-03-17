@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'dart:ui';
-import 'package:coronajump/level.dart';
 import 'package:coronajump/world.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
