@@ -61,10 +61,10 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       playing = false;
 
       // player
-      //player.destroy();
+      player.destroy();
 
       // level
-      //level.destroy();
+      level.destroy();
     }
   }
 
