@@ -72,7 +72,7 @@ class Level extends PositionComponent
       int nextStep = rng.nextInt(11) + 6;
       int y = currentHeight + nextStep;
       addPlatform(x.toDouble(), y.toDouble());
-      print("Generating safe path platform at height " + y.toString());
+      //print("Generating safe path platform at height " + y.toString());
       currentHeight = y;
     }
   }
