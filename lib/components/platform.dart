@@ -9,7 +9,7 @@ import 'package:box2d_flame/box2d.dart';
 class Platform extends SpriteComponent {
   PlatformBody body;
 
-  Platform(box, double x, double y)
+  Platform(Box2DComponent box, double x, double y)
       : super.fromSprite(72, 12, new Sprite('platform/platform.png')) {
     anchor = Anchor.topCenter;
     this.x = x;
@@ -22,7 +22,7 @@ class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
 
-  PlatformBody(box, this.sprite) : super(box) {
+  PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
   }
 

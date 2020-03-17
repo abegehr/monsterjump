@@ -15,7 +15,8 @@ class Player extends SpriteComponent {
   double sensorScale = 5;
   Vector2 acceleration = Vector2.zero();
 
-  Player(box) : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
+  Player(Box2DComponent box)
+      : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
     x = 0;
     y = -160;
@@ -46,7 +47,7 @@ class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
 
-  PlayerBody(box, this.sprite) : super(box) {
+  PlayerBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
   }
 

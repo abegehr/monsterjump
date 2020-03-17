@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:coronajump/components/platform.dart';
-import 'package:coronajump/world.dart';
+import 'package:coronajump/box.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -11,16 +11,16 @@ import 'package:flame/components/composed_component.dart';
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
-  World world;
+  Box box;
 
-  Level(this.world) : super() {
+  Level(this.box) : super() {
     //for (int i = 1; i <= 999; i++) addPlatform(0, -100.0 * i);
   }
 
   void addPlatform(double x, double y) {
-    Platform platform = Platform(world, x, y);
+    Platform platform = Platform(box, x, y);
     add(platform);
-    world.add(platform.body);
+    box.add(platform.body);
   }
 
   void generateLevel(int levelNumber) {
@@ -100,7 +100,7 @@ class Level extends PositionComponent
   void resize(Size size) {
     screenSize = size;
     super.resize(size);
-    world.resize(size);
+    box.resize(size);
 
     for (int j = 0; j <= 1; j++)
       generateLevel(j); //TODO pass screensize from game
