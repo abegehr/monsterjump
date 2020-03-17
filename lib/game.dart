@@ -35,15 +35,17 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   }
 
   void start() {
-    print("START GAME");
-    removeWidgetOverlay("Menu");
-    removeWidgetOverlay("Gameover");
+    if (!playing) {
+      print("START GAME");
+      removeWidgetOverlay("Menu");
+      removeWidgetOverlay("Gameover");
 
-    playing = true;
+      playing = true;
 
-    // player
-    addPlayer();
-    player.start();
+      // player
+      addPlayer();
+      player.start();
+    }
   }
 
   void addPlayer() {
