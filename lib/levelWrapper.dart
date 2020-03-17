@@ -16,7 +16,7 @@ class LevelWrapper extends PositionComponent
 
   LevelWrapper(this.world) : super();
 
-  void buildLevel(int levelNumber, double screenWidth) {
+  void buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
     int levelHeight = (8 - (levelNumber % 3)) * 1000;
 
@@ -35,7 +35,7 @@ class LevelWrapper extends PositionComponent
         1000;
     int levelEndHeight = levelStartHeight + levelHeight - 1;
 
-    print("DEBUG movementSpeed: " + movementSpeed.toString());
+    double screenWidth = screenSize.width;
 
     Level level = new Level(world, screenWidth, levelStartHeight,
         levelEndHeight, numRandomPlatforms, movementSpeed);
@@ -47,7 +47,6 @@ class LevelWrapper extends PositionComponent
     super.resize(size);
     world.resize(size);
 
-    for (int j = 0; j <= 1; j++)
-      buildLevel(j, size.width); //TODO pass screensize from game
+    for (int j = 0; j <= 1; j++) buildLevel(j); //TODO pass screensize from game
   }
 }
