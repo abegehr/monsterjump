@@ -26,7 +26,7 @@ class LevelWrapper extends PositionComponent
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
-    //TODO set movementSpeed (Anton)
+    //TODO? set movementSpeed
 
     // level bounds in pixel
     int levelStartHeight = (((levelNumber + 2) ~/ 3 * 8) +
