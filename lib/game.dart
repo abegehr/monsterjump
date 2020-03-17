@@ -17,7 +17,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Box box = new Box();
   bool playing = false;
   Player player;
-  Level level;
+  LevelWrapper level;
   double maxHeight = 0;
 
   CoronaJump() {
@@ -65,7 +65,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       player.remove();
       // level
       level.remove();
-      addLater(level = new Level(box));
+      addLater(level = new LevelWrapper(box));
     }
   }
 
