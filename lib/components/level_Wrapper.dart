@@ -9,8 +9,6 @@ import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 import 'level.dart';
 
-double bgAspectRatio = 14073 / 1125;
-
 class LevelWrapper extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Size screenSize;
