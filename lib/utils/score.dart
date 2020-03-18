@@ -32,6 +32,9 @@ class Score {
           .add({
         'score': score,
         'timestamp': FieldValue.serverTimestamp(),
+      }).then((docRef) {
+        print("saveScore($score): $docRef");
+        return docRef;
       });
   }
 
@@ -48,7 +51,11 @@ class Score {
           .then((querySnap) => querySnap.documents.length >= 1
               ? querySnap.documents.first
               : null)
-          .then((docSnap) => docSnap.data['score']);
+          .then((docSnap) => docSnap.data['score'])
+          .then((score) {
+        print("getHighscore(): $score");
+        return score;
+      });
     return null;
   }
 }
