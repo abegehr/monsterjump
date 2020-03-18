@@ -40,11 +40,14 @@ class Level extends PositionComponent
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
-    var rng = new Random();
+    var rng =
+        new Random(); //TODO is it good practive to init multiple Randoms or just one per file? @tguelenman
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      double x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2);
-      int nextStep = rng.nextInt(30) + 70;
+      double x = (rng.nextDouble() - 0.5) *
+          screenWidth; //TODO uniform random double generation is used multiple times and can be extracted to function @tguelenman
+      double nextStep = rng.nextDouble() * 30 +
+          70; //TODO these should be parameters @tguelenman
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
       currentHeight = y;
@@ -56,9 +59,10 @@ class Level extends PositionComponent
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
-      double x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2);
-      double y = rng.nextInt((levelEndHeight - levelStartHeight).toInt()) + levelStartHeight;
-      addPlatform(x.toDouble(), -y.toDouble());
+      double x = (rng.nextDouble() - 0.5) * screenWidth;
+      double y = rng.nextDouble() * (levelEndHeight - levelStartHeight) +
+          levelStartHeight;
+      addPlatform(x, -y);
     }
   }
 
