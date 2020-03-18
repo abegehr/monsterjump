@@ -4,14 +4,18 @@ import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:coronajump/game.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  Flame.images.loadAll(<String>['bg/background.png', 'virus/virus.png', 'platform/platform.png']);
+  Flame.images.loadAll(<String>[
+    'bg/background.png',
+    'virus/virus.png',
+    'platform/platform.png'
+  ]);
 
   Util flameUtil = Util();
-  await flameUtil.fullScreen();
-  await flameUtil.setOrientations(
+  flameUtil.fullScreen();
+  flameUtil.setOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   CoronaJump game = CoronaJump();
