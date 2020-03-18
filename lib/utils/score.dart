@@ -26,7 +26,7 @@ class Score {
     String uuid = await getUUID();
     if (uuid != null)
       return Firestore.instance
-          .collection('users')
+          .collection('devices')
           .document(uuid)
           .collection('scores')
           .add({
@@ -39,7 +39,7 @@ class Score {
     String uuid = await getUUID();
     if (uuid != null)
       return Firestore.instance
-          .collection('users')
+          .collection('devices')
           .document(uuid)
           .collection('scores')
           .orderBy('scores', descending: true)
