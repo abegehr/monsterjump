@@ -19,6 +19,7 @@ class Score {
       print('Failed to get UUID');
     }
 
+    print("getUUID(): $uuid");
     return uuid;
   }
 
