@@ -7,7 +7,6 @@ import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 
 var rng = new Random();
-double halfPlatformWidth = 37.5;
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
@@ -36,31 +35,24 @@ class Level extends PositionComponent
     for (int i = 0; i < numPaths; i++)
       generatePath(levelStartHeight, levelEndHeight);
 
-    /*TODO generate randomPlatforms
+    // generate randomPlatforms
     generateRandomPlatforms(
-        numRandomPlatforms, levelStartHeight, levelEndHeight);*/
+        numRandomPlatforms, levelStartHeight, levelEndHeight);
 
     // generate starting platform for first level
     if (levelNumber == 0) addPlatform(0.0, -75.0);
   }
 
   double randomDouble(double start, double end) {
-    double res = rng.nextDouble() * (end - start).abs() + start;
-    print("DEBUG start: " +
-        start.toString() +
-        "; end: " +
-        end.toString() +
-        "; result: " +
-        res.toString());
-
-    return res;
+    return rng.nextDouble() * (end - start).abs() + start;
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
     double halfScreenWidth = screenWidth / 2;
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      double x = randomDouble(-halfScreenWidth + halfPlatformWidth, halfScreenWidth - halfPlatformWidth);
+      double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
+          halfScreenWidth - Platform.platformWidth / 2);
       double nextStep = randomDouble(70, 100);
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
@@ -72,7 +64,8 @@ class Level extends PositionComponent
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
     for (int i = 0; i < numRandomPlatforms; i++) {
       double halfScreenWidth = screenWidth / 2;
-      double x = randomDouble(-halfScreenWidth + halfPlatformWidth, halfScreenWidth - halfPlatformWidth);
+      double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
+          halfScreenWidth - Platform.platformWidth / 2);
       double y = randomDouble(levelStartHeight, levelEndHeight);
       addPlatform(x, -y);
     }
