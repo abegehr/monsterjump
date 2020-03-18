@@ -27,6 +27,13 @@ class Box extends Box2DComponent {
   }
 
   @override
+  void update(double t) {
+    components.removeWhere((c) => c
+        .destroy()); //TODO this should be part of Box2DComponent implementation (see BaseGame)
+    super.update(t);
+  }
+
+  @override
   void resize(Size size) {
     screenSize = size;
     super.resize(size);
