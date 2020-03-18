@@ -6,6 +6,8 @@ import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 
+var rng = new Random();
+
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Box box;
@@ -41,15 +43,17 @@ class Level extends PositionComponent
     if (levelNumber == 0) addPlatform(0.0, -75.0);
   }
 
+  double randomDouble(double start, double end) {
+    return rng.nextDouble() * (end - start).abs() + start;
+  }
+
   void generatePath(double levelStartHeight, double levelEndHeight) {
-    var rng =
-        new Random(); //TODO is it good practive to init multiple Randoms or just one per file? @tguelenman
+    double halfScreenWidth = screenWidth / 2;
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      double x = (rng.nextDouble() - 0.5) *
-          screenWidth; //TODO uniform random double generation is used multiple times and can be extracted to function @tguelenman
-      double nextStep = rng.nextDouble() * 30 +
-          70; //TODO these should be parameters @tguelenman
+      double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
+          halfScreenWidth - Platform.platformWidth / 2);
+      double nextStep = randomDouble(70, 100);
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
       currentHeight = y;
@@ -58,12 +62,11 @@ class Level extends PositionComponent
 
   void generateRandomPlatforms(
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
-    var rng = new Random();
-
     for (int i = 0; i < numRandomPlatforms; i++) {
-      double x = (rng.nextDouble() - 0.5) * screenWidth;
-      double y = rng.nextDouble() * (levelEndHeight - levelStartHeight) +
-          levelStartHeight;
+      double halfScreenWidth = screenWidth / 2;
+      double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
+          halfScreenWidth - Platform.platformWidth / 2);
+      double y = randomDouble(levelStartHeight, levelEndHeight);
       addPlatform(x, -y);
     }
   }

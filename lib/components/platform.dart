@@ -9,9 +9,12 @@ import 'package:box2d_flame/box2d.dart';
 class Platform extends SpriteComponent {
   PlatformBody body;
   bool willDestroy = false;
+  static double platformWidth = 72.0;
+  static double platformHeight = 12.0;
 
   Platform(Box2DComponent box, double x, double y)
-      : super.fromSprite(72, 12, new Sprite('platform/platform.png')) {
+      : super.fromSprite(platformWidth, platformHeight,
+            new Sprite('platform/platform.png')) {
     anchor = Anchor.topCenter;
     this.x = x;
     this.y = y;
