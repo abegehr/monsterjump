@@ -7,6 +7,7 @@ import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 
 var rng = new Random();
+double halfPlatformWidth = 37.5;
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
@@ -59,8 +60,7 @@ class Level extends PositionComponent
     double halfScreenWidth = screenWidth / 2;
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      //TODO half platform width
-      double x = randomDouble(-halfScreenWidth + 37.5, halfScreenWidth - 37.5);
+      double x = randomDouble(-halfScreenWidth + halfPlatformWidth, halfScreenWidth - halfPlatformWidth);
       double nextStep = randomDouble(70, 100);
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
@@ -72,8 +72,7 @@ class Level extends PositionComponent
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
     for (int i = 0; i < numRandomPlatforms; i++) {
       double halfScreenWidth = screenWidth / 2;
-      //TODO half platform width
-      double x = randomDouble(-halfScreenWidth + 37.5, halfScreenWidth - 37.5);
+      double x = randomDouble(-halfScreenWidth + halfPlatformWidth, halfScreenWidth - halfPlatformWidth);
       double y = randomDouble(levelStartHeight, levelEndHeight);
       addPlatform(x, -y);
     }
