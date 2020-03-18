@@ -56,11 +56,6 @@ class Level extends PositionComponent
     for (int i = 0; i < numRandomPlatforms; i++) {
       int x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2).toInt();
       int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
-      print("Generating random platform at (" +
-          x.toString() +
-          "," +
-          y.toString() +
-          ").");
       addPlatform(x.toDouble(), -y.toDouble());
     }
   }
