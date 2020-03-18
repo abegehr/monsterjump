@@ -29,6 +29,7 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics:
   firebase_performance:
+  cloud_firestore:
 
   # Flame
   flame: ^0.18.1
