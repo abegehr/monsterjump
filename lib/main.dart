@@ -13,11 +13,11 @@ void main() {
     'platform/platform.png'
   ]);
 
-  CoronaJump game = CoronaJump();
-  runApp(game.widget);
-
   Util flameUtil = Util();
   flameUtil.fullScreen();
   flameUtil.setOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+  CoronaJump game = CoronaJump();
+  runApp(game.widget);
 }
