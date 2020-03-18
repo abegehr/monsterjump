@@ -36,17 +36,25 @@ class Level extends PositionComponent
     // generate randomPlatforms
     generateRandomPlatforms(
         numRandomPlatforms, levelStartHeight, levelEndHeight);
-    addPlatform(200.0, -250.0);
+
+    // generate starting platform for first level
+    if (levelNumber == 0) addPlatform(0.0, -75.0);
+  }
+
+  double randomDouble() {
+    var rng =
+        new Random(); //TODO is it good practive to init multiple Randoms or just one per file? @tguelenman
+    return rng.nextDouble();
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
-    var rng =
-        new Random(); //TODO is it good practive to init multiple Randoms or just one per file? @tguelenman
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      double x = (rng.nextDouble() - 0.5) *
-          screenWidth; //TODO uniform random double generation is used multiple times and can be extracted to function @tguelenman
-      double nextStep = rng.nextDouble() * 30 +
+      // generation of x coordinate will change again in limiting variance PR (soon to come), therefore it doesnt make sense to use one functino for both right now
+      double x = (randomDouble() - 0.5) *
+          (screenWidth -
+              75); //TODO uniform random double generation is used multiple times and can be extracted to function @tguelenman
+      double nextStep = randomDouble() * 30 +
           70; //TODO these should be parameters @tguelenman
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
@@ -56,11 +64,9 @@ class Level extends PositionComponent
 
   void generateRandomPlatforms(
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
-    var rng = new Random();
-
     for (int i = 0; i < numRandomPlatforms; i++) {
-      double x = (rng.nextDouble() - 0.5) * screenWidth;
-      double y = rng.nextDouble() * (levelEndHeight - levelStartHeight) +
+      double x = (randomDouble() - 0.5) * (screenWidth - 75);
+      double y = randomDouble() * (levelEndHeight - levelStartHeight) +
           levelStartHeight;
       addPlatform(x, -y);
     }
