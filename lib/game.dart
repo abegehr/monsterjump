@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:coronajump/components/level_Wrapper.dart';
+import 'package:coronajump/utils/score.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
@@ -19,6 +20,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Player player;
   LevelWrapper level;
   double maxHeight = 0;
+  int score = 0;
 
   CoronaJump() {
     // Box2D
@@ -60,6 +62,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       print("GAME OVER");
       playing = false;
 
+      // save score
+      Score.saveScore(score);
+
       // overlays
       addWidgetOverlay("Gameover", GameoverOverlay(start: start));
       // player
@@ -85,7 +90,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     canvas.save();
 
     // render score //TODO use Flame TextComponent
-    int score = (maxHeight / 10).floor();
     const TextConfig config = TextConfig(
         fontSize: 48.0, color: Color(0xFFFFFFFF), fontFamily: 'Awesome Font');
     config.render(canvas, "Score: $score", Position(16, 32));
@@ -98,8 +102,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
     if (playing) {
       if (screenSize != null) {
-        // update maxHeight
+        // update maxHeight and score
         maxHeight = min(-maxHeight, player.y + 0.5 * screenSize.height).abs();
+        score = (maxHeight / 10).floor();
 
         // move up camera so player stays in lower screen half
         camera = new Position(0, -maxHeight);

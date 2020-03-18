@@ -29,12 +29,16 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics:
   firebase_performance:
+  cloud_firestore:
 
   # Flame
   flame: ^0.18.1
 
   # Sensors
   sensors: '>=0.4.1+10 <2.0.0'
+
+  # Device Info
+  device_info:
 
 dev_dependencies:
   flutter_test:
