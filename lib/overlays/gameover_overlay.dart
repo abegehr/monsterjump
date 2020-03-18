@@ -8,16 +8,37 @@ class GameoverOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-        child: Container(
-            width: 240,
-            height: 240,
-            color: Color(0x88FF0000),
-            child: Column(children: <Widget>[
-              Text("GAME OVER"),
-              FlatButton(
-                onPressed: start,
-                child: Text("Start New Game"),
-              )
-            ], mainAxisAlignment: MainAxisAlignment.center)));
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+              width: 200, child: Image.asset('assets/images/ui/game_over.png')),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: Text('Your Score: 1243'),
+          ),
+          Text('Personal HighScore: 5342'),
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.all(30),
+              child: RaisedButton(
+                  onPressed: start,
+                  child: Padding(
+                    padding: EdgeInsets.all(12),
+                    child: Text(
+                      'Try Again',
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  color: Colors.blue[500]),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

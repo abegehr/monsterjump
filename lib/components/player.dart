@@ -34,6 +34,8 @@ class Player extends SpriteComponent {
   @override
   void update(double t) {
     super.update(t);
+
+    // move with gyroscope
     body.body.applyForceToCenter(acceleration);
   }
 
@@ -51,6 +53,7 @@ class Player extends SpriteComponent {
 class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
+  double screenHalfWidth;
 
   PlayerBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -77,22 +80,38 @@ class PlayerBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    /*
-    CircleShape shape = body.getFixtureList().getShape();
-    Paint paint = Paint()..color = const Color(0x99FF0000);
-    canvas.drawCircle(
-        Offset(body.position.x, body.position.y), shape.radius, paint);
-    */
+    if (Globals.renderBox2DShapes) {
+      CircleShape shape = body.getFixtureList().getShape();
+      Paint paint = Paint()..color = const Color(0x99FF0000);
+      canvas.drawCircle(
+          Offset(body.position.x * Globals.mtp, body.position.y * Globals.mtp),
+          shape.radius * Globals.mtp,
+          paint);
+    }
   }
 
   @override
   void update(num t) {
     // update sprite position
-    sprite.x = body.position.x * Globals.mtp;
     sprite.y = body.position.y * Globals.mtp;
+    double newX = body.position.x * Globals.mtp;
+    // keep player in screen horizontally
+    if (screenHalfWidth != null && newX.abs() > screenHalfWidth) {
+      newX = -newX;
+      body.setTransform(
+          new Vector2(newX * Globals.ptm, body.position.y), body.getAngle());
+    }
+    sprite.x = newX;
   }
 
   void remove() {
     box.remove(this);
+  }
+
+  @override
+  void resize(Size size) {
+    print("size $size");
+    screenHalfWidth = 0.5 * size.width;
+    super.resize(size);
   }
 }
