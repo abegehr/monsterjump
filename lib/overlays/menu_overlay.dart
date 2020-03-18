@@ -46,10 +46,24 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
               color: Colors.blue[500]),
-        )
+        ),
+        Positioned(
+          bottom: 32,
+          right: 32,
+          child: RaisedButton(
+            onPressed: () {},
+            color: Colors.white,
+            child: Text(
+              'Settings',
+              style: TextStyle(
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
-
-  onPressed() {}
 }
