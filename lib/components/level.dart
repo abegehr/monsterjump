@@ -53,7 +53,7 @@ class Level extends PositionComponent
     while (currentHeight <= levelEndHeight) {
       double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
           halfScreenWidth - Platform.platformWidth / 2);
-      double nextStep = randomDouble(70, 100);
+      double nextStep = randomDouble(100, 200);
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
       currentHeight = y;

@@ -18,7 +18,12 @@ class LevelWrapper extends PositionComponent
 
   LevelWrapper(this.box) : super();
 
-  updateMaxHeight(double maxHeight) {
+  void initLevels() {
+    queue = Queue.from([buildLevel(0), buildLevel(1)]);
+    queue.forEach((q) => add(q));
+  }
+
+  void updateMaxHeight(double maxHeight) {
     Level lastLevel = queue.last;
     double upperBound = lastLevel.levelEndHeight.abs();
     if (upperBound - screenSize.height < maxHeight) {
@@ -38,7 +43,7 @@ class LevelWrapper extends PositionComponent
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // amount of safe paths
-    int numPaths = 1;
+    int numPaths = max(1, 3 - levelNumber);
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
@@ -61,16 +66,20 @@ class LevelWrapper extends PositionComponent
 
   @override
   void resize(Size size) {
-    screenSize = size;
+    if (screenSize == null || screenSize != size) {
+      screenSize = size;
+      removeComponents();
+      initLevels();
+    }
     super.resize(size);
-
-    // for (int j = 0; j <= 1; j++) buildLevel(j); //TODO pass screensize from game
-    queue = Queue.from([buildLevel(0), buildLevel(1)]);
-    queue.forEach((q) => add(q));
   }
 
   void remove() {
     willDestroy = true;
+    removeComponents();
+  }
+
+  removeComponents() {
     components.forEach((c) {
       if (c is Platform) c.remove();
     });
