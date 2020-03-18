@@ -5,4 +5,7 @@ class Globals {
 
   // jump
   static double jumpVY = 20.0;
+
+  // Box2D debug rendering
+  static bool renderBox2DShapes = true;
 }
