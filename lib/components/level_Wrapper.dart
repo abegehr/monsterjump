@@ -22,7 +22,7 @@ class LevelWrapper extends PositionComponent
 
   updateMaxHeight(double maxHeight) {
     Level lastLevel = queue.last;
-    double upperBound = lastLevel.levelEndHeight.abs().toDouble();
+    double upperBound = lastLevel.levelEndHeight.abs();
     if (upperBound - screenSize.height < maxHeight) {
       // remove lowest Level, add another one on top
       queue.removeFirst();
@@ -47,12 +47,11 @@ class LevelWrapper extends PositionComponent
     //TODO? set movementSpeed
 
     // level bounds in pixel
-    int levelStartHeight = (((levelNumber + 2) ~/ 3 * 8) +
-                ((levelNumber + 1) ~/ 3 * 7) +
-                (levelNumber ~/ 3 * 6))
-            .toInt() *
-        1000;
-    int levelEndHeight = levelStartHeight + levelHeight - 1;
+    double levelStartHeight = (((levelNumber + 2) ~/ 3 * 8) +
+            ((levelNumber + 1) ~/ 3 * 7) +
+            (levelNumber ~/ 3 * 6)) *
+        1000.0;
+    double levelEndHeight = levelStartHeight + levelHeight - 1;
 
     double screenWidth = screenSize.width;
 

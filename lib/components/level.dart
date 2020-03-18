@@ -11,7 +11,7 @@ class Level extends PositionComponent
   Box box;
   double screenWidth;
   bool willDestroy = false;
-  int levelEndHeight;
+  double levelEndHeight;
   int levelNumber;
 
   Level(this.box, this.screenWidth, levelStartHeight, this.levelEndHeight,
@@ -27,7 +27,7 @@ class Level extends PositionComponent
     box.add(platform.body);
   }
 
-  void generateLevel(int levelStartHeight, int levelEndHeight,
+  void generateLevel(double levelStartHeight, double levelEndHeight,
       int numRandomPlatforms, int numPaths, double movementSpeed) {
     // generate safe path
     for (int i = 0; i < numPaths; i++)
@@ -39,30 +39,25 @@ class Level extends PositionComponent
     addPlatform(200.0, -250.0);
   }
 
-  void generatePath(levelStartHeight, levelEndHeight) {
+  void generatePath(double levelStartHeight, double levelEndHeight) {
     var rng = new Random();
-    int currentHeight = levelStartHeight;
+    double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      int x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2).toInt();
+      double x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2);
       int nextStep = rng.nextInt(30) + 70;
-      int y = currentHeight + nextStep;
-      addPlatform(x.toDouble(), -y.toDouble());
+      double y = currentHeight + nextStep;
+      addPlatform(x, -y);
       currentHeight = y;
     }
   }
 
   void generateRandomPlatforms(
-      numRandomPlatforms, levelStartHeight, levelEndHeight) {
+      int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
     var rng = new Random();
 
     for (int i = 0; i < numRandomPlatforms; i++) {
-      int x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2).toInt();
-      int y = rng.nextInt(levelEndHeight - levelStartHeight) + levelStartHeight;
-      print("Generating random platform at (" +
-          x.toString() +
-          "," +
-          y.toString() +
-          ").");
+      double x = (rng.nextInt(screenWidth.toInt()) - screenWidth / 2);
+      double y = rng.nextInt((levelEndHeight - levelStartHeight).toInt()) + levelStartHeight;
       addPlatform(x.toDouble(), -y.toDouble());
     }
   }
