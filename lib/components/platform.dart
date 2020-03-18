@@ -56,16 +56,16 @@ class PlatformBody extends BodyComponent {
 
   @override
   void render(Canvas canvas) {
-    /*
-    EdgeShape shape = body.getFixtureList().getShape();
-    Paint paint = Paint()..color = const Color(0xFFFF0000);
-    canvas.drawLine(
-        Offset(body.position.x + shape.vertex1.x,
-            body.position.y + shape.vertex1.y),
-        Offset(body.position.x + shape.vertex2.x,
-            body.position.y + shape.vertex2.y),
-        paint);
-    */
+    if (Globals.renderBox2DShapes) {
+      EdgeShape shape = body.getFixtureList().getShape();
+      Paint paint = Paint()..color = const Color(0xFFFF0000);
+      canvas.drawLine(
+          Offset((body.position.x + shape.vertex1.x) * Globals.mtp,
+              (body.position.y + shape.vertex1.y) * Globals.mtp),
+          Offset((body.position.x + shape.vertex2.x) * Globals.mtp,
+              (body.position.y + shape.vertex2.y) * Globals.mtp),
+          paint);
+    }
   }
 
   void remove() {
