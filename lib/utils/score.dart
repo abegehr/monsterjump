@@ -46,13 +46,13 @@ class Score {
           .collection('devices')
           .document(uuid)
           .collection('scores')
-          .orderBy('scores', descending: true)
+          .orderBy('score', descending: true)
           .limit(1)
           .getDocuments()
           .then((querySnap) => querySnap.documents.length >= 1
               ? querySnap.documents.first
               : null)
-          .then((docSnap) => docSnap.data['score'])
+          .then((docSnap) => docSnap != null ? docSnap.data['score'] : null)
           .then((score) {
         print("getHighscore(): $score");
         return score;
