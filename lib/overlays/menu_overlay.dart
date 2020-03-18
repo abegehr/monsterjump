@@ -14,10 +14,8 @@ class MenuOverlay extends StatelessWidget {
           right: -200,
           width: 500,
           height: 500,
-          child: Container(
-            child: Image.asset(
-              'assets/images/virus/virus.png',
-            ),
+          child: Image.asset(
+            'assets/images/virus/virus.png',
           ),
         ),
         Positioned(
