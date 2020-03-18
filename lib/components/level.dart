@@ -11,9 +11,11 @@ class Level extends PositionComponent
   Box box;
   double screenWidth;
   bool willDestroy = false;
+  int levelEndHeight;
+  int levelNumber;
 
-  Level(this.box, this.screenWidth, levelStartHeight, levelEndHeight,
-      numRandomPlatforms, numPaths, movementSpeed)
+  Level(this.box, this.screenWidth, levelStartHeight, this.levelEndHeight,
+      numRandomPlatforms, numPaths, movementSpeed, this.levelNumber)
       : super() {
     generateLevel(levelStartHeight, levelEndHeight, numRandomPlatforms,
         numPaths, movementSpeed);

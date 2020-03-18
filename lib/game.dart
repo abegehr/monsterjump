@@ -105,6 +105,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
         // update background
         background.updateMaxHeight(maxHeight);
+
+        // update levels
+        level.updateMaxHeight(maxHeight);
       }
 
       // test if player dies
