@@ -30,8 +30,6 @@ class LevelWrapper extends PositionComponent
       // remove lowest Level, add another one on top
       queue.removeFirst();
       int nextLevelNumber = lastLevel.levelNumber + 1;
-      print(
-          "Updating maxHeight. nextLevelNumber: " + nextLevelNumber.toString());
       Level nextLevel = buildLevel(nextLevelNumber);
       queue.add(nextLevel);
     }
@@ -45,7 +43,7 @@ class LevelWrapper extends PositionComponent
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // amount of safe paths
-    int numPaths = 5;
+    int numPaths = 1;
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
