@@ -16,16 +16,13 @@ class LevelWrapper extends PositionComponent
   Size screenSize;
   Box box;
   bool willDestroy = false;
-
   Queue<Level> queue;
 
-  LevelWrapper(this.box) : super() {}
+  LevelWrapper(this.box) : super();
 
   updateMaxHeight(double maxHeight) {
-    double tol = 16.0;
     Level lastLevel = queue.last;
-    double upperBound =
-        lastLevel.levelEndHeight.abs() + lastLevel.width * bgAspectRatio - tol;
+    double upperBound = lastLevel.levelEndHeight.abs().toDouble();
     if (upperBound - screenSize.height < maxHeight) {
       // remove lowest Level, add another one on top
       queue.removeFirst();
