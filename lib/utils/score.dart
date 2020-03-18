@@ -22,7 +22,7 @@ class Score {
     return uuid;
   }
 
-  static saveScore(double score) async {
+  static saveScore(int score) async {
     String uuid = await getUUID();
     if (uuid != null)
       return Firestore.instance
@@ -35,7 +35,7 @@ class Score {
       });
   }
 
-  static getHighscore() async {
+  static Future<int> getHighscore() async {
     String uuid = await getUUID();
     if (uuid != null)
       return Firestore.instance
@@ -49,5 +49,6 @@ class Score {
               ? querySnap.documents.first
               : null)
           .then((docSnap) => docSnap.data['score']);
+    return null;
   }
 }
