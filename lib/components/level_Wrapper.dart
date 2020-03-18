@@ -81,7 +81,7 @@ class LevelWrapper extends PositionComponent
 
   removeComponents() {
     components.forEach((c) {
-      if (c is Platform) c.remove();
+      if (c is Level) c.remove();
     });
   }
 
