@@ -54,6 +54,7 @@ class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
   double screenHalfWidth;
+  bool willDestroy = false;
 
   PlayerBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -105,7 +106,13 @@ class PlayerBody extends BodyComponent {
   }
 
   void remove() {
-    box.remove(this);
+    willDestroy = true;
+  }
+
+  @override
+  bool destroy() {
+    if (willDestroy) box.remove(this);
+    return willDestroy;
   }
 
   @override
