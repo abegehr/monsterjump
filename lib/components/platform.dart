@@ -35,6 +35,7 @@ class Platform extends SpriteComponent {
 class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
+  bool willDestroy = false;
 
   PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -72,6 +73,14 @@ class PlatformBody extends BodyComponent {
   }
 
   void remove() {
-    box.remove(this);
+    willDestroy = true;
+  }
+
+  @override
+  bool destroy() {
+    if (willDestroy)
+      box.world.destroyBody(
+          body); //TODO where should box.remove() be used? https://github.com/flame-engine/flame/issues/17#issuecomment-406700417
+    return willDestroy;
   }
 }
