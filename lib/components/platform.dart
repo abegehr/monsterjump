@@ -35,6 +35,7 @@ class Platform extends SpriteComponent {
 class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
+  bool willDestroy = false;
 
   PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -72,6 +73,17 @@ class PlatformBody extends BodyComponent {
   }
 
   void remove() {
-    box.remove(this);
+    willDestroy = true;
+  }
+
+  @override
+  bool destroy() {
+    print("called destroy");
+    if (willDestroy) {
+      print("will destroy p body");
+      box.remove(this);
+    }
+
+    return willDestroy;
   }
 }
