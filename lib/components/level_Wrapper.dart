@@ -38,7 +38,8 @@ class LevelWrapper extends PositionComponent
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // amount of safe paths
-    int numPaths = 1;
+    // TODO
+    int numPaths = 5;
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);

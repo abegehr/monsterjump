@@ -6,6 +6,8 @@ import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 
+var rng = new Random();
+
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Box box;
@@ -33,29 +35,33 @@ class Level extends PositionComponent
     for (int i = 0; i < numPaths; i++)
       generatePath(levelStartHeight, levelEndHeight);
 
-    // generate randomPlatforms
+    /*TODO generate randomPlatforms
     generateRandomPlatforms(
-        numRandomPlatforms, levelStartHeight, levelEndHeight);
+        numRandomPlatforms, levelStartHeight, levelEndHeight);*/
 
     // generate starting platform for first level
     if (levelNumber == 0) addPlatform(0.0, -75.0);
   }
 
-  double randomDouble() {
-    var rng =
-        new Random(); //TODO is it good practive to init multiple Randoms or just one per file? @tguelenman
-    return rng.nextDouble();
+  double randomDouble(double start, double end) {
+    double res = rng.nextDouble() * (end - start).abs() + start;
+    print("DEBUG start: " +
+        start.toString() +
+        "; end: " +
+        end.toString() +
+        "; result: " +
+        res.toString());
+
+    return res;
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
+    double halfScreenWidth = screenWidth / 2;
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
-      // generation of x coordinate will change again in limiting variance PR (soon to come), therefore it doesnt make sense to use one functino for both right now
-      double x = (randomDouble() - 0.5) *
-          (screenWidth -
-              75); //TODO uniform random double generation is used multiple times and can be extracted to function @tguelenman
-      double nextStep = randomDouble() * 30 +
-          70; //TODO these should be parameters @tguelenman
+      //TODO half platform width
+      double x = randomDouble(-halfScreenWidth + 37.5, halfScreenWidth - 37.5);
+      double nextStep = randomDouble(70, 100);
       double y = currentHeight + nextStep;
       addPlatform(x, -y);
       currentHeight = y;
@@ -65,9 +71,10 @@ class Level extends PositionComponent
   void generateRandomPlatforms(
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
     for (int i = 0; i < numRandomPlatforms; i++) {
-      double x = (randomDouble() - 0.5) * (screenWidth - 75);
-      double y = randomDouble() * (levelEndHeight - levelStartHeight) +
-          levelStartHeight;
+      double halfScreenWidth = screenWidth / 2;
+      //TODO half platform width
+      double x = randomDouble(-halfScreenWidth + 37.5, halfScreenWidth - 37.5);
+      double y = randomDouble(levelStartHeight, levelEndHeight);
       addPlatform(x, -y);
     }
   }
