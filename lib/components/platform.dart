@@ -78,12 +78,7 @@ class PlatformBody extends BodyComponent {
 
   @override
   bool destroy() {
-    print("called destroy");
-    if (willDestroy) {
-      print("will destroy p body");
-      box.remove(this);
-    }
-
+    if (willDestroy) box.world.destroyBody(body);
     return willDestroy;
   }
 }

@@ -111,7 +111,7 @@ class PlayerBody extends BodyComponent {
 
   @override
   bool destroy() {
-    if (willDestroy) box.remove(this);
+    if (willDestroy) box.world.destroyBody(body);
     return willDestroy;
   }
 
