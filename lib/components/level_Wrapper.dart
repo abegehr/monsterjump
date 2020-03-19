@@ -23,18 +23,6 @@ class LevelWrapper extends PositionComponent
     queue.forEach((q) => add(q));
   }
 
-  void updateMaxHeight(double maxHeight) {
-    Level lastLevel = queue.last;
-    double upperBound = lastLevel.levelEndHeight.abs();
-    if (upperBound - screenSize.height < maxHeight) {
-      // remove lowest Level, add another one on top
-      queue.removeFirst();
-      int nextLevelNumber = lastLevel.levelNumber + 1;
-      Level nextLevel = buildLevel(nextLevelNumber);
-      queue.add(nextLevel);
-    }
-  }
-
   Level buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
     int levelHeight = (8 - (levelNumber % 3)) * 1000;
@@ -62,6 +50,18 @@ class LevelWrapper extends PositionComponent
         numRandomPlatforms, numPaths, movementSpeed, levelNumber);
     add(level);
     return level;
+  }
+
+  void updateMaxHeight(double maxHeight) {
+    Level lastLevel = queue.last;
+    double upperBound = lastLevel.levelEndHeight.abs();
+    if (upperBound - screenSize.height < maxHeight) {
+      // remove lowest Level, add another one on top
+      queue.removeFirst();
+      int nextLevelNumber = lastLevel.levelNumber + 1;
+      Level nextLevel = buildLevel(nextLevelNumber);
+      queue.add(nextLevel);
+    }
   }
 
   @override
