@@ -44,9 +44,7 @@ class LevelWrapper extends PositionComponent
         1000.0;
     double levelEndHeight = levelStartHeight + levelHeight - 1;
 
-    double screenWidth = screenSize.width;
-
-    Level level = Level(box, screenWidth, levelStartHeight, levelEndHeight,
+    Level level = Level(box, levelStartHeight, levelEndHeight,
         numRandomPlatforms, numPaths, movementSpeed, levelNumber);
     add(level);
     return level;

@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'dart:ui';
+import 'package:collection/collection.dart';
 import 'package:coronajump/components/platform.dart';
 import 'package:coronajump/box.dart';
 import 'package:flame/components/component.dart';
@@ -15,22 +17,33 @@ double randomDouble(double start, double end) {
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
   Box box;
-  double screenWidth;
+  Size screenSize;
   bool willDestroy = false;
-  double levelEndHeight;
+  // level parameters
   int levelNumber;
+  double levelStartHeight;
+  double levelEndHeight;
+  int numRandomPlatforms;
+  int numPaths;
+  double movementSpeed;
+  // platforms queues
+  static Comparator _queueComparator = (e1, e2) => (e2.y - e1.y).toInt();
+  PriorityQueue<Platform> queue = new PriorityQueue(_queueComparator);
+  PriorityQueue<Platform> queueVisible = new PriorityQueue(_queueComparator);
 
-  Level(this.box, this.screenWidth, levelStartHeight, this.levelEndHeight,
-      numRandomPlatforms, numPaths, movementSpeed, this.levelNumber)
-      : super() {
+  Level(
+      this.box,
+      this.levelStartHeight,
+      this.levelEndHeight,
+      this.numRandomPlatforms,
+      this.numPaths,
+      this.movementSpeed,
+      this.levelNumber)
+      : super();
+
+  void init() {
     generateLevel(levelStartHeight, levelEndHeight, numRandomPlatforms,
         numPaths, movementSpeed);
-  }
-
-  void addPlatform(double x, double y) {
-    Platform platform = Platform(box, x, y);
-    add(platform);
-    box.add(platform.body);
   }
 
   void generateLevel(double levelStartHeight, double levelEndHeight,
@@ -44,18 +57,18 @@ class Level extends PositionComponent
         numRandomPlatforms, levelStartHeight, levelEndHeight);
 
     // generate starting platform for first level
-    if (levelNumber == 0) addPlatform(0.0, -75.0);
+    if (levelNumber == 0) addPlatformToQueue(0.0, -75.0);
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
-    double halfScreenWidth = screenWidth / 2;
+    double halfScreenWidth = screenSize.width / 2;
     double currentHeight = levelStartHeight;
     while (currentHeight <= levelEndHeight) {
       double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
           halfScreenWidth - Platform.platformWidth / 2);
       double nextStep = randomDouble(100, 200);
       double y = currentHeight + nextStep;
-      addPlatform(x, -y);
+      addPlatformToQueue(x, -y);
       currentHeight = y;
     }
   }
@@ -63,12 +76,34 @@ class Level extends PositionComponent
   void generateRandomPlatforms(
       int numRandomPlatforms, double levelStartHeight, double levelEndHeight) {
     for (int i = 0; i < numRandomPlatforms; i++) {
-      double halfScreenWidth = screenWidth / 2;
+      double halfScreenWidth = screenSize.width / 2;
       double x = randomDouble(-halfScreenWidth + Platform.platformWidth / 2,
           halfScreenWidth - Platform.platformWidth / 2);
       double y = randomDouble(levelStartHeight, levelEndHeight);
-      addPlatform(x, -y);
+      addPlatformToQueue(x, -y);
     }
+  }
+
+  void addPlatformToQueue(double x, double y) {
+    queue.add(Platform(box, x, y));
+  }
+
+  void addPlatform(Platform platform) {
+    queueVisible.add(platform);
+    add(platform);
+    box.add(platform.body);
+  }
+
+  void updateMaxHeight(double maxHeight) {
+    final double upperBound = maxHeight + screenSize.height;
+    final double lowerBound = maxHeight;
+
+    while (queue.length > 0 && queue.first.y.abs() <= upperBound) {
+      print("paltform ${queue.first.y}");
+      addPlatform(queue.removeFirst());
+    }
+    while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound)
+      queueVisible.removeFirst().remove();
   }
 
   void remove() {
@@ -81,5 +116,14 @@ class Level extends PositionComponent
   @override
   bool destroy() {
     return willDestroy;
+  }
+
+  @override
+  void resize(Size size) {
+    if (screenSize == null) {
+      screenSize = size;
+      init();
+    }
+    super.resize(size);
   }
 }
