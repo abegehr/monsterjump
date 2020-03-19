@@ -98,14 +98,10 @@ class Level extends PositionComponent
     final double upperBound = maxHeight + screenSize.height;
     final double lowerBound = maxHeight;
 
-    while (queue.length > 0 && queue.first.y.abs() <= upperBound) {
-      print("add paltform ${queue.first.y}");
+    while (queue.length > 0 && queue.first.y.abs() <= upperBound)
       addPlatform(queue.removeFirst());
-    }
-    while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound) {
-      print("del paltform ${queueVisible.first.y}");
+    while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound)
       queueVisible.removeFirst().remove();
-    }
   }
 
   void remove() {
