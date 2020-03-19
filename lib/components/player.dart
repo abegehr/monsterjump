@@ -16,11 +16,11 @@ class Player extends SpriteComponent {
   double sensorScale = 5;
   Vector2 acceleration = Vector2.zero();
 
-  Player(Box2DComponent box)
+  Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
-    x = 0;
-    y = -160;
+    this.x = x;
+    this.y = y;
     body = PlayerBody(box, this);
   }
 
@@ -54,6 +54,7 @@ class PlayerBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
   double screenHalfWidth;
+  bool willDestroy = false;
 
   PlayerBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -105,7 +106,13 @@ class PlayerBody extends BodyComponent {
   }
 
   void remove() {
-    box.remove(this);
+    willDestroy = true;
+  }
+
+  @override
+  bool destroy() {
+    if (willDestroy) box.world.destroyBody(body);
+    return willDestroy;
   }
 
   @override

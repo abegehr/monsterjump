@@ -18,27 +18,20 @@ class LevelWrapper extends PositionComponent
 
   LevelWrapper(this.box) : super();
 
-  updateMaxHeight(double maxHeight) {
-    Level lastLevel = queue.last;
-    double upperBound = lastLevel.levelEndHeight.abs();
-    if (upperBound - screenSize.height < maxHeight) {
-      // remove lowest Level, add another one on top
-      queue.removeFirst();
-      int nextLevelNumber = lastLevel.levelNumber + 1;
-      Level nextLevel = buildLevel(nextLevelNumber);
-      queue.add(nextLevel);
-    }
+  void initLevels() {
+    queue = Queue.from([buildLevel(0), buildLevel(1)]);
+    queue.forEach((q) => add(q));
   }
 
   Level buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
-    int levelHeight = (8 - (levelNumber % 3)) * 1000;
+    double levelHeight = (8 - (levelNumber % 3)) * 1000.0;
 
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // amount of safe paths
-    int numPaths = 1;
+    int numPaths = max(1, 3 - levelNumber);
 
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
@@ -51,33 +44,50 @@ class LevelWrapper extends PositionComponent
         1000.0;
     double levelEndHeight = levelStartHeight + levelHeight - 1;
 
-    double screenWidth = screenSize.width;
-
-    Level level = Level(box, screenWidth, levelStartHeight, levelEndHeight,
+    Level level = Level(box, levelStartHeight, levelEndHeight,
         numRandomPlatforms, numPaths, movementSpeed, levelNumber);
     add(level);
     return level;
   }
 
-  @override
-  void resize(Size size) {
-    screenSize = size;
-    super.resize(size);
+  void updateMaxHeight(double maxHeight) {
+    Level last = queue.last;
+    double upperBound = last.levelEndHeight.abs();
+    if (upperBound - screenSize.height < maxHeight) {
+      // remove lowest Level, add another one on top
+      queue.removeFirst().remove();
+      queue.add(buildLevel(last.levelNumber + 1));
+    }
 
-    // for (int j = 0; j <= 1; j++) buildLevel(j); //TODO pass screensize from game
-    queue = Queue.from([buildLevel(0), buildLevel(1)]);
-    queue.forEach((q) => add(q));
+    // update levels
+    queue.forEach((level) {
+      level.updateMaxHeight(maxHeight);
+    });
   }
 
   void remove() {
     willDestroy = true;
+    removeComponents();
+  }
+
+  removeComponents() {
     components.forEach((c) {
-      if (c is Platform) c.remove();
+      if (c is Level) c.remove();
     });
   }
 
   @override
   bool destroy() {
     return willDestroy;
+  }
+
+  @override
+  void resize(Size size) {
+    if (screenSize == null || screenSize != size) {
+      screenSize = size;
+      removeComponents();
+      initLevels();
+    }
+    super.resize(size);
   }
 }

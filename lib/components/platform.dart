@@ -9,9 +9,12 @@ import 'package:box2d_flame/box2d.dart';
 class Platform extends SpriteComponent {
   PlatformBody body;
   bool willDestroy = false;
+  static double platformWidth = 72.0;
+  static double platformHeight = 12.0;
 
   Platform(Box2DComponent box, double x, double y)
-      : super.fromSprite(72, 12, new Sprite('platform/platform.png')) {
+      : super.fromSprite(platformWidth, platformHeight,
+            new Sprite('platform/platform.png')) {
     anchor = Anchor.topCenter;
     this.x = x;
     this.y = y;
@@ -32,6 +35,7 @@ class Platform extends SpriteComponent {
 class PlatformBody extends BodyComponent {
   SpriteComponent sprite;
   Fixture fixture;
+  bool willDestroy = false;
 
   PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
@@ -69,6 +73,14 @@ class PlatformBody extends BodyComponent {
   }
 
   void remove() {
-    box.remove(this);
+    willDestroy = true;
+  }
+
+  @override
+  bool destroy() {
+    if (willDestroy)
+      box.world.destroyBody(
+          body); //TODO where should box.remove() be used? https://github.com/flame-engine/flame/issues/17#issuecomment-406700417
+    return willDestroy;
   }
 }
