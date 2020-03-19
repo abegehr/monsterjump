@@ -68,7 +68,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       Score.saveScore(score);
 
       // overlays
-      addWidgetOverlay("Gameover", GameoverOverlay(start: start));
+      addWidgetOverlay("Gameover", GameoverOverlay(start: start, score: score));
       // player
       player.remove();
       // level
