@@ -38,6 +38,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       print("START GAME");
       playing = true;
       maxHeight = 0;
+      score = 0;
 
       // overlays
       removeWidgetOverlay("Menu");
@@ -56,7 +57,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   }
 
   void addPlayer() {
-    addLater(player = new Player(box));
+    addLater(player = new Player(box, y: -(maxHeight + 160)));
     box.add(player.body);
   }
 
