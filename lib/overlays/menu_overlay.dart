@@ -29,17 +29,19 @@ class MenuOverlay extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-            width: 165,
-            height: 50,
-            child: ConstrainedBox(
-                constraints: BoxConstraints.expand(),
-                child: FlatButton(
-                    onPressed: start,
-                    padding: EdgeInsets.all(0.0),
-                    child: Image.asset(
-                      'assets/images/ui/play-button.png',
-                    )))),
+        Center(
+          child: Container(
+              width: 165,
+              height: 50,
+              child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(),
+                  child: FlatButton(
+                      onPressed: start,
+                      padding: EdgeInsets.all(0.0),
+                      child: Image.asset(
+                        'assets/images/ui/play_button.png',
+                      )))),
+        ),
         Positioned(
           bottom: 32,
           right: 32,
