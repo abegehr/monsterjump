@@ -29,21 +29,29 @@ class MenuOverlay extends StatelessWidget {
             ),
           ),
         ),
+        Positioned(
+          top: 275,
+          left: 30,
+          child: Container(
+            width: 280,
+            height: 150,
+            child: Image.asset(
+              'assets/images/ui/stayathomeandplaycoronajump.png',
+            ),
+          ),
+        ),
         Center(
-          child: RaisedButton(
-              onPressed: start,
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Text(
-                  'PLAY',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              color: Colors.blue[500]),
+          child: Container(
+              width: 165,
+              height: 50,
+              child: ConstrainedBox(
+                  constraints: BoxConstraints.expand(),
+                  child: FlatButton(
+                      onPressed: start,
+                      padding: EdgeInsets.all(0.0),
+                      child: Image.asset(
+                        'assets/images/ui/play_button.png',
+                      )))),
         ),
         Positioned(
           bottom: 32,
