@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 class GameoverOverlay extends StatelessWidget {
   final Function start;
+  final int score;
 
-  GameoverOverlay({Key key, this.start}) : super(key: key);
+  GameoverOverlay({Key key, this.start, this.score}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class GameoverOverlay extends StatelessWidget {
               width: 200, child: Image.asset('assets/images/ui/game_over.png')),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text('Your Score: 1243'),
+            child: Text('Your Score: $score'),
           ),
           Text('Personal HighScore: 5342'),
           Center(
