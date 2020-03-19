@@ -21,7 +21,7 @@ void main() {
     // Replace the testAdUnitId with an ad unit id from the AdMob dash.
     // https://developers.google.com/admob/android/test-ads
     // https://developers.google.com/admob/ios/test-ads
-    adUnitId: BannerAd.testAdUnitId,
+    adUnitId: BannerAd.ca - app - pub - 3940256099942544 / 6300978111,
     size: AdSize.smartBanner,
     targetingInfo: targetingInfo,
     listener: (MobileAdEvent event) {
