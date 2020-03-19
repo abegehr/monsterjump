@@ -29,6 +29,7 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics:
   firebase_performance:
+  firebase_admob:
 
   # Flame
   flame: ^0.18.1
