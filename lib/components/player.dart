@@ -29,6 +29,7 @@ class Player extends SpriteComponent {
       //Adding up the scaled sensor data to the current acceleration
       acceleration.add(Vector2(event.y / sensorScale, 0));
     });
+    }); //TODO unsubscribe?
   }
 
   @override
