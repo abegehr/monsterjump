@@ -47,7 +47,5 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-            <key>GADApplicationIdentifier</key>
-            <string>ca-app-pub-2773918257223246~2092525035</string>
     </application>
 </manifest>
