@@ -42,6 +42,8 @@ dependencies:
   # Device Info
   device_info:
 
+  share:
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
