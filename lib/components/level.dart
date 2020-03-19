@@ -99,11 +99,13 @@ class Level extends PositionComponent
     final double lowerBound = maxHeight;
 
     while (queue.length > 0 && queue.first.y.abs() <= upperBound) {
-      print("paltform ${queue.first.y}");
+      print("add paltform ${queue.first.y}");
       addPlatform(queue.removeFirst());
     }
-    while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound)
+    while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound) {
+      print("del paltform ${queue.first.y}");
       queueVisible.removeFirst().remove();
+    }
   }
 
   void remove() {
