@@ -68,7 +68,7 @@ class Admob {
     );
   }
 
-  static void hideBannerAdUnit() {
+  static void removeBannerAdUnit() {
     myBanner.dispose();
   }
 }
