@@ -23,8 +23,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   int score = 0;
 
   CoronaJump() {
-    Score.getHighscore(); //TODO this is debug
-
     // Box2D
     box.initializeWorld();
 
