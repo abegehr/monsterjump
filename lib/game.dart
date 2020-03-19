@@ -23,16 +23,11 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   int score = 0;
 
   CoronaJump() {
-    Score.getHighscore(); //TODO this is debug
-
     // Box2D
     box.initializeWorld();
 
     // background
     add(background);
-
-    // level
-    add(level = new LevelWrapper(box));
 
     // start menu
     addWidgetOverlay("Menu", MenuOverlay(start: start));
@@ -43,10 +38,17 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       print("START GAME");
       playing = true;
       maxHeight = 0;
+      score = 0;
 
       // overlays
       removeWidgetOverlay("Menu");
       removeWidgetOverlay("Gameover");
+
+      // background
+      background.reset();
+
+      // level
+      add(level = new LevelWrapper(box));
 
       // player
       addPlayer();
@@ -55,7 +57,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   }
 
   void addPlayer() {
-    addLater(player = new Player(box));
+    addLater(player = new Player(box, y: -(maxHeight + 160)));
     box.add(player.body);
   }
 
@@ -73,7 +75,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       player.remove();
       // level
       level.remove();
-      addLater(level = new LevelWrapper(box));
     }
   }
 

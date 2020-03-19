@@ -32,7 +32,15 @@ class Background extends PositionComponent
 
   Background() : super() {
     queue = Queue.from([new BackgroundTile(0), new BackgroundTile(0)]);
-    queue.forEach((tile) => add(tile));
+    queue.forEach((tile) {
+      add(tile);
+    });
+  }
+
+  void reset() {
+    queue.forEach((tile) {
+      tile.y = 0;
+    });
   }
 
   updateMaxHeight(double maxHeight) {
