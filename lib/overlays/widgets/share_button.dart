@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
 Future<void> share() => Share.share(
-    'Check out this cool game https://example.com and stay at home!');
+    'Check out this cool game: https://coronajump.page.link/download and stay at home!');
 
 class ShareButton extends StatelessWidget {
   @override
