@@ -7,19 +7,18 @@ Future<void> share() => Share.share(
 class ShareButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
-        onPressed: share,
-        child: Padding(
-          padding: EdgeInsets.all(12),
-          child: Text(
-            'Share with Friends',
-            style: TextStyle(
-              fontSize: 21,
-              fontWeight: FontWeight.bold,
-              color: Colors.blue[500],
-            ),
-          ),
-        ),
-        color: Colors.white);
+    return Center(
+      child: Container(
+          width: 165,
+          height: 50,
+          child: ConstrainedBox(
+              constraints: BoxConstraints.expand(),
+              child: FlatButton(
+                  onPressed: share,
+                  padding: EdgeInsets.all(0.0),
+                  child: Image.asset(
+                    'assets/images/ui/share_button.png',
+                  )))),
+    );
   }
 }

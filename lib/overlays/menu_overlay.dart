@@ -46,7 +46,7 @@ class MenuOverlay extends StatelessWidget {
               ),
               color: Colors.blue[500]),
         ),
-        Positioned(bottom: 128, right: 32, child: ShareButton()),
+        Positioned(bottom: 165, right: 50, child: ShareButton()),
         Positioned(
           bottom: 32,
           right: 32,
