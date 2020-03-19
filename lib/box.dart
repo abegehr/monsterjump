@@ -21,9 +21,16 @@ class Box extends Box2DComponent {
 
   @override
   void add(BodyComponent c) {
-    //TODO open an issue/PR. This should be part of Box2DComponent implementation the same as BaseGame: https://pub.dev/documentation/flame/latest/game_game/BaseGame/preAdd.html
-    preAdd(c);
+    preAdd(
+        c); //TODO this should be part of Box2DComponent implementation (see BaseGame)
     super.add(c);
+  }
+
+  @override
+  void update(double t) {
+    components.removeWhere((c) => c
+        .destroy()); //TODO this should be part of Box2DComponent implementation (see BaseGame)
+    super.update(t);
   }
 
   @override
