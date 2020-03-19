@@ -29,6 +29,7 @@ class Player extends SpriteComponent {
       //Adding up the scaled sensor data to the current acceleration
       acceleration.add(Vector2(event.y / sensorScale, 0));
     });
+    }); //TODO unsubscribe?
   }
 
   @override
@@ -62,7 +63,7 @@ class PlayerBody extends BodyComponent {
 
   void _createBody() {
     final shape = new CircleShape();
-    shape.radius = 0.5 * SIZE * Globals.ptm;
+    shape.radius = 0.3 * SIZE * Globals.ptm;
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;

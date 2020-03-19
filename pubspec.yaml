@@ -17,6 +17,7 @@ environment:
   sdk: '>=2.1.0 <3.0.0'
 
 dependencies:
+  url_launcher: ^5.4.2
   flutter:
     sdk: flutter
 
@@ -31,6 +32,7 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics:
   firebase_performance:
+  firebase_admob:
   cloud_firestore:
 
   # Flame
@@ -45,9 +47,14 @@ dependencies:
   share:
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.3"
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/appicon1024.png"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -65,6 +72,10 @@ flutter:
     - assets/images/ui/title.png
     - assets/images/ui/game_over.png
     - assets/images/ui/share_button.png
+    - assets/images/ui/play_button.png
+    - assets/images/ui/try_again.png
+    - assets/images/ui/gowashyourhands.png
+    - assets/images/ui/stayathomeandplaycoronajump.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
