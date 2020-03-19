@@ -43,6 +43,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       removeWidgetOverlay("Menu");
       removeWidgetOverlay("Gameover");
 
+      // background
+      background.reset();
+
       // level
       add(level = new LevelWrapper(box));
 
