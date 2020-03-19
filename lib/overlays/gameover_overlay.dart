@@ -1,3 +1,4 @@
+import 'package:coronajump/utils/score.dart';
 import 'package:flutter/material.dart';
 
 class GameoverOverlay extends StatelessWidget {
@@ -18,7 +19,18 @@ class GameoverOverlay extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text('Your Score: $score'),
           ),
-          Text('Personal HighScore: 5342'),
+          FutureBuilder(
+              future: Score.getHighscore(),
+              builder: (BuildContext context, AsyncSnapshot<int> snap) {
+                String text = "";
+                int score = snap.data;
+                if (snap.hasData)
+                  text = score != null
+                      ? "Personal HighScore: $score"
+                      : "Personal HighScore: loading…";
+                else if (snap.hasError) text = "Failed loading Highscore";
+                return Text(text);
+              }),
           Center(
             child: Padding(
               padding: const EdgeInsets.all(30),
