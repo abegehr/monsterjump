@@ -117,6 +117,10 @@ class Level extends PositionComponent
 
   @override
   bool destroy() {
+    if (willDestroy) {
+      queue.clear();
+      queueVisible.clear();
+    }
     return willDestroy;
   }
 
