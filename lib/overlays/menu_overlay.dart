@@ -1,12 +1,8 @@
+import 'package:coronajump/overlays/widgets/share_button.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
-  Future<void> share() {
-    return Share.share(
-        'Check out this cool game https://example.com and stay at home!');
-  }
 
   MenuOverlay({Key key, this.start}) : super(key: key);
 
@@ -50,24 +46,7 @@ class MenuOverlay extends StatelessWidget {
               ),
               color: Colors.blue[500]),
         ),
-        Positioned(
-          bottom: 128,
-          right: 32,
-          child: RaisedButton(
-              onPressed: share,
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Text(
-                  'Share with Friends',
-                  style: TextStyle(
-                    fontSize: 21,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.blue[500],
-                  ),
-                ),
-              ),
-              color: Colors.white),
-        ),
+        Positioned(bottom: 128, right: 32, child: ShareButton()),
         Positioned(
           bottom: 32,
           right: 32,
