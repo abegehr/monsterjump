@@ -25,7 +25,7 @@ class LevelWrapper extends PositionComponent
 
   Level buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
-    int levelHeight = (8 - (levelNumber % 3)) * 1000;
+    double levelHeight = (8 - (levelNumber % 3)) * 1000.0;
 
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
