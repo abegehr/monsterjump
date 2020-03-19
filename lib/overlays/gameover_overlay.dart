@@ -16,6 +16,12 @@ class GameoverOverlay extends StatelessWidget {
           Container(
               width: 200, child: Image.asset('assets/images/ui/game_over.png')),
           Padding(
+            padding: const EdgeInsets.all(10),
+            child: Container(
+                width: 180,
+                child: Image.asset('assets/images/ui/gowashyourhands.png')),
+          ),
+          Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text('Your Score: $score'),
           ),

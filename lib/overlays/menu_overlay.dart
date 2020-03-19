@@ -29,6 +29,17 @@ class MenuOverlay extends StatelessWidget {
             ),
           ),
         ),
+        Positioned(
+          top: 275,
+          left: 30,
+          child: Container(
+            width: 280,
+            height: 150,
+            child: Image.asset(
+              'assets/images/ui/stayathomeandplaycoronajump.png',
+            ),
+          ),
+        ),
         Center(
           child: Container(
               width: 165,
