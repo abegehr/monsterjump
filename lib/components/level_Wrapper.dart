@@ -25,7 +25,7 @@ class LevelWrapper extends PositionComponent
 
   Level buildLevel(int levelNumber) {
     // levelHeight: 0 -> 8k, 1 -> 7k, 2 -> 6k, 3 -> 8k, ...
-    int levelHeight = (8 - (levelNumber % 3)) * 1000;
+    double levelHeight = (8 - (levelNumber % 3)) * 1000.0;
 
     // amount of random platforms
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
@@ -44,34 +44,25 @@ class LevelWrapper extends PositionComponent
         1000.0;
     double levelEndHeight = levelStartHeight + levelHeight - 1;
 
-    double screenWidth = screenSize.width;
-
-    Level level = Level(box, screenWidth, levelStartHeight, levelEndHeight,
+    Level level = Level(box, levelStartHeight, levelEndHeight,
         numRandomPlatforms, numPaths, movementSpeed, levelNumber);
     add(level);
     return level;
   }
 
   void updateMaxHeight(double maxHeight) {
-    Level lastLevel = queue.last;
-    double upperBound = lastLevel.levelEndHeight.abs();
+    Level last = queue.last;
+    double upperBound = last.levelEndHeight.abs();
     if (upperBound - screenSize.height < maxHeight) {
       // remove lowest Level, add another one on top
-      queue.removeFirst();
-      int nextLevelNumber = lastLevel.levelNumber + 1;
-      Level nextLevel = buildLevel(nextLevelNumber);
-      queue.add(nextLevel);
+      queue.removeFirst().remove();
+      queue.add(buildLevel(last.levelNumber + 1));
     }
-  }
 
-  @override
-  void resize(Size size) {
-    if (screenSize == null || screenSize != size) {
-      screenSize = size;
-      removeComponents();
-      initLevels();
-    }
-    super.resize(size);
+    // update levels
+    queue.forEach((level) {
+      level.updateMaxHeight(maxHeight);
+    });
   }
 
   void remove() {
@@ -88,5 +79,15 @@ class LevelWrapper extends PositionComponent
   @override
   bool destroy() {
     return willDestroy;
+  }
+
+  @override
+  void resize(Size size) {
+    if (screenSize == null || screenSize != size) {
+      screenSize = size;
+      removeComponents();
+      initLevels();
+    }
+    super.resize(size);
   }
 }
