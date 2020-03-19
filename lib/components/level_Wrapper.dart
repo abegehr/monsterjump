@@ -60,16 +60,11 @@ class LevelWrapper extends PositionComponent
       queue.removeFirst().remove();
       queue.add(buildLevel(last.levelNumber + 1));
     }
-  }
 
-  @override
-  void resize(Size size) {
-    if (screenSize == null || screenSize != size) {
-      screenSize = size;
-      removeComponents();
-      initLevels();
-    }
-    super.resize(size);
+    // update levels
+    queue.forEach((level) {
+      level.updateMaxHeight(maxHeight);
+    });
   }
 
   void remove() {
@@ -86,5 +81,15 @@ class LevelWrapper extends PositionComponent
   @override
   bool destroy() {
     return willDestroy;
+  }
+
+  @override
+  void resize(Size size) {
+    if (screenSize == null || screenSize != size) {
+      screenSize = size;
+      removeComponents();
+      initLevels();
+    }
+    super.resize(size);
   }
 }
