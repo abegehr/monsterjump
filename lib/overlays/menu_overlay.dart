@@ -1,3 +1,4 @@
+import 'package:coronajump/overlays/widgets/share_button.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -54,6 +55,7 @@ class MenuOverlay extends StatelessWidget {
                         'assets/images/ui/play_button.png',
                       )))),
         ),
+        Positioned(bottom: 165, right: 50, child: ShareButton()),
         Positioned(
           bottom: 32,
           right: 32,
