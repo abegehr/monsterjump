@@ -7,6 +7,8 @@ import 'package:coronajump/game.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  FirebaseAdMob.instance.initialize(appId: appId);
+
   Flame.images.loadAll(<String>[
     'bg/background.png',
     'virus/virus.png',
