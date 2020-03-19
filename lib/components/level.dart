@@ -6,7 +6,11 @@ import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/components/composed_component.dart';
 
+// random double generator
 var rng = new Random();
+double randomDouble(double start, double end) {
+  return rng.nextDouble() * (end - start).abs() + start;
+}
 
 class Level extends PositionComponent
     with HasGameRef, Tapable, ComposedComponent {
@@ -41,10 +45,6 @@ class Level extends PositionComponent
 
     // generate starting platform for first level
     if (levelNumber == 0) addPlatform(0.0, -75.0);
-  }
-
-  double randomDouble(double start, double end) {
-    return rng.nextDouble() * (end - start).abs() + start;
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
