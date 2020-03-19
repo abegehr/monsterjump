@@ -57,7 +57,8 @@ class LevelWrapper extends PositionComponent
     double upperBound = lastLevel.levelEndHeight.abs();
     if (upperBound - screenSize.height < maxHeight) {
       // remove lowest Level, add another one on top
-      queue.removeFirst();
+      Level firstLevel = queue.removeFirst();
+      firstLevel.remove();
       int nextLevelNumber = lastLevel.levelNumber + 1;
       Level nextLevel = buildLevel(nextLevelNumber);
       queue.add(nextLevel);
