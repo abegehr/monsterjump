@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
@@ -57,19 +58,27 @@ class MenuOverlay extends StatelessWidget {
           bottom: 32,
           right: 32,
           child: RaisedButton(
-            onPressed: () {},
             color: Colors.white,
+            onPressed: _launchURL,
             child: Text(
-              'Settings',
+              'Privacy Policy',
               style: TextStyle(
-                fontSize: 21,
-                fontWeight: FontWeight.bold,
-                color: Colors.blue,
+                fontSize: 14,
+                color: Colors.grey,
               ),
             ),
           ),
         ),
       ],
     );
+  }
+}
+
+_launchURL() async {
+  const url = 'https://places.rocks/coronajump-dse';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
