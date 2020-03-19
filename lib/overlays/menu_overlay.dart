@@ -29,22 +29,17 @@ class MenuOverlay extends StatelessWidget {
             ),
           ),
         ),
-        Center(
-          child: RaisedButton(
-              onPressed: start,
-              child: Padding(
-                padding: EdgeInsets.all(12),
-                child: Text(
-                  'PLAY',
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-              color: Colors.blue[500]),
-        ),
+        Container(
+            width: 165,
+            height: 50,
+            child: ConstrainedBox(
+                constraints: BoxConstraints.expand(),
+                child: FlatButton(
+                    onPressed: start,
+                    padding: EdgeInsets.all(0.0),
+                    child: Image.asset(
+                      'assets/images/ui/play-button.png',
+                    )))),
         Positioned(
           bottom: 32,
           right: 32,
