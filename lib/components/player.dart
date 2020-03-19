@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
 import 'package:flame/sprite.dart';
@@ -8,12 +9,13 @@ import 'package:flutter/painting.dart';
 import 'package:coronajump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
-const num SIZE = 48.0;
+const double SIZE = 48.0;
+const double sensorScale = 0.13;
+const double horResistance = 0.0003;
 
 class Player extends SpriteComponent {
   PlayerBody body;
   bool willDestroy = false;
-  double sensorScale = 5;
   Vector2 acceleration = Vector2.zero();
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
@@ -27,8 +29,7 @@ class Player extends SpriteComponent {
   void start() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
-      acceleration.add(Vector2(event.y / sensorScale, 0));
-    });
+      acceleration.add(Vector2(event.y * sensorScale, 0));
     }); //TODO unsubscribe?
   }
 
@@ -37,7 +38,14 @@ class Player extends SpriteComponent {
     super.update(t);
 
     // move with gyroscope
-    body.body.applyForceToCenter(acceleration);
+    Vector2 vel = body.body.linearVelocity;
+    double speed = vel.length;
+    print("speed $speed");
+    Vector2 horResistanceVec =
+        Vector2(vel.x * pow(speed, 2) * horResistance, 0);
+    print("acceleration: $acceleration");
+    print("horResistanceVec $horResistanceVec");
+    body.body.applyForceToCenter(acceleration - horResistanceVec);
   }
 
   void remove() {
