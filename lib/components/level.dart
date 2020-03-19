@@ -103,7 +103,7 @@ class Level extends PositionComponent
       addPlatform(queue.removeFirst());
     }
     while (queueVisible.length > 0 && queueVisible.first.y.abs() < lowerBound) {
-      print("del paltform ${queue.first.y}");
+      print("del paltform ${queueVisible.first.y}");
       queueVisible.removeFirst().remove();
     }
   }
