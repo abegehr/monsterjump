@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:coronajump/box.dart';
 import 'package:coronajump/components/platform.dart';
+import 'package:box2d_flame/box2d.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -31,8 +32,8 @@ class LevelWrapper extends PositionComponent
     int numRandomPlatforms = max(10, 25 - levelNumber * 5);
 
     // amount of safe paths
-    int numPaths = max(1, 3 - levelNumber);
-
+    //DEBUG int numPaths = max(1, 3 - levelNumber);
+    int numPaths = 1;
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
     //TODO? set movementSpeed
@@ -68,9 +69,23 @@ class LevelWrapper extends PositionComponent
   void remove() {
     willDestroy = true;
     removeComponents();
+    Body currentEl = box.world.bodyList;
+    int i = 1;
+    while (currentEl != null) {
+      currentEl = currentEl.getNext();
+      i++;
+    }
+    print("DEBUG count after remove: " + i.toString());
   }
 
   removeComponents() {
+    Body currentEl = box.world.bodyList;
+    int i = 1;
+    while (currentEl != null) {
+      currentEl = currentEl.getNext();
+      i++;
+    }
+    print("DEBUG count inside remove: " + i.toString());
     components.forEach((c) {
       if (c is Level) c.remove();
     });
@@ -86,8 +101,9 @@ class LevelWrapper extends PositionComponent
     if (screenSize == null || screenSize != size) {
       screenSize = size;
       removeComponents();
+
       initLevels();
     }
-    super.resize(size);
+
   }
 }
