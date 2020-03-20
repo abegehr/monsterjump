@@ -6,7 +6,15 @@ class Admob {
   static BannerAd _bannerAd;
 
   static MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: <String>['game', 'corona', 'awesome', 'fun'],
+    keywords: <String>[
+      'game',
+      'corona',
+      'fun',
+      'virus',
+      'health',
+      'home',
+      'safe'
+    ],
     contentUrl: 'https://coronajump.app',
     childDirected: false,
     testDevices: <String>[], // Android emulators are considered test devices
