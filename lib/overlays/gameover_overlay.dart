@@ -37,15 +37,19 @@ class GameoverOverlay extends StatelessWidget {
                 else if (snap.hasError) text = "Failed loading Highscore";
                 return Text(text);
               }),
-          Container(
-              width: 197,
-              height: 50,
-              child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FlatButton(
-                      onPressed: start,
-                      padding: EdgeInsets.all(0.0),
-                      child: Image.asset('assets/images/ui/try_again.png')))),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            child: ConstrainedBox(
+                constraints: BoxConstraints.expand(),
+                child: FlatButton(
+                    onPressed: start,
+                    padding: EdgeInsets.all(0.0),
+                    child: Image.asset(
+                      'assets/images/ui/try_again.png',
+                      width: 197,
+                      height: 50,
+                    ))),
+          ),
         ],
       ),
     );
