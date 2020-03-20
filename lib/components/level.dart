@@ -107,10 +107,7 @@ class Level extends PositionComponent
   void remove() {
     willDestroy = true;
     components.forEach((c) {
-      if (c is Platform) {
-        c.body?.remove();
-        c.remove();
-      }
+      if (c is Platform) c.remove();
     });
   }
 
