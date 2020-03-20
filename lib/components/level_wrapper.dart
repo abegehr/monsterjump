@@ -87,5 +87,6 @@ class LevelWrapper extends PositionComponent
 
       initLevels();
     }
+    super.resize(size);
   }
 }
