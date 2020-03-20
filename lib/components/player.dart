@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
@@ -17,6 +18,7 @@ class Player extends SpriteComponent {
   PlayerBody body;
   bool willDestroy = false;
   Vector2 acceleration = Vector2.zero();
+  StreamSubscription gyroSub;
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
@@ -27,10 +29,14 @@ class Player extends SpriteComponent {
   }
 
   void start() {
-    gyroscopeEvents.listen((GyroscopeEvent event) {
+    gyroSub = gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
       acceleration = Vector2(event.y * sensorScale, 0);
-    }); //TODO unsubscribe?
+    });
+  }
+
+  void stop() {
+    if (gyroSub != null) gyroSub.cancel();
   }
 
   @override
@@ -48,6 +54,7 @@ class Player extends SpriteComponent {
   void remove() {
     willDestroy = true;
     body.remove();
+    stop();
   }
 
   @override
