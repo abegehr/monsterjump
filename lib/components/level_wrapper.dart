@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:math';
 import 'dart:ui';
 import 'package:coronajump/box.dart';
-import 'package:coronajump/components/platform.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
@@ -32,7 +31,6 @@ class LevelWrapper extends PositionComponent
 
     // amount of safe paths
     int numPaths = max(1, 3 - levelNumber);
-
     // movementSpeed
     double movementSpeed = min(1.5, 1 + levelNumber ~/ 2 * 0.05);
     //TODO? set movementSpeed
@@ -86,6 +84,7 @@ class LevelWrapper extends PositionComponent
     if (screenSize == null || screenSize != size) {
       screenSize = size;
       removeComponents();
+
       initLevels();
     }
     super.resize(size);

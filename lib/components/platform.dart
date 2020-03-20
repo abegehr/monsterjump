@@ -7,60 +7,44 @@ import 'package:flame/sprite.dart';
 import 'package:box2d_flame/box2d.dart';
 
 class Platform extends SpriteComponent {
-  PlatformBody body;
   bool willDestroy = false;
   static double platformWidth = 72.0;
   static double platformHeight = 12.0;
+  // physics
+  Box2DComponent box;
+  final FixtureDef fixtureDef = new FixtureDef();
+  Fixture fixture;
+  final BodyDef bodyDef = new BodyDef();
+  Body body;
 
-  Platform(Box2DComponent box, double x, double y)
+  Platform(this.box, double x, double y)
       : super.fromSprite(platformWidth, platformHeight,
             new Sprite('platform/platform.png')) {
     anchor = Anchor.topCenter;
     this.x = x;
     this.y = y;
-    body = PlatformBody(box, this);
-  }
-
-  void remove() {
-    willDestroy = true;
-    body.remove();
-  }
-
-  @override
-  bool destroy() {
-    return willDestroy;
-  }
-}
-
-class PlatformBody extends BodyComponent {
-  SpriteComponent sprite;
-  Fixture fixture;
-  bool willDestroy = false;
-
-  PlatformBody(Box2DComponent box, this.sprite) : super(box) {
     _createBody();
   }
 
   void _createBody() {
     final shape = new EdgeShape();
-    final hw = 0.5 * sprite.width * Globals.ptm;
+    final hw = 0.5 * width * Globals.ptm;
     shape.set(new Vector2(-hw, 0), new Vector2(hw, 0));
 
-    final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
-    final bodyDef = new BodyDef();
-    bodyDef.position =
-        new Vector2(sprite.x * Globals.ptm, sprite.y * Globals.ptm);
+    bodyDef.position = new Vector2(x * Globals.ptm, y * Globals.ptm);
     bodyDef.type = BodyType.STATIC;
+  }
 
-    body = world.createBody(bodyDef);
+  void addBody() {
+    body = box.world.createBody(bodyDef);
     fixture = body.createFixtureFromFixtureDef(fixtureDef);
     fixture.userData = {'type': "platform"};
   }
 
   @override
   void render(Canvas canvas) {
-    if (Globals.renderBox2DShapes) {
+    if (Globals.renderBox2DShapes && body != null) {
       EdgeShape shape = body.getFixtureList().getShape();
       Paint paint = Paint()..color = const Color(0xFFFF0000);
       canvas.drawLine(
@@ -70,17 +54,20 @@ class PlatformBody extends BodyComponent {
               (body.position.y + shape.vertex2.y) * Globals.mtp),
           paint);
     }
+    super.render(canvas);
   }
 
   void remove() {
     willDestroy = true;
   }
 
+  void removeBody() {
+    if (body != null) box.world.destroyBody(body);
+  }
+
   @override
   bool destroy() {
-    if (willDestroy)
-      box.world.destroyBody(
-          body); //TODO where should box.remove() be used? https://github.com/flame-engine/flame/issues/17#issuecomment-406700417
+    if (willDestroy) removeBody();
     return willDestroy;
   }
 }
