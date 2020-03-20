@@ -40,11 +40,8 @@ class Player extends SpriteComponent {
     // move with gyroscope
     Vector2 vel = body.body.linearVelocity;
     double speed = vel.length;
-    print("speed $speed");
     Vector2 horResistanceVec =
         Vector2(vel.x * pow(speed, 2) * horResistance, 0);
-    print("acceleration: $acceleration");
-    print("horResistanceVec $horResistanceVec");
     body.body.applyForceToCenter(acceleration - horResistanceVec);
   }
 
