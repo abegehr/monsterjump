@@ -58,24 +58,6 @@ class MenuOverlay extends StatelessWidget {
               ),
             ),
             Expanded(flex: 1, child: ShareButton()),
-            FutureBuilder(
-                future: Score.getHighscore(),
-                builder: (BuildContext context, AsyncSnapshot<int> snap) {
-                  String text = "";
-                  int score = snap.data;
-                  if (snap.hasData)
-                    text = score != null
-                        ? "Personal HighScore: $score"
-                        : "Personal HighScore: loading…";
-                  else if (snap.hasError) text = "Failed loading Highscore";
-                  return Text(
-                    text,
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                    ),
-                  );
-                }),
             Expanded(
               flex: 2,
               child: Align(
