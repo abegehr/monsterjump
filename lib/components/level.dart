@@ -89,9 +89,9 @@ class Level extends PositionComponent
   }
 
   void addPlatform(Platform platform) {
-    queueVisible.add(platform);
+    platform.addBody();
     add(platform);
-    box.add(platform.body);
+    queueVisible.add(platform);
   }
 
   void updateMaxHeight(double maxHeight) {
