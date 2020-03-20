@@ -1,4 +1,5 @@
 import 'package:coronajump/overlays/widgets/share_button.dart';
+import 'package:coronajump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -20,56 +21,79 @@ class MenuOverlay extends StatelessWidget {
             'assets/images/virus/virus.png',
           ),
         ),
-        Positioned(
-          top: 180,
-          left: 10,
-          child: Container(
-            width: 280,
-            height: 150,
-            child: Image.asset(
-              'assets/images/ui/title.png',
-            ),
-          ),
-        ),
-        Positioned(
-          top: 275,
-          left: 30,
-          child: Container(
-            width: 280,
-            height: 150,
-            child: Image.asset(
-              'assets/images/ui/stayathomeandplaycoronajump.png',
-            ),
-          ),
-        ),
-        Center(
-          child: Container(
-              width: 165,
-              height: 50,
-              child: ConstrainedBox(
-                  constraints: BoxConstraints.expand(),
-                  child: FlatButton(
-                      onPressed: start,
-                      padding: EdgeInsets.all(0.0),
-                      child: Image.asset(
-                        'assets/images/ui/play_button.png',
-                      )))),
-        ),
-        Positioned(bottom: 256, right: 50, child: ShareButton()),
-        Positioned(
-          bottom: 128,
-          right: 32,
-          child: RaisedButton(
-            color: Colors.white,
-            onPressed: _launchURL,
-            child: Text(
-              'Privacy Policy',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey,
+        Column(
+          children: <Widget>[
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment(-1.0, -1.0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      Image.asset(
+                        'assets/images/ui/title.png',
+                        width: 280,
+                        height: 150,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Image.asset(
+                          'assets/images/ui/stayathomeandplaycoronajump.png',
+                          width: 280,
+                          height: 150,
+                        ),
+                      ),
+                    ]),
               ),
             ),
-          ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: start,
+                child: Image.asset(
+                  'assets/images/ui/play_button.png',
+                  width: 210,
+                  height: 60,
+                ),
+              ),
+            ),
+            Expanded(flex: 1, child: ShareButton()),
+            FutureBuilder(
+                future: Score.getHighscore(),
+                builder: (BuildContext context, AsyncSnapshot<int> snap) {
+                  String text = "";
+                  int score = snap.data;
+                  if (snap.hasData)
+                    text = score != null
+                        ? "Personal HighScore: $score"
+                        : "Personal HighScore: loading…";
+                  else if (snap.hasError) text = "Failed loading Highscore";
+                  return Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  );
+                }),
+            Expanded(
+              flex: 2,
+              child: Align(
+                alignment: Alignment.center,
+                child: RaisedButton(
+                  color: Colors.white,
+                  onPressed: _launchURL,
+                  child: Text(
+                    'Privacy Policy',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
       ],
     );
