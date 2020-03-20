@@ -79,28 +79,9 @@ class PlatformBody extends BodyComponent {
 
   @override
   bool destroy() {
-    if (willDestroy) {
-      Body currentEl = box.world.bodyList;
-      int i = 1;
-      while (currentEl != null) {
-        currentEl = currentEl.getNext();
-        i++;
-      }
-      print("DEBUG count before box destroy: " + i.toString());
-
-      //
+    if (willDestroy)
       box.world.destroyBody(
           body); //TODO where should box.remove() be used? https://github.com/flame-engine/flame/issues/17#issuecomment-406700417
-
-      int j = 1;
-      currentEl = box.world.bodyList;
-      while (currentEl != null) {
-        currentEl = currentEl.getNext();
-        j++;
-      }
-      print("DEBUG count after box destroy: " + j.toString());
-      //
-    }
 
     return willDestroy;
   }

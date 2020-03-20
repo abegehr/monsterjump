@@ -9,7 +9,6 @@ import 'package:coronajump/box.dart';
 import 'package:coronajump/components/background.dart';
 import 'package:coronajump/components/player.dart';
 import 'package:flame/text_config.dart';
-import 'package:box2d_flame/box2d.dart' as b;
 // overlays
 import 'package:coronajump/overlays/menu_overlay.dart';
 import 'package:coronajump/overlays/gameover_overlay.dart';
@@ -53,17 +52,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       background.reset();
 
       // level
-      level = new LevelWrapper(box);
-
-      add(level);
-
-      b.Body currentEl = box.world.bodyList;
-      int i = 1;
-      while (currentEl != null) {
-        currentEl = currentEl.getNext();
-        i++;
-      }
-      print("DEBUG count on initLevels: " + i.toString());
+      add(level = new LevelWrapper(box));
 
       // player
       addPlayer();

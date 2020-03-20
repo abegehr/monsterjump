@@ -69,23 +69,9 @@ class LevelWrapper extends PositionComponent
   void remove() {
     willDestroy = true;
     removeComponents();
-    Body currentEl = box.world.bodyList;
-    int i = 1;
-    while (currentEl != null) {
-      currentEl = currentEl.getNext();
-      i++;
-    }
-    print("DEBUG count after remove: " + i.toString());
   }
 
   removeComponents() {
-    Body currentEl = box.world.bodyList;
-    int i = 1;
-    while (currentEl != null) {
-      currentEl = currentEl.getNext();
-      i++;
-    }
-    print("DEBUG count inside remove: " + i.toString());
     components.forEach((c) {
       if (c is Level) c.remove();
     });
@@ -104,6 +90,5 @@ class LevelWrapper extends PositionComponent
 
       initLevels();
     }
-
   }
 }
