@@ -9,6 +9,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
   Admob.init();
+  Admob.loadBannerAd();
 
   Flame.images.loadAll(<String>[
     'bg/background.png',

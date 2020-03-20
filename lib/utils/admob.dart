@@ -1,26 +1,15 @@
 import 'dart:io';
-
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/foundation.dart';
 
 class Admob {
+  static BannerAd _bannerAd;
+
   static MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
     keywords: <String>['game', 'corona', 'awesome', 'fun'],
     contentUrl: 'https://coronajump.app',
     childDirected: false,
     testDevices: <String>[], // Android emulators are considered test devices
-  );
-
-  static BannerAd myBanner = BannerAd(
-    // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-    // https://developers.google.com/admob/android/test-ads
-    // https://developers.google.com/admob/ios/test-ads
-    adUnitId: getBannerAdUnitId(),
-    size: AdSize.smartBanner,
-    targetingInfo: targetingInfo,
-    listener: (MobileAdEvent event) {
-      print("BannerAd event is $event");
-    },
   );
 
   static bool shouldEnable() => Platform.isAndroid || Platform.isIOS;
@@ -41,10 +30,9 @@ class Admob {
 
   static void init() {
     if (shouldEnable()) FirebaseAdMob.instance.initialize(appId: getAppId());
-
-    // load ad units
-    myBanner.load();
   }
+
+  // banner ad
 
   static String getBannerAdUnitId() {
     if (kReleaseMode) {
@@ -60,15 +48,29 @@ class Admob {
     }
   }
 
-  static void showBannerAdUnit() {
-    myBanner.show(
+  static void loadBannerAd() {
+    _bannerAd = new BannerAd(
+      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+      // https://developers.google.com/admob/android/test-ads
+      // https://developers.google.com/admob/ios/test-ads
+      adUnitId: getBannerAdUnitId(),
+      size: AdSize.smartBanner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+      },
+    )..load();
+  }
+
+  static void showBannerAd() {
+    _bannerAd?.show(
       anchorOffset: 0.0,
       horizontalCenterOffset: 0.0,
       anchorType: AnchorType.bottom,
     );
   }
 
-  static void removeBannerAdUnit() {
-    myBanner.dispose();
+  static void removeBannerAd() {
+    _bannerAd?.dispose();
   }
 }
