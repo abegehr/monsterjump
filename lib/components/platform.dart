@@ -62,7 +62,11 @@ class Platform extends SpriteComponent {
   }
 
   void removeBody() {
-    if (body != null) box.world.destroyBody(body);
+    if (body != null) {
+      box.world.destroyBody(body);
+      body = null;
+      fixture = null;
+    }
   }
 
   @override
