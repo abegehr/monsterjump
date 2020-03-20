@@ -57,7 +57,7 @@ class Level extends PositionComponent
         numRandomPlatforms, levelStartHeight, levelEndHeight);
 
     // generate starting platform for first level
-    //DEBUG if (levelNumber == 0) addPlatformToQueue(0.0, -75.0);
+    if (levelNumber == 0) addPlatformToQueue(0.0, -75.0);
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
