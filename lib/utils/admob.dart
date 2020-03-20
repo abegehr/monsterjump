@@ -14,7 +14,7 @@ class Admob {
       'health',
       'home',
       'safe'
-    ],
+    ], // TODO get keywords from Firebase Remoteconfig
     contentUrl: 'https://coronajump.app',
     childDirected: false,
     testDevices: <String>[], // Android emulators are considered test devices
