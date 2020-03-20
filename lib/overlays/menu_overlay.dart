@@ -55,9 +55,9 @@ class MenuOverlay extends StatelessWidget {
                         'assets/images/ui/play_button.png',
                       )))),
         ),
-        Positioned(bottom: 165, right: 50, child: ShareButton()),
+        Positioned(bottom: 256, right: 50, child: ShareButton()),
         Positioned(
-          bottom: 32,
+          bottom: 128,
           right: 32,
           child: RaisedButton(
             color: Colors.white,
