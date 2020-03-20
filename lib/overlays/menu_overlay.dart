@@ -1,11 +1,13 @@
 import 'package:coronajump/overlays/widgets/share_button.dart';
+import 'package:coronajump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
+  final int score;
 
-  MenuOverlay({Key key, this.start}) : super(key: key);
+  MenuOverlay({Key key, this.start, this.score}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,24 @@ class MenuOverlay extends StatelessWidget {
               ),
             ),
             Expanded(flex: 1, child: ShareButton()),
+            FutureBuilder(
+                future: Score.getHighscore(),
+                builder: (BuildContext context, AsyncSnapshot<int> snap) {
+                  String text = "";
+                  int score = snap.data;
+                  if (snap.hasData)
+                    text = score != null
+                        ? "Personal HighScore: $score"
+                        : "Personal HighScore: loading…";
+                  else if (snap.hasError) text = "Failed loading Highscore";
+                  return Text(
+                    text,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  );
+                }),
             Expanded(
               flex: 2,
               child: Align(
