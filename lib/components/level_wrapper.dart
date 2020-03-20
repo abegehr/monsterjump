@@ -2,8 +2,6 @@ import 'dart:collection';
 import 'dart:math';
 import 'dart:ui';
 import 'package:coronajump/box.dart';
-import 'package:coronajump/components/platform.dart';
-import 'package:box2d_flame/box2d.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';
