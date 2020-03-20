@@ -10,7 +10,7 @@ import 'package:coronajump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
 const double SIZE = 48.0;
-const double sensorScale = 0.13;
+const double sensorScale = 3;
 const double horResistance = 0.0003;
 
 class Player extends SpriteComponent {
@@ -29,7 +29,7 @@ class Player extends SpriteComponent {
   void start() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
       //Adding up the scaled sensor data to the current acceleration
-      acceleration.add(Vector2(event.y * sensorScale, 0));
+      acceleration = Vector2(event.y * sensorScale, 0);
     }); //TODO unsubscribe?
   }
 
