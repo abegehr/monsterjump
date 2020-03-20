@@ -5,9 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
-  final int score;
 
-  MenuOverlay({Key key, this.start, this.score}) : super(key: key);
+  MenuOverlay({Key key, this.start}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
