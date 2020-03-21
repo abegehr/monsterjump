@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:virusjump/utils/admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +8,8 @@ import 'package:virusjump/game.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  if (!kIsWeb) {
-    Admob.init();
-    Admob.loadBannerAd();
-  }
+  Admob.init();
+  Admob.loadBannerAd();
 
   Flame.images.loadAll(<String>[
     'bg/background.png',

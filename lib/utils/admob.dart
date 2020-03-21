@@ -21,7 +21,8 @@ class Admob {
     testDevices: <String>[], // Android emulators are considered test devices
   );
 
-  static bool shouldEnable() => Platform.isAndroid || Platform.isIOS;
+  static bool shouldEnable() =>
+      !kIsWeb && (Platform.isAndroid || Platform.isIOS);
 
   static String getAppId() {
     if (kReleaseMode && !kIsWeb) {
