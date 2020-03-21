@@ -32,7 +32,6 @@ dependencies:
   firebase_analytics:
   firebase_crashlytics:
   firebase_performance:
-  firebase_admob:
   cloud_firestore:
 
   # Flame

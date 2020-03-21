@@ -1,6 +1,5 @@
 import 'dart:ui';
 import 'package:coronajump/components/level_wrapper.dart';
-import 'package:coronajump/utils/admob.dart';
 import 'package:coronajump/utils/score.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
@@ -32,7 +31,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
     // start menu
     addWidgetOverlay("Menu", MenuOverlay(start: start));
-    Admob.showBannerAd();
   }
 
   void start() {
@@ -45,8 +43,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       // overlays
       removeWidgetOverlay("Menu");
       removeWidgetOverlay("Gameover");
-      Admob.removeBannerAd();
-      Admob.loadBannerAd();
+
 
       // background
       background.reset();
@@ -75,7 +72,6 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
       // overlay
       addWidgetOverlay("Gameover", GameoverOverlay(start: start, score: score));
-      Admob.showBannerAd();
       // player
       player.remove();
       // level
