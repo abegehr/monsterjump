@@ -9,11 +9,12 @@ class Admob {
     keywords: <String>[
       'game',
       'corona',
-      'fun',
       'virus',
       'health',
       'home',
-      'safe'
+      'selfisolation',
+      'quarantine',
+      'stayathome'
     ], // TODO get keywords from Firebase Remoteconfig
     contentUrl: 'https://coronajump.app',
     childDirected: false,
