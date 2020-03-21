@@ -7,7 +7,7 @@ import 'package:flame/anchor.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/painting.dart';
-import 'package:coronajump/utils/globals.dart';
+import 'package:virusjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
 const double SIZE = 48.0;

@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:coronajump/utils/globals.dart';
+import 'package:virusjump/utils/globals.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:flame/components/component.dart';

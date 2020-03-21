@@ -9,7 +9,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:coronajump/main.dart';
+import 'package:virusjump/main.dart';
 */
 
 void main() {}

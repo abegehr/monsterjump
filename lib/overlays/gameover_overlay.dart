@@ -1,4 +1,4 @@
-import 'package:coronajump/utils/score.dart';
+import 'package:virusjump/utils/score.dart';
 import 'package:flutter/material.dart';
 
 class GameoverOverlay extends StatelessWidget {

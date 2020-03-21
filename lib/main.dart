@@ -1,9 +1,9 @@
-import 'package:coronajump/utils/admob.dart';
+import 'package:virusjump/utils/admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
-import 'package:coronajump/game.dart';
+import 'package:virusjump/game.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
