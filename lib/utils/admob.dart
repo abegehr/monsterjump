@@ -24,7 +24,7 @@ class Admob {
   static bool shouldEnable() => Platform.isAndroid || Platform.isIOS;
 
   static String getAppId() {
-    if (kReleaseMode) {
+    if (kReleaseMode && !kIsWeb) {
       if (Platform.isAndroid) {
         return 'ca-app-pub-2773918257223246~2092525035';
       } else if (Platform.isIOS) {
@@ -44,7 +44,7 @@ class Admob {
   // banner ad
 
   static String getBannerAdUnitId() {
-    if (kReleaseMode) {
+    if (kReleaseMode && !kIsWeb) {
       if (Platform.isAndroid) {
         return 'ca-app-pub-2773918257223246/1799282503';
       } else if (Platform.isIOS) {
