@@ -1,7 +1,6 @@
 import 'dart:ui';
 import 'package:virusjump/components/level_wrapper.dart';
 import 'package:virusjump/utils/admob.dart';
-import 'package:virusjump/utils/globals.dart';
 import 'package:virusjump/utils/score.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
