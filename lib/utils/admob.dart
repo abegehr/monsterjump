@@ -59,28 +59,30 @@ class Admob {
   }
 
   static void loadBannerAd() {
-    _bannerAd = new BannerAd(
-      // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-      // https://developers.google.com/admob/android/test-ads
-      // https://developers.google.com/admob/ios/test-ads
-      adUnitId: getBannerAdUnitId(),
-      size: AdSize.smartBanner,
-      targetingInfo: targetingInfo,
-      listener: (MobileAdEvent event) {
-        print("BannerAd event is $event");
-      },
-    )..load();
+    if (shouldEnable())
+      _bannerAd = new BannerAd(
+        // Replace the testAdUnitId with an ad unit id from the AdMob dash.
+        // https://developers.google.com/admob/android/test-ads
+        // https://developers.google.com/admob/ios/test-ads
+        adUnitId: getBannerAdUnitId(),
+        size: AdSize.smartBanner,
+        targetingInfo: targetingInfo,
+        listener: (MobileAdEvent event) {
+          print("BannerAd event is $event");
+        },
+      )..load();
   }
 
   static void showBannerAd() {
-    _bannerAd?.show(
-      anchorOffset: 0.0,
-      horizontalCenterOffset: 0.0,
-      anchorType: AnchorType.bottom,
-    );
+    if (shouldEnable())
+      _bannerAd?.show(
+        anchorOffset: 0.0,
+        horizontalCenterOffset: 0.0,
+        anchorType: AnchorType.bottom,
+      );
   }
 
   static void removeBannerAd() {
-    _bannerAd?.dispose();
+    if (shouldEnable()) _bannerAd?.dispose();
   }
 }
