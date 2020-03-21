@@ -25,6 +25,20 @@ void main() {
   flameUtil.setOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  CoronaJump game = CoronaJump();
-  runApp(game.widget);
+  runApp(new GameContainer());
+}
+
+class GameContainer extends StatelessWidget {
+  final CoronaJump game = CoronaJump();
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        // red box
+        child: game.widget,
+        width: 240, //max-width is 240
+      ),
+    );
+  }
 }
