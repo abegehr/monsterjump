@@ -23,12 +23,12 @@ packages:
     source: hosted
     version: "2.4.0"
   audioplayers:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: audioplayers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.1"
+    version: "0.14.0"
   boolean_selector:
     dependency: transitive
     description:
