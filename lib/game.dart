@@ -85,7 +85,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       // level
       level.remove();
 
-// To let the screen turn off again:
+      // To let the screen turn off again:
       Wakelock.disable();
     }
   }
