@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
+import 'package:flutter/foundation.dart';
 
 class Score {
   static Future<String> getUUID() async {
@@ -8,12 +9,19 @@ class Score {
 
     String uuid;
     try {
-      if (Platform.isAndroid) {
-        var build = await deviceInfoPlugin.androidInfo;
-        uuid = build.androidId; //UUID for Android
-      } else if (Platform.isIOS) {
-        var data = await deviceInfoPlugin.iosInfo;
-        uuid = data.identifierForVendor; //UUID for iOS
+      if (!kIsWeb) {
+        if (Platform.isAndroid) {
+          // Android
+          var build = await deviceInfoPlugin.androidInfo;
+          uuid = build.androidId; //UUID for Android
+        } else if (Platform.isIOS) {
+          // iOS
+          var data = await deviceInfoPlugin.iosInfo;
+          uuid = data.identifierForVendor; //UUID for iOS
+        }
+      } else {
+        // web
+        //TODO generate unique ID for web.
       }
     } on Exception {
       print('Failed to get UUID');
