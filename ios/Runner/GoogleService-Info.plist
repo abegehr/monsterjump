@@ -34,5 +34,7 @@
 	<string>1:964026911169:ios:2d5ee3434bdff4db1d0740</string>
 	<key>DATABASE_URL</key>
 	<string>https://coronajump-22640.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-2773918257223246~2647892952</string>
 </dict>
 </plist>
