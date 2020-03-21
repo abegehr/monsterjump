@@ -8,20 +8,24 @@ import 'package:virusjump/game.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Admob setup
   Admob.init();
   Admob.loadBannerAd();
 
+  // preload images
   Flame.images.loadAll(<String>[
     'bg/background.png',
     'virus/virus.png',
     'platform/platform.png'
   ]);
 
+  // Flame settings
   Util flameUtil = Util();
   flameUtil.fullScreen();
   flameUtil.setOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
+  // run app
   runApp(new GameContainer());
 }
 
