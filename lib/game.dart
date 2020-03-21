@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:virusjump/components/level_wrapper.dart';
 import 'package:virusjump/utils/admob.dart';
+import 'package:virusjump/utils/globals.dart';
 import 'package:virusjump/utils/score.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
@@ -131,8 +132,8 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
   @override
   void resize(Size size) {
-    screenSize = size;
-    super.resize(size);
-    box.resize(size);
+    screenSize = Size(min(size.width, Globals.maxScreenWidth), size.height);
+    super.resize(screenSize);
+    box.resize(screenSize);
   }
 }
