@@ -35,9 +35,8 @@ class GameContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
-        // red box
         child: game.widget,
-        width: 240, //max-width is 240
+        width: 240,
       ),
     );
   }
