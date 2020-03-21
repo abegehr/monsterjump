@@ -1,4 +1,4 @@
-# coronajump
+# virusjump
 
 A new Flutter project.
 
