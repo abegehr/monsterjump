@@ -9,6 +9,7 @@ import 'package:virusjump/box.dart';
 import 'package:virusjump/components/background.dart';
 import 'package:virusjump/components/player.dart';
 import 'package:flame/text_config.dart';
+import 'package:wakelock/wakelock.dart';
 // overlays
 import 'package:virusjump/overlays/menu_overlay.dart';
 import 'package:virusjump/overlays/gameover_overlay.dart';
@@ -57,6 +58,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       // player
       addPlayer();
       player.start();
+
+      // To keep the screen on:
+      Wakelock.enable();
     }
   }
 
@@ -80,6 +84,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       player.remove();
       // level
       level.remove();
+
+// To let the screen turn off again:
+      Wakelock.disable();
     }
   }
 
