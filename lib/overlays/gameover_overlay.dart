@@ -65,7 +65,3 @@ class _RandomImageState extends State<RandomImage> {
         child: Image.asset('assets/images/tipps/$randomNumber.png'));
   }
 }
-
-//Container(
-//width: 180,
-//child: Image.asset('assets/images/tipps/$randomNumber.png')),
