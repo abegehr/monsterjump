@@ -5,10 +5,8 @@ import 'dart:math';
 class GameoverOverlay extends StatelessWidget {
   final Function start;
   final int score;
-  final int randomNumber;
 
-  GameoverOverlay({Key key, this.start, this.score, this.randomNumber})
-      : super(key: key);
+  GameoverOverlay({Key key, this.start, this.score}) : super(key: key);
 
   Random random = new Random();
 
