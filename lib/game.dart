@@ -132,7 +132,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   @override
   void resize(Size size) {
     screenSize = size;
-    super.resize(size);
-    box.resize(size);
+    super.resize(screenSize);
+    box.resize(screenSize);
   }
 }

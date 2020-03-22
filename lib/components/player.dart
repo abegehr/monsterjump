@@ -6,6 +6,7 @@ import 'package:flame/sprite.dart';
 import 'package:flame/anchor.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:virusjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
@@ -29,10 +30,11 @@ class Player extends SpriteComponent {
   }
 
   void start() {
-    gyroSub = gyroscopeEvents.listen((GyroscopeEvent event) {
-      //Adding up the scaled sensor data to the current acceleration
-      acceleration = Vector2(event.y * sensorScale, 0);
-    });
+    if (!kIsWeb)
+      gyroSub = gyroscopeEvents.listen((GyroscopeEvent event) {
+        //Adding up the scaled sensor data to the current acceleration
+        acceleration = Vector2(event.y * sensorScale, 0);
+      });
   }
 
   void stop() {
