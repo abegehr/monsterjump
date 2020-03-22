@@ -46,6 +46,7 @@ dependencies:
   device_info:
 
   share:
+  wakelock: ^0.1.4
 
 dev_dependencies:
   flutter_launcher_icons: "^0.7.3"
