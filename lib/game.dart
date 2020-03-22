@@ -31,7 +31,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     add(background);
 
     // start menu
-    addWidgetOverlay("Menu", MenuOverlay(start: start));
+    addWidgetOverlay("Gameover", GameoverOverlay(start: start));
     Admob.showBannerAd();
   }
 
