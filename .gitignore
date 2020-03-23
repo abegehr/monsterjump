@@ -40,4 +40,6 @@ lib/generated_plugin_registrant.dart
 
 
 ### manual ###
+
+# Android release signing
 /android/key.properties
