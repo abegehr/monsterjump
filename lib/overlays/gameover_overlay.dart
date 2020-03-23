@@ -59,7 +59,7 @@ class _RandomImageState extends State<RandomImage> {
   @override
   Widget build(BuildContext content) {
     Random random = new Random();
-    int randomNumber = random.nextInt(10) + 1;
+    int randomNumber = random.nextInt(11) + 1;
     return Container(
         width: 180,
         child: Image.asset('assets/images/tipps/$randomNumber.png'));
