@@ -43,3 +43,7 @@ lib/generated_plugin_registrant.dart
 
 # Android release signing
 /android/key.properties
+
+# Firebase config
+/android/app/google-services.json
+/ios/Runner/GoogleService-Info.plist
