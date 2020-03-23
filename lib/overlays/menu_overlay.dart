@@ -101,7 +101,7 @@ class MenuOverlay extends StatelessWidget {
 }
 
 _launchURL() async {
-  const url = 'https://places.rocks/coronajump-dse';
+  const url = 'https://places.rocks/monsterjump-dse';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
