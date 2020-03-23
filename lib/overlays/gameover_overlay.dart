@@ -1,4 +1,4 @@
-import 'package:virusjump/utils/score.dart';
+import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
