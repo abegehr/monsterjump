@@ -1,18 +1,18 @@
 import 'dart:ui';
-import 'package:virusjump/components/level_wrapper.dart';
-import 'package:virusjump/utils/admob.dart';
-import 'package:virusjump/utils/score.dart';
+import 'package:monsterjump/components/level_wrapper.dart';
+import 'package:monsterjump/utils/admob.dart';
+import 'package:monsterjump/utils/score.dart';
 import 'package:flame/game.dart';
 import 'package:flame/position.dart';
 import 'dart:math';
-import 'package:virusjump/box.dart';
-import 'package:virusjump/components/background.dart';
-import 'package:virusjump/components/player.dart';
+import 'package:monsterjump/box.dart';
+import 'package:monsterjump/components/background.dart';
+import 'package:monsterjump/components/player.dart';
 import 'package:flame/text_config.dart';
 import 'package:wakelock/wakelock.dart';
 // overlays
-import 'package:virusjump/overlays/menu_overlay.dart';
-import 'package:virusjump/overlays/gameover_overlay.dart';
+import 'package:monsterjump/overlays/menu_overlay.dart';
+import 'package:monsterjump/overlays/gameover_overlay.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;

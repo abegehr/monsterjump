@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:collection/collection.dart';
-import 'package:virusjump/components/platform.dart';
-import 'package:virusjump/box.dart';
+import 'package:monsterjump/components/platform.dart';
+import 'package:monsterjump/box.dart';
 import 'package:flame/components/component.dart';
 import 'package:flame/components/mixins/has_game_ref.dart';
 import 'package:flame/components/mixins/tapable.dart';

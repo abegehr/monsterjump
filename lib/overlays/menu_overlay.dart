@@ -1,5 +1,5 @@
-import 'package:virusjump/overlays/widgets/share_button.dart';
-import 'package:virusjump/utils/score.dart';
+import 'package:monsterjump/overlays/widgets/share_button.dart';
+import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
