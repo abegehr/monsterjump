@@ -38,7 +38,7 @@ class MenuOverlay extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(left: 20),
                         child: Image.asset(
-                          'assets/images/ui/stayathomeandplayvirusjump.png',
+                          'assets/images/ui/subtitle.png',
                           width: 280,
                           height: 150,
                         ),
