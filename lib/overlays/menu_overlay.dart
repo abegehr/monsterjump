@@ -1,4 +1,5 @@
 import 'package:monsterjump/overlays/widgets/share_button.dart';
+import 'package:monsterjump/overlays/widgets/progress_section.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -77,7 +78,7 @@ class MenuOverlay extends StatelessWidget {
                   );
                 }),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Align(
                 alignment: Alignment.center,
                 child: RaisedButton(
@@ -92,6 +93,10 @@ class MenuOverlay extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            Expanded(
+              flex: 2,
+              child: ProgressSection(),
             ),
           ],
         ),
