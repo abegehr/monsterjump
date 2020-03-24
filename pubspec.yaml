@@ -72,23 +72,11 @@ flutter:
     - assets/images/virus/virus.png
     - assets/images/platform/platform.png
     - assets/images/ui/title.png
-    - assets/images/ui/subtitle.png
     - assets/images/ui/game_over.png
     - assets/images/ui/share_button.png
     - assets/images/ui/play_button.png
     - assets/images/ui/try_again.png
     - assets/images/ui/gowashyourhands.png
-    - assets/images/tipps/1.png
-    - assets/images/tipps/2.png
-    - assets/images/tipps/3.png
-    - assets/images/tipps/4.png
-    - assets/images/tipps/5.png
-    - assets/images/tipps/6.png
-    - assets/images/tipps/7.png
-    - assets/images/tipps/8.png
-    - assets/images/tipps/9.png
-    - assets/images/tipps/10.png
-    - assets/images/tipps/11.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
