@@ -35,14 +35,6 @@ class MenuOverlay extends StatelessWidget {
                         width: 280,
                         height: 150,
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Image.asset(
-                          'assets/images/ui/subtitle.png',
-                          width: 280,
-                          height: 150,
-                        ),
-                      ),
                     ]),
               ),
             ),
