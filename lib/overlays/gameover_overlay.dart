@@ -1,14 +1,11 @@
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 
 class GameoverOverlay extends StatelessWidget {
   final Function start;
   final int score;
 
   GameoverOverlay({Key key, this.start, this.score}) : super(key: key);
-
-  Random random = new Random();
 
   @override
   Widget build(BuildContext context) {
