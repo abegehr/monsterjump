@@ -83,6 +83,9 @@ class Admob {
   }
 
   static void removeBannerAd() {
-    if (shouldEnable()) _bannerAd?.dispose();
+    if (shouldEnable()) {
+      _bannerAd?.dispose();
+      _bannerAd = null;
+    }
   }
 }
