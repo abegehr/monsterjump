@@ -48,7 +48,7 @@ class GameoverOverlay extends StatelessWidget {
           GestureDetector(
             onTap: goHome,
             child: Image.asset(
-              'assets/images/ui/try_again.png',
+              'assets/images/ui/menu_button.png',
               width: 197,
               height: 50,
             ),
