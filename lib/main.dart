@@ -35,10 +35,17 @@ class GameContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
-        constraints: BoxConstraints(maxWidth: 420),
-        child: game.widget,
-      ),
-    );
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+                        SizedBox(
+              width: double.infinity,
+              height: 300,
+              child: KeyboardListener(),
+            ),
+            Container(constraints: BoxConstraints(maxWidth: 420), child: game.widget,)
+          ],
+        ),
+      );
   }
 }
