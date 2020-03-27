@@ -26,16 +26,12 @@ class MenuOverlay extends StatelessWidget {
             Expanded(
               flex: 4,
               child: Align(
-                alignment: Alignment(-1.0, -1.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      Image.asset(
-                        'assets/images/ui/title.png',
-                        width: 280,
-                        height: 150,
-                      ),
-                    ]),
+                alignment: Alignment(-1.0, 1.0),
+                child: Image.asset(
+                  'assets/images/ui/title.png',
+                  width: 280,
+                  height: 150,
+                ),
               ),
             ),
             Expanded(
