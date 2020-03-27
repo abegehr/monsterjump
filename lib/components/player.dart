@@ -39,6 +39,7 @@ class Player extends SpriteComponent {
       });
     //TODO player movement with arrow keys
     else {
+      // TODO https://github.com/flutter/flutter/issues/22905
       RawKeyboardListener(
           focusNode: FocusNode(),
           child: TextField(
