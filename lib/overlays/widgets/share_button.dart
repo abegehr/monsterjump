@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
-Future<void> share() => Share.share(
-    'Check out this cool game: https://monsterjump.page.link/download and stay at home!');
-
 class ShareButton extends StatelessWidget {
   void onPress() {
     print("ShareButton – pressed");
-    share();
+    Share.share(
+      'Check out this cool game: https://monsterjump.page.link/download and stay at home!',
+      sharePositionOrigin:
+          Rect.fromCenter(center: Offset(100, 100), width: 100, height: 100),
+    );
   }
 
   @override
