@@ -70,6 +70,7 @@ flutter:
     - assets/images/ui/share_button.png
     - assets/images/ui/play_button.png
     - assets/images/ui/try_again.png
+    - assets/images/ui/menu_button.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
