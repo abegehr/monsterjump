@@ -2,10 +2,12 @@ import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 
 class GameoverOverlay extends StatelessWidget {
-  final Function start;
+  final Function restart;
+  final Function goHome;
   final int score;
 
-  GameoverOverlay({Key key, this.start, this.score}) : super(key: key);
+  GameoverOverlay({Key key, this.restart, this.goHome, this.score})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,19 @@ class GameoverOverlay extends StatelessWidget {
                 return Text(text);
               }),
           SizedBox(height: 10),
+          // RestartButton
           GestureDetector(
-            onTap: start,
+            onTap: restart,
+            child: Image.asset(
+              'assets/images/ui/try_again.png',
+              width: 197,
+              height: 50,
+            ),
+          ),
+          SizedBox(height: 10),
+          // HomeButton
+          GestureDetector(
+            onTap: goHome,
             child: Image.asset(
               'assets/images/ui/try_again.png',
               width: 197,
