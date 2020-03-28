@@ -1,12 +1,24 @@
+import 'package:flutter/foundation.dart';
 import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class MenuOverlay extends StatelessWidget {
+class MenuOverlay extends StatefulWidget {
   final Function start;
 
   MenuOverlay({Key key, this.start}) : super(key: key);
+
+  @override
+  MenuOverlayState createState() => MenuOverlayState(start);
+}
+
+class MenuOverlayState extends State<MenuOverlay> {
+  final Function start;
+
+  int localHighScore = 0;
+
+  MenuOverlayState(this.start);
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +70,9 @@ class MenuOverlay extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot<int> snap) {
                   String text = "";
                   int score = snap.data;
-                  if (snap.hasData)
+                  if (kIsWeb)
+                    text = "Personal HighScore: $localHighScore";
+                  else if (snap.hasData)
                     text = score != null
                         ? "Personal HighScore: $score"
                         : "Personal HighScore: loading…";
