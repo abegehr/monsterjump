@@ -32,8 +32,27 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     add(background);
 
     // start menu
+    showMenuOverlay();
+  }
+
+  void showMenuOverlay() {
+    removeWidgetOverlay("Gameover");
     addWidgetOverlay("Menu", MenuOverlay(start: start));
     Admob.showBannerAd();
+  }
+
+  void showGameoverOverlay() {
+    removeWidgetOverlay("Menu");
+    addWidgetOverlay("Gameover",
+        GameoverOverlay(restart: start, goHome: showMenuOverlay, score: score));
+    Admob.showBannerAd();
+  }
+
+  void hideOverlay() {
+    removeWidgetOverlay("Menu");
+    removeWidgetOverlay("Gameover");
+    Admob.removeBannerAd();
+    Admob.loadBannerAd();
   }
 
   void start() {
@@ -44,10 +63,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       score = 0;
 
       // overlays
-      removeWidgetOverlay("Menu");
-      removeWidgetOverlay("Gameover");
-      Admob.removeBannerAd();
-      Admob.loadBannerAd();
+      hideOverlay();
 
       // background
       background.reset();
@@ -78,8 +94,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       Score.saveScore(score);
 
       // overlay
-      addWidgetOverlay("Gameover", GameoverOverlay(start: start, score: score));
-      Admob.showBannerAd();
+      showGameoverOverlay();
       // player
       player.remove();
       // level
