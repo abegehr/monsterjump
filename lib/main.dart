@@ -19,7 +19,7 @@ void main() {
   // preload images
   Flame.images.loadAll(<String>[
     'bg/background.png',
-    'virus/virus.png',
+    'monster/monster.png',
     'platform/platform.png'
   ]);
 
