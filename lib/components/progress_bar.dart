@@ -1,8 +1,40 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:http/http.dart' as http;
 
-class ProgressBar extends StatelessWidget {
+class ProgressBar extends StatefulWidget {
   const ProgressBar({Key key}) : super(key: key);
+
+  @override
+  ProgressBarState createState() => ProgressBarState();
+}
+
+Future<CoronaCasesGermany> fetchCases() async {
+  final response =
+      await http.get('https://pomber.github.io/covid19/timeseries.json');
+  if (response.statusCode == 200) {
+    // If the server did return a 200 OK response,
+    // then parse the JSON.
+    print("fetchcases: " +
+        CoronaCasesGermany.fromJson(json.decode(response.body)).toString());
+    return CoronaCasesGermany.fromJson(json.decode(response.body));
+  } else {
+    // If the server did not return a 200 OK response,
+    // then throw an exception.
+    throw Exception('Failed to load data');
+  }
+}
+
+class ProgressBarState extends State<ProgressBar> {
+  Future<CoronaCasesGermany> futureCCG;
+
+  @override
+  void initState() {
+    super.initState();
+    futureCCG = fetchCases();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +88,20 @@ class ProgressBar extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('48.042',
-                            style: TextStyle(
-                              fontFamily: 'Impact',
-                              fontSize: 21,
-                            )),
+                        FutureBuilder<CoronaCasesGermany>(
+                          future: futureCCG,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              print("DEBUG render data: " +
+                                  snapshot.data.confirmed.toString());
+                              return Text(snapshot.data.confirmed);
+                            } else if (snapshot.hasError) {
+                              return Text("${snapshot.error}");
+                            }
+                            // By default, show a loading spinner.
+                            return CircularProgressIndicator();
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
                           child: Text('* reg. Fälle in DE',
@@ -102,10 +143,22 @@ class ProgressBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Align(
                 alignment: Alignment(1.0, 1.0),
-                child: Text('*data worldometer.com (WHO)')),
+                child: Text('*data worldometer.com (WHO)')), //TODO
           )
         ],
       ),
+    );
+  }
+}
+
+class CoronaCasesGermany {
+  final String confirmed;
+
+  CoronaCasesGermany({this.confirmed});
+
+  factory CoronaCasesGermany.fromJson(Map<String, dynamic> json) {
+    return CoronaCasesGermany(
+      confirmed: json['Germany']['confirmed'],
     );
   }
 }
