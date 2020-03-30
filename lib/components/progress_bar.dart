@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:monsterjump/utils/Country.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-class ProgressBar extends StatelessWidget {
-  const ProgressBar({Key key}) : super(key: key);
+class ProgressBar extends StatefulWidget {
+  @override
+  ProgressBarState createState() => ProgressBarState();
+}
+
+class ProgressBarState extends State<ProgressBar> {
+  Future<List<Country>> fetchData() async {
+    final response = await http.get('https://corona.lmao.ninja/countries');
+
+    if (response.statusCode == 200) {
+      final parsedResponse =
+          jsonDecode(response.body).cast<Map<String, dynamic>>();
+
+      final list = parsedResponse
+          .map<Country>((json) => Country.fromJson(json))
+          .toList();
+      print("DEBUG list: " + list.toString());
+      //TODO only get Germany (and only number of cases)
+      return list;
+    } else {
+      throw Exception('Failed to fetch data');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +80,19 @@ class ProgressBar extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('48.042',
-                            style: TextStyle(
-                              fontFamily: 'Impact',
-                              fontSize: 21,
-                            )),
+                        FutureBuilder<List<Country>>(
+                          future: fetchData(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) print(snapshot.error);
+                            return snapshot.hasData
+                                ? Text(snapshot.data.toString(),
+                                    style: TextStyle(
+                                      fontFamily: 'Impact',
+                                      fontSize: 21,
+                                    ))
+                                : Center(child: CircularProgressIndicator());
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
                           child: Text('* reg. Fälle in DE',
