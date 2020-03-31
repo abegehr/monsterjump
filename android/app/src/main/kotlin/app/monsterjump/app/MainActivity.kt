@@ -1,4 +1,4 @@
-package app.coronajump.app
+package app.monsterjump.app
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
