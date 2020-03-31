@@ -10,7 +10,7 @@ class ProgressBar extends StatefulWidget {
 }
 
 class ProgressBarState extends State<ProgressBar> {
-  Future<List<Country>> fetchData() async {
+  Future<String> fetchData() async {
     final response = await http.get('https://corona.lmao.ninja/countries');
 
     if (response.statusCode == 200) {
@@ -20,9 +20,13 @@ class ProgressBarState extends State<ProgressBar> {
       final list = parsedResponse
           .map<Country>((json) => Country.fromJson(json))
           .toList();
-      print("DEBUG list: " + list.toString());
-      //TODO only get Germany (and only number of cases)
-      return list;
+      int i = 0;
+      while (i < list.length) {
+        var entry = list[i];
+        if (entry.name == 'Germany') return entry.cases.toString();
+        i++;
+      }
+      return ' ';
     } else {
       throw Exception('Failed to fetch data');
     }
@@ -80,7 +84,7 @@ class ProgressBarState extends State<ProgressBar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        FutureBuilder<List<Country>>(
+                        FutureBuilder<String>(
                           future: fetchData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) print(snapshot.error);
