@@ -22,7 +22,7 @@ class Player extends SpriteComponent {
   StreamSubscription gyroSub;
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
-      : super.fromSprite(SIZE, SIZE, new Sprite("monster/monster.png")) {
+      : super.fromSprite(SIZE, SIZE, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
     this.x = x;
     this.y = y;
