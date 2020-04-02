@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:monsterjump/components/level_wrapper.dart';
 import 'package:monsterjump/utils/admob.dart';
 import 'package:monsterjump/utils/score.dart';
@@ -23,8 +24,9 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   LevelWrapper level;
   double maxHeight = 0;
   int score = 0;
+  FirebaseAnalytics analytics;
 
-  CoronaJump() {
+  CoronaJump(this.analytics) {
     // Box2D
     box.initializeWorld();
 
