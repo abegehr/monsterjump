@@ -39,15 +39,6 @@ class GameContainer extends StatelessWidget {
   static FirebaseAnalytics analytics = FirebaseAnalytics();
   final CoronaJump game = CoronaJump(analytics: analytics);
 
-  GameContainer() {
-    setAnalyticsUserId();
-  }
-
-  void setAnalyticsUserId() async {
-    String uuid = await Score.getUUID();
-    analytics.setUserId(uuid);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
