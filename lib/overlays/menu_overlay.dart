@@ -2,6 +2,7 @@ import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:math';
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
@@ -35,6 +36,10 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(
+                flex: 1,
+                child: Align(
+                    alignment: Alignment(-0.8, 0.0), child: new RandomImage())),
             // PlayButton
             Expanded(
               flex: 1,
@@ -93,6 +98,22 @@ class MenuOverlay extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class RandomImage extends StatefulWidget {
+  @override
+  _RandomImageState createState() => _RandomImageState();
+}
+
+class _RandomImageState extends State<RandomImage> {
+  @override
+  Widget build(BuildContext content) {
+    Random random = new Random();
+    int randomNumber = random.nextInt(5) + 1;
+    return Container(
+        width: 280,
+        child: Image.asset('assets/images/subtitle/$randomNumber.png'));
   }
 }
 
