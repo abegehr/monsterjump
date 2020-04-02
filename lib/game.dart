@@ -26,7 +26,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   int score = 0;
   FirebaseAnalytics analytics;
 
-  CoronaJump(this.analytics) {
+  CoronaJump({this.analytics}) {
     // Box2D
     box.initializeWorld();
 
