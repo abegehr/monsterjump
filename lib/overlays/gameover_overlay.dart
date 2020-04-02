@@ -1,5 +1,6 @@
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class GameoverOverlay extends StatelessWidget {
   final Function restart;
@@ -17,6 +18,7 @@ class GameoverOverlay extends StatelessWidget {
         children: <Widget>[
           Container(
               width: 200, child: Image.asset('assets/images/ui/game_over.png')),
+          Padding(padding: const EdgeInsets.all(10), child: new RandomImage()),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
             child: Text('Your Score: $score'),
@@ -43,7 +45,7 @@ class GameoverOverlay extends StatelessWidget {
               height: 50,
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 50),
           // HomeButton
           GestureDetector(
             onTap: goHome,
@@ -56,5 +58,21 @@ class GameoverOverlay extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class RandomImage extends StatefulWidget {
+  @override
+  _RandomImageState createState() => _RandomImageState();
+}
+
+class _RandomImageState extends State<RandomImage> {
+  @override
+  Widget build(BuildContext content) {
+    Random random = new Random();
+    int randomNumber = random.nextInt(5) + 1;
+    return Container(
+        width: 180,
+        child: Image.asset('assets/images/tipps/$randomNumber.png'));
   }
 }
