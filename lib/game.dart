@@ -74,6 +74,11 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       addPlayer();
       player.start();
 
+      // log start
+      analytics.logEvent(
+        name: 'gamestart',
+      );
+
       // To keep the screen on:
       Wakelock.enable();
     }
@@ -98,6 +103,14 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       player.remove();
       // level
       level.remove();
+
+      // log gameover
+      analytics.logEvent(
+        name: 'gameover',
+        parameters: <String, dynamic>{
+          'score': score,
+        },
+      );
 
       // To let the screen turn off again:
       Wakelock.disable();
