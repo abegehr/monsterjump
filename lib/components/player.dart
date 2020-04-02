@@ -7,7 +7,9 @@ import 'package:flame/anchor.dart';
 import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/services.dart';
 import 'package:monsterjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
@@ -35,6 +37,23 @@ class Player extends SpriteComponent {
         //Adding up the scaled sensor data to the current acceleration
         acceleration = Vector2(event.y * sensorScale, 0);
       });
+    //TODO player movement with arrow keys
+    else {
+      // TODO https://github.com/flutter/flutter/issues/22905
+      RawKeyboardListener(
+          focusNode: FocusNode(),
+          child: TextField(
+            focusNode: FocusNode(),
+            controller: TextEditingController(),
+          ),
+          onKey: (RawKeyEvent event) {
+            print("DEBUG key: $event");
+            if (event.runtimeType == RawKeyDownEvent) {
+              print("asdadda");
+            }
+          });
+    }
+    print("DEBUG is web");
   }
 
   void stop() {
