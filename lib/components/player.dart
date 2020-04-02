@@ -30,11 +30,16 @@ class Player extends SpriteComponent {
   }
 
   void start() {
-    if (!kIsWeb)
+    if (!kIsWeb) {
+      // mobile
       gyroSub = gyroscopeEvents.listen((GyroscopeEvent event) {
         //Adding up the scaled sensor data to the current acceleration
         acceleration = Vector2(event.y * sensorScale, 0);
       });
+    } else {
+      // web
+
+    }
   }
 
   void stop() {
