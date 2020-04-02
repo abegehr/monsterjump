@@ -26,7 +26,7 @@ class MenuOverlay extends StatelessWidget {
           children: <Widget>[
             // Title
             Expanded(
-              flex: 4,
+              flex: 3,
               child: Align(
                 alignment: Alignment(-1.0, 1.0),
                 child: Image.asset(
@@ -110,7 +110,7 @@ class _RandomImageState extends State<RandomImage> {
   @override
   Widget build(BuildContext content) {
     Random random = new Random();
-    int randomNumber = random.nextInt(5) + 1;
+    int randomNumber = random.nextInt(4) + 1;
     return Container(
         width: 280,
         child: Image.asset('assets/images/subtitle/$randomNumber.png'));
