@@ -37,6 +37,8 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     showMenuOverlay();
   }
 
+  // navigation
+
   void showMenuOverlay() {
     removeWidgetOverlay("Gameover");
     addWidgetOverlay("Menu", MenuOverlay(start: start));
@@ -56,6 +58,8 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     Admob.removeBannerAd();
     Admob.loadBannerAd();
   }
+
+  // gameplay
 
   void start() {
     if (!playing) {
@@ -116,6 +120,8 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       Wakelock.disable();
     }
   }
+
+  // rendering
 
   @override
   void render(Canvas canvas) {
