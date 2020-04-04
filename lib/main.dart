@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:monsterjump/utils/admob.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:monsterjump/game.dart';
+import 'package:monsterjump/utils/score.dart';
 
 void main() {
   //Crashlytics.instance.enableInDevMode = true;
@@ -40,7 +42,8 @@ void main() {
 }
 
 class GameContainer extends StatelessWidget {
-  final CoronaJump game = CoronaJump();
+  static FirebaseAnalytics analytics = FirebaseAnalytics();
+  final CoronaJump game = CoronaJump(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
