@@ -121,7 +121,7 @@ class PlayerBody extends BodyComponent {
 
   void _createBody() {
     final shape = new CircleShape();
-    shape.radius = 0.3 * SIZE * Globals.ptm;
+    shape.radius = 0.3 * Player.size * Globals.ptm;
 
     final fixtureDef = new FixtureDef();
     fixtureDef.shape = shape;
