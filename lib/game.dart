@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
 import 'package:monsterjump/components/level_wrapper.dart';
 import 'package:monsterjump/utils/admob.dart';
 import 'package:monsterjump/utils/score.dart';
@@ -76,7 +77,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       player.start();
 
       // To keep the screen on:
-      Wakelock.enable();
+      if (!kIsWeb) Wakelock.enable();
     }
   }
 
@@ -101,7 +102,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       level.remove();
 
       // To let the screen turn off again:
-      Wakelock.disable();
+      if (!kIsWeb) Wakelock.disable();
     }
   }
 
