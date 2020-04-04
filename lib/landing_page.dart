@@ -191,14 +191,14 @@ class LandingPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
                         color: Colors.white,
                       )),
                   Text("Android",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w700,
                         color: Colors.white,
                       )),
                 ]),
