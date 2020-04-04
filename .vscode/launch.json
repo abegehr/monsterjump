@@ -32,7 +32,7 @@
       "program": "lib/main.dart",
       "deviceId": "web-server",
       "flutterMode": "release",
-      "args": ["--web-hostname", "127.0.0.1", "--web-port 8989"],
+      "args": ["--web-hostname", "127.0.0.1", "--web-port", "8989"],
       "internalConsoleOptions": "openOnSessionStart"
     }
   ]
