@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:monsterjump/utils/admob.dart';
@@ -9,30 +10,35 @@ import 'package:monsterjump/game.dart';
 import 'package:monsterjump/utils/score.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
+  //Crashlytics.instance.enableInDevMode = true;
 
-  // Pass all uncaught errors from the framework to Crashlytics.
+  // on uncaught flutter error
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
-  // Admob setup
-  Admob.init();
-  Admob.loadBannerAd();
+  // run in zone for stacktrace
+  runZoned<Future<void>>(() async {
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // preload images
-  Flame.images.loadAll(<String>[
-    'bg/background.png',
-    'monster/monster.png',
-    'platform/platform.png'
-  ]);
+    // Admob setup
+    Admob.init();
+    Admob.loadBannerAd();
 
-  // Flame settings
-  Util flameUtil = Util();
-  flameUtil.fullScreen();
-  flameUtil.setOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    // preload images
+    Flame.images.loadAll(<String>[
+      'bg/background.png',
+      'monster/monster.png',
+      'platform/platform.png'
+    ]);
 
-  // run app
-  runApp(new GameContainer());
+    // Flame settings
+    Util flameUtil = Util();
+    flameUtil.fullScreen();
+    flameUtil.setOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
+    // run app
+    runApp(GameContainer());
+  }, onError: Crashlytics.instance.recordError);
 }
 
 class GameContainer extends StatelessWidget {
