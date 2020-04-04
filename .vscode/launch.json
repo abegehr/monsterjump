@@ -5,9 +5,26 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "MonsterJump",
+      "name": "Debug",
       "request": "launch",
-      "type": "dart"
+      "type": "dart",
+      "program": "lib/main.dart",
+      "flutterMode": "debug"
+    },
+    {
+      "name": "Profile",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "Release",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "flutterMode": "release"
+    },
     }
   ]
 }
