@@ -1,6 +1,3 @@
-@JS()
-library t; // TODO move JS stuff to web only?
-
 import 'dart:async';
 import 'dart:html'; // TODO move to web only?
 import 'dart:math';
@@ -16,7 +13,8 @@ import 'package:js/js.dart';
 import 'package:monsterjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
-@JS()
+// ignore: missing_js_lib_annotation
+@JS("requestDeviceMotionEventPermission")
 external void requestDeviceMotionEventPermission();
 
 const double SIZE = 48.0;
