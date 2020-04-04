@@ -3,6 +3,7 @@ import 'package:monsterjump/utils/Country.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProgressBar extends StatefulWidget {
   @override
@@ -32,6 +33,18 @@ class ProgressBarState extends State<ProgressBar> {
     }
   }
 
+  Future<String> fetchGamesCount() async {
+    return Firestore.instance
+        .collection('stats')
+        .document('stat')
+        .get()
+        .then((docSnap) => docSnap != null ? docSnap.data['gamesCount'] : null)
+        .then((games) {
+      print("fetchGamesCount(): $games");
+      return games.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,6 +61,7 @@ class ProgressBarState extends State<ProgressBar> {
                     style: TextStyle(
                       fontFamily: 'Impact',
                       fontSize: 18,
+                      color: Colors.white,
                     )),
               ),
               Expanded(
@@ -58,17 +72,27 @@ class ProgressBarState extends State<ProgressBar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('1234',
-                            style: TextStyle(
-                              fontFamily: 'Impact',
-                              fontSize: 21,
-                            )),
+                        FutureBuilder<String>(
+                          future: fetchGamesCount(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) print(snapshot.error);
+                            return snapshot.hasData
+                                ? Text(snapshot.data.toString(),
+                                    style: TextStyle(
+                                      fontFamily: 'Impact',
+                                      fontSize: 21,
+                                      color: Colors.white,
+                                    ))
+                                : Center(child: CircularProgressIndicator());
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
                           child: Text('Spiele insg.',
                               style: TextStyle(
                                 fontFamily: 'Impact',
                                 fontSize: 11,
+                                color: Colors.white,
                               )),
                         ),
                       ],
@@ -93,16 +117,18 @@ class ProgressBarState extends State<ProgressBar> {
                                     style: TextStyle(
                                       fontFamily: 'Impact',
                                       fontSize: 21,
+                                      color: Colors.white,
                                     ))
                                 : Center(child: CircularProgressIndicator());
                           },
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
-                          child: Text('* reg. Fälle in DE',
+                          child: Text('neue Fälle in DE*',
                               style: TextStyle(
                                 fontFamily: 'Impact',
                                 fontSize: 11,
+                                color: Colors.white,
                               )),
                         ),
                       ],
@@ -138,7 +164,10 @@ class ProgressBarState extends State<ProgressBar> {
             padding: const EdgeInsets.all(8.0),
             child: Align(
                 alignment: Alignment(1.0, 1.0),
-                child: Text('*data worldometer.com (WHO)')),
+                child: Text(
+                  '*data worldometer.com (WHO)',
+                  style: TextStyle(color: Colors.white),
+                )),
           )
         ],
       ),

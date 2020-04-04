@@ -49,15 +49,15 @@ class Level extends PositionComponent
   void generateLevel(double levelStartHeight, double levelEndHeight,
       int numRandomPlatforms, int numPaths, double movementSpeed) {
     // generate safe path
-    for (int i = 0; i < numPaths; i++)
+    /* DEBUG for (int i = 0; i < numPaths; i++)
       generatePath(levelStartHeight, levelEndHeight);
 
     // generate randomPlatforms
-    generateRandomPlatforms(
+     generateRandomPlatforms(
         numRandomPlatforms, levelStartHeight, levelEndHeight);
 
     // generate starting platform for first level
-    if (levelNumber == 0) addPlatformToQueue(0.0, -75.0);
+    if (levelNumber == 0) addPlatformToQueue(0.0, -75.0); */
   }
 
   void generatePath(double levelStartHeight, double levelEndHeight) {
