@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html'; // TODO move to web only?
 import 'dart:math';
 import 'dart:ui';
@@ -17,20 +18,24 @@ import 'package:sensors/sensors.dart';
 @JS("requestDeviceMotionEventPermission")
 external void requestDeviceMotionEventPermission();
 
-const double SIZE = 48.0;
-const double sensorScale = 3;
-const double horResistance = 0;
-
 class Player extends SpriteComponent {
+  static final double size = 48.0;
+  final double sensorScaleNative = 3;
+  final double sensorScaleWeb = -0.7;
+  final double horResistance = 0;
+  final double maxHorVel = 13;
+
   PlayerBody body;
   bool willDestroy = false;
   Vector2 acceleration = Vector2.zero();
+  double horVel = 0;
 
   StreamSubscription gyroSubNative;
   EventListener gyroListenerWeb;
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
-      : super.fromSprite(SIZE, SIZE, new Sprite("monster/monster.png")) {
+      : super.fromSprite(
+            Player.size, Player.size, new Sprite("monster/monster.png")) {
     anchor = Anchor.center;
     this.x = x;
     this.y = y;
@@ -42,12 +47,21 @@ class Player extends SpriteComponent {
       // nativemobile
       gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
         //Adding up the scaled sensor data to the current acceleration
-        acceleration = Vector2(event.y * sensorScale, 0);
+        acceleration = Vector2(event.y * sensorScaleNative, 0);
       });
     } else {
       // web
       gyroListenerWeb = (event) {
-        print("devicemotion – event: $event");
+        if (event is DeviceMotionEvent &&
+            event.rotationRate != null &&
+            event.rotationRate.alpha != null) {
+          double rot = (event.rotationRate.alpha + event.rotationRate.gamma) *
+              event.interval;
+
+          horVel += sensorScaleWeb * rot;
+          if (horVel.abs() > maxHorVel) horVel = horVel.sign * maxHorVel;
+          print("horVel: $horVel");
+        }
       };
 
       // TODO move logic to dart once DeviceMotionEvent.requestPermission() is supported: https://github.com/dart-lang/sdk/issues/41337
@@ -73,10 +87,14 @@ class Player extends SpriteComponent {
 
     // move with gyroscope
     Vector2 vel = body.body.linearVelocity;
+    // linear velocity
+    if (horVel != 0) body.body.linearVelocity = Vector2(horVel, vel.y);
+    // acceleration
     double speed = vel.length;
     Vector2 horResistanceVec =
         Vector2(vel.x * pow(speed, 2) * horResistance, 0);
-    body.body.applyForceToCenter(acceleration - horResistanceVec);
+    if (acceleration.length != 0)
+      body.body.applyForceToCenter(acceleration - horResistanceVec);
   }
 
   void remove() {
