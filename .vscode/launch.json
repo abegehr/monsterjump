@@ -25,6 +25,15 @@
       "program": "lib/main.dart",
       "flutterMode": "release"
     },
+    {
+      "name": "Web Server Local Release",
+      "type": "dart",
+      "request": "launch",
+      "program": "lib/main.dart",
+      "deviceId": "web-server",
+      "flutterMode": "release",
+      "args": ["--web-hostname 127.0.0.1"],
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }
