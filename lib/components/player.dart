@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html'; // TODO move to web only?
 import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
@@ -19,7 +20,10 @@ class Player extends SpriteComponent {
   PlayerBody body;
   bool willDestroy = false;
   Vector2 acceleration = Vector2.zero();
-  StreamSubscription gyroSub;
+
+  StreamSubscription gyroSubNative;
+  Gyroscope gyroSensorWeb;
+  EventListener gyroListenerWeb;
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(SIZE, SIZE, new Sprite("monster/monster.png")) {
@@ -31,19 +35,28 @@ class Player extends SpriteComponent {
 
   void start() {
     if (!kIsWeb) {
-      // mobile
-      gyroSub = gyroscopeEvents.listen((GyroscopeEvent event) {
+      // nativemobile
+      gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
         //Adding up the scaled sensor data to the current acceleration
         acceleration = Vector2(event.y * sensorScale, 0);
       });
     } else {
       // web
-
+      print("hello web :) ;");
+      gyroListenerWeb = (event) => print("gyroListenerWeb – event: $event");
+      gyroSensorWeb = new Gyroscope();
+      gyroSensorWeb.addEventListener('reading', gyroListenerWeb);
+      gyroSensorWeb.start();
     }
   }
 
   void stop() {
-    if (gyroSub != null) gyroSub.cancel();
+    if (!kIsWeb) {
+      // native mobile
+      if (gyroSubNative != null) gyroSubNative.cancel();
+    } else {
+      // web
+    }
   }
 
   @override
