@@ -37,7 +37,6 @@ class Score {
       // Update games counter
       const numShards = 10;
       var shardId = (Math.Random().nextInt(numShards)).toString();
-      print("DEBUG savingScore to $shardId");
       await Firestore.instance
           .collection('stats')
           .document('stat')
@@ -45,7 +44,7 @@ class Score {
           .document(shardId)
           .setData({"gamesCount": FieldValue.increment(1)});
     } catch (e) {
-      print("DEBUG error: " + e.toString());
+      print("incrementGamesCounter error: " + e.toString());
     }
   }
 
