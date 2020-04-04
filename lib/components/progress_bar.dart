@@ -24,7 +24,7 @@ class ProgressBarState extends State<ProgressBar> {
       int i = 0;
       while (i < list.length) {
         var entry = list[i];
-        if (entry.name == 'Germany') return entry.cases.toString();
+        if (entry.name == 'Germany') return entry.todayCases.toString();
         i++;
       }
       return ' ';
