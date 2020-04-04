@@ -142,14 +142,14 @@ class ProgressBarState extends State<ProgressBar> {
                   radius: 80.0,
                   lineWidth: 10.0,
                   animation: true,
-                  percent: 0.4,
+                  percent: 0,
                   progressColor: Color(0xFF40DBFF),
                   backgroundColor: Color(0xFFE1F5FE),
                   animationDuration: 2000,
                   animateFromLastPercent: true,
                   circularStrokeCap: CircularStrokeCap.round,
                   center: Text(
-                    "41,3%",
+                    "0%",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14.0,
