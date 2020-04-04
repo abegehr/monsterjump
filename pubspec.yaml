@@ -73,6 +73,7 @@ flutter:
     - assets/images/ui/menu_button.png
     - assets/images/ui/ios_share.png
     - assets/images/ui/android_settings.png
+    - assets/images/ui/game_play.png
     - assets/images/tipps/1.png
     - assets/images/tipps/2.png
     - assets/images/tipps/3.png
