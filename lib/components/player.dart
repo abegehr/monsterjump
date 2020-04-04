@@ -22,7 +22,6 @@ class Player extends SpriteComponent {
   Vector2 acceleration = Vector2.zero();
 
   StreamSubscription gyroSubNative;
-  Gyroscope gyroSensorWeb;
   EventListener gyroListenerWeb;
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
@@ -42,11 +41,10 @@ class Player extends SpriteComponent {
       });
     } else {
       // web
-      print("hello web :) ;");
-      gyroListenerWeb = (event) => print("gyroListenerWeb – event: $event");
-      gyroSensorWeb = new Gyroscope();
-      gyroSensorWeb.addEventListener('reading', gyroListenerWeb);
-      gyroSensorWeb.start();
+      gyroListenerWeb = (event) {
+        print("devicemotion – event: $event");
+      };
+      document.window.addEventListener('devicemotion', gyroListenerWeb);
     }
   }
 
@@ -56,6 +54,7 @@ class Player extends SpriteComponent {
       if (gyroSubNative != null) gyroSubNative.cancel();
     } else {
       // web
+      document.window.removeEventListener('devicemotion', gyroListenerWeb);
     }
   }
 
