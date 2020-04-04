@@ -11,10 +11,7 @@ void main() {
   //Crashlytics.instance.enableInDevMode = true;
 
   // on uncaught flutter error
-  FlutterError.onError = (details) {
-    print("FlutterERROR: $details");
-    return Crashlytics.instance.recordFlutterError(details);
-  };
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
   // run in zone for stacktrace
   runZoned<Future<void>>(() async {
