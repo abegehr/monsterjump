@@ -13,7 +13,7 @@ import 'package:sensors/sensors.dart';
 
 const double SIZE = 48.0;
 const double sensorScale = 3;
-const double horResistance = 0; //TODO does this improve gameplay?
+const double horResistance = 0;
 
 class Player extends SpriteComponent {
   PlayerBody body;
