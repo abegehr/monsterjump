@@ -1,3 +1,6 @@
+@JS()
+library t; // TODO move JS stuff to web only?
+
 import 'dart:async';
 import 'dart:html'; // TODO move to web only?
 import 'dart:math';
@@ -9,8 +12,12 @@ import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
+import 'package:js/js.dart';
 import 'package:monsterjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
+
+@JS()
+external void requestDeviceMotionEventPermission();
 
 const double SIZE = 48.0;
 const double sensorScale = 3;
@@ -44,9 +51,10 @@ class Player extends SpriteComponent {
       gyroListenerWeb = (event) {
         print("devicemotion – event: $event");
       };
-      if (DeviceMotionEvent != null &&
-          DeviceMotionEvent.requestPermission != null)
-        DeviceMotionEvent.requestPermission();
+
+      // TODO move logic to dart once DeviceMotionEvent.requestPermission() is supported: https://github.com/dart-lang/sdk/issues/41337
+      requestDeviceMotionEventPermission();
+
       document.window.addEventListener('devicemotion', gyroListenerWeb);
     }
   }
