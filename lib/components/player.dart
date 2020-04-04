@@ -44,6 +44,9 @@ class Player extends SpriteComponent {
       gyroListenerWeb = (event) {
         print("devicemotion – event: $event");
       };
+      if (DeviceMotionEvent != null &&
+          DeviceMotionEvent.requestPermission != null)
+        DeviceMotionEvent.requestPermission();
       document.window.addEventListener('devicemotion', gyroListenerWeb);
     }
   }
