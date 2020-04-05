@@ -124,7 +124,7 @@ class ProgressBarState extends State<ProgressBar> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
-                          child: Text('neue Fälle in DE*',
+                          child: Text('*neue Fälle in DE',
                               style: TextStyle(
                                 fontFamily: 'Impact',
                                 fontSize: 11,
@@ -165,7 +165,7 @@ class ProgressBarState extends State<ProgressBar> {
             child: Align(
                 alignment: Alignment(1.0, 1.0),
                 child: Text(
-                  '*data worldometer.com (WHO)',
+                  '*data worldometers.info/coronavirus',
                   style: TextStyle(color: Colors.white),
                 )),
           )
