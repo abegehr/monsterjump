@@ -72,11 +72,12 @@ class MenuOverlay extends StatelessWidget {
                     ),
                   );
                 }),
-            // PrivacyPolicyButton
+            //ProgressBar
             Expanded(
               flex: 2,
               child: ProgressBar(),
             ),
+            // PrivacyPolicyButton
             Expanded(
               flex: 1,
               child: Align(
