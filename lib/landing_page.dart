@@ -36,8 +36,10 @@ class LandingPage extends StatelessWidget {
                   height: 150,
                 ),
               ),
+              // Random Image
               Align(alignment: Alignment(-0.8, 0.0), child: new RandomImage()),
               SizedBox(height: 80),
+              // PlayButton
               GestureDetector(
                 onTap: goHome,
                 child: Image.asset(
@@ -47,6 +49,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 110),
+              // Content "Corona jump"
               Text('CORONA JUMP',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -78,6 +81,7 @@ class LandingPage extends StatelessWidget {
                 color: Colors.blue,
               ),
               SizedBox(height: 80),
+              // Content "Unser Ziel"
               Text('Unser Ziel:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -112,7 +116,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               SizedBox(height: 110),
-
+// Content "Unser Beitrag"
               Text('Unser Beitrag:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -131,6 +135,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               SizedBox(height: 110),
+              // Gameplay Image
               GestureDetector(
                 onTap: goHome,
                 child: Image.asset(
@@ -139,6 +144,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 110),
+              // Content "Warum nicht als App"
               Text('Warum nicht als App?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -167,6 +173,7 @@ class LandingPage extends StatelessWidget {
                   )),
 
               SizedBox(height: 110),
+              // Table manual header
               Text('Corona Jump fürs Handy',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -185,6 +192,7 @@ class LandingPage extends StatelessWidget {
                   )),
 
               SizedBox(height: 30),
+              // Table manual
               Table(children: [
                 TableRow(children: [
                   Text("iOS",
@@ -264,6 +272,7 @@ class LandingPage extends StatelessWidget {
                 ])
               ]),
               SizedBox(height: 110),
+              // Play Button #2
               GestureDetector(
                 onTap: goHome,
                 child: Image.asset(
@@ -273,6 +282,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 110),
+              // Content "Wie kann ich unterstützen?"
               Text('Wie kann ich unterstützen?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -308,6 +318,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               SizedBox(height: 110),
+              // Content "Über uns"
               Text('Über uns:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -352,6 +363,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               SizedBox(height: 110),
+              // Contact
               Text('Kontaktiere uns gerne, falls du weitere Fragen hast.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -369,6 +381,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               SizedBox(height: 80),
+              // Impressum link
               Align(
                 alignment: Alignment.center,
                 child: RaisedButton(
@@ -386,6 +399,7 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
               ),
+              // DSE link
               Align(
                 alignment: Alignment.center,
                 child: RaisedButton(
@@ -404,6 +418,7 @@ class LandingPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 80),
+              // Footer
               Text("Places Rocks UG - all rights reserved",
                   textAlign: TextAlign.center,
                   style: TextStyle(
