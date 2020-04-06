@@ -21,7 +21,11 @@ class GameoverOverlay extends StatelessWidget {
           Padding(padding: const EdgeInsets.all(10), child: new RandomImage()),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text('Your Score: $score'),
+            child: Text('Your Score: $score',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                )),
           ),
           FutureBuilder(
               future: Score.getHighscore(),
