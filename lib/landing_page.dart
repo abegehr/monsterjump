@@ -68,7 +68,7 @@ class LandingPage extends StatelessWidget {
 
               SizedBox(height: 30),
               Text(
-                  ' Wir wollen Corona Jump zum Symbol gegen alle Arten von Corona Partys machen. Wenn Andere zuhause bleiben müssen und dieses ______ Spiel spielen, kannst du das auch.',
+                  ' Wir wollen Corona Jump zum Symbol gegen alle Arten von Corona Partys machen. Wenn Andere zuhause bleiben müssen und dieses * Spiel spielen, kannst du das auch.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -100,7 +100,7 @@ class LandingPage extends StatelessWidget {
                   )),
               SizedBox(height: 30),
               Text(
-                  ' Jedes Spiel wird zusammengezählt und durch die tägliche Anzahl an neuen Infizierten in Deutschland geteilt, um den Fortschritt festzuhalten.  ',
+                  ' Wir teilen die Anzahl aller Spiele durch die tägliche Anzahl an neuen Infizierten in Deutschland, um den Fortschritt festzuhalten.  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w200,
@@ -108,7 +108,7 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
               Text(
-                  ' Dein persönlicher Highscore soll künftig auch berücksichtigt werden…  ',
+                  ' Dein persönlicher Highscore soll künftig auch berücksichtigt werden.  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -127,7 +127,16 @@ class LandingPage extends StatelessWidget {
 
               SizedBox(height: 30),
               Text(
-                  ' Uns ist natürlich bewusst, dass dieses Spiel das Problem Corona und die damit verbundene Pandemie nicht lösen kann. Dennoch möchten wir einen kleinen symbolischen Beitrag leisten, um die Ausbreitung einzudämmen und vor allem unsere Generation an ihre Verantwortung gegenüber den Schwächeren und Älteren erinnern.   ',
+                  ' Uns ist natürlich bewusst, dass dieses Spiel das Problem Corona und die damit verbundene Pandemie nicht lösen kann. ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w200,
+                    color: Colors.white,
+                  )),
+              SizedBox(height: 10),
+              Text(
+                  ' Dennoch möchten wir einen kleinen symbolischen Beitrag leisten, um die Ausbreitung einzudämmen und vor allem unsere Generation an ihre Verantwortung gegenüber den Schwächeren und Älteren zu erinnern. ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
@@ -283,7 +292,7 @@ class LandingPage extends StatelessWidget {
               ),
               SizedBox(height: 110),
               // Content "Wie kann ich unterstützen?"
-              Text('Wie kann ich unterstützen?',
+              Text('Wie kann ich mitmachen?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
