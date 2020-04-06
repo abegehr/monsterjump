@@ -1,7 +1,7 @@
 import 'dart:ui';
+import 'dart:js' as js;
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:url_launcher/url_launcher.dart';
 
 class LandingPage extends StatelessWidget {
   final Function goHome;
@@ -373,7 +373,10 @@ class LandingPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: RaisedButton(
                   color: Colors.white10,
-                  onPressed: _launchDSE,
+                  onPressed: () {
+                    js.context
+                        .callMethod("open", ["https://places.rocks/impressum"]);
+                  },
                   child: Text(
                     'Impressum',
                     style: TextStyle(
@@ -387,7 +390,10 @@ class LandingPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: RaisedButton(
                   color: Colors.white10,
-                  onPressed: _launchURL,
+                  onPressed: () {
+                    js.context.callMethod(
+                        "open", ["https://places.rocks/monsterjump-dse"]);
+                  },
                   child: Text(
                     'Datenschutz',
                     style: TextStyle(
@@ -427,23 +433,5 @@ class _RandomImageState extends State<RandomImage> {
     return Container(
         width: 280,
         child: Image.asset('assets/images/subtitle/$randomNumber.png'));
-  }
-}
-
-_launchURL() async {
-  const url = 'https://places.rocks/monsterjump-dse';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-_launchDSE() async {
-  const url = 'https://places.rocks/impressum';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }
