@@ -19,6 +19,7 @@ class ProgressBar extends StatelessWidget {
                 child: Text('Fortschritt =',
                     style: TextStyle(
                       fontFamily: 'Impact',
+                      color: Colors.white,
                       fontSize: 18,
                     )),
               ),
@@ -33,6 +34,7 @@ class ProgressBar extends StatelessWidget {
                         Text('1234',
                             style: TextStyle(
                               fontFamily: 'Impact',
+                              color: Colors.white,
                               fontSize: 21,
                             )),
                         Padding(
@@ -40,6 +42,7 @@ class ProgressBar extends StatelessWidget {
                           child: Text('Spiele insg.',
                               style: TextStyle(
                                 fontFamily: 'Impact',
+                                color: Colors.white,
                                 fontSize: 11,
                               )),
                         ),
@@ -59,6 +62,7 @@ class ProgressBar extends StatelessWidget {
                         Text('48.042',
                             style: TextStyle(
                               fontFamily: 'Impact',
+                              color: Colors.white,
                               fontSize: 21,
                             )),
                         Padding(
@@ -66,6 +70,7 @@ class ProgressBar extends StatelessWidget {
                           child: Text('* reg. Fälle in DE',
                               style: TextStyle(
                                 fontFamily: 'Impact',
+                                color: Colors.white,
                                 fontSize: 11,
                               )),
                         ),
@@ -102,7 +107,10 @@ class ProgressBar extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Align(
                 alignment: Alignment(1.0, 1.0),
-                child: Text('*data worldometer.com (WHO)')),
+                child: Text('*data worldometer.com (WHO)',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ))),
           )
         ],
       ),
