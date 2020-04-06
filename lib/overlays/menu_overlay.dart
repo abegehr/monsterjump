@@ -24,10 +24,12 @@ class MenuOverlay extends StatelessWidget {
         ),
         Column(
           children: <Widget>[
+            // Title
             Expanded(
               flex: 3,
               child: Align(
                 alignment: Alignment(-0.80, 0.5),
+
                 child: Image.asset(
                   'assets/images/ui/title.png',
                   width: 280,
@@ -35,6 +37,7 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
+            // PlayButton
             Expanded(
               flex: 1,
               child: GestureDetector(
@@ -46,7 +49,12 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(flex: 1, child: ShareButton()),
+            // ShareButton
+            Expanded(
+              flex: 1,
+              child: ShareButton(),
+            ),
+            // Highscore
             FutureBuilder(
                 future: Score.getHighscore(),
                 builder: (BuildContext context, AsyncSnapshot<int> snap) {
@@ -65,6 +73,7 @@ class MenuOverlay extends StatelessWidget {
                     ),
                   );
                 }),
+            // PrivacyPolicyButton
             Expanded(
               flex: 1,
               child: ProgressBar(),

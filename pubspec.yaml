@@ -11,7 +11,7 @@ description: Go wash your hands!
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+12
+version: 1.0.0+14
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -21,9 +21,14 @@ dependencies:
   flutter:
     sdk: flutter
 
-  audioplayers: 0.14.0
-  collection:
+  audioplayers: ^0.14.2
+  collection: ^1.14.11
   url_launcher: ^5.4.2
+  flame: ^0.18.2
+  sensors: ">=0.4.1+10 <2.0.0"
+  device_info: ^0.4.2+1
+  share: ^0.6.3+6
+  wakelock: ^0.1.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -37,20 +42,8 @@ dependencies:
   firebase_admob: ^0.9.0+7
   cloud_firestore:
 
-  # Flame
-  flame: ^0.18.1
-
-  # Sensors
-  sensors: ">=0.4.1+10 <2.0.0"
-
-  # Device Info
-  device_info:
-
-  share:
-  wakelock: ^0.1.4
-
 dev_dependencies:
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: ^0.7.4
   flutter_test:
     sdk: flutter
 
@@ -78,7 +71,7 @@ flutter:
     - assets/images/ui/share_button.png
     - assets/images/ui/play_button.png
     - assets/images/ui/try_again.png
-    - assets/images/ui/gowashyourhands.png
+    - assets/images/ui/menu_button.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

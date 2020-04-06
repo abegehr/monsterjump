@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
 
-Future<void> share() => Share.share(
-    'Check out this cool game: https://monsterjump.page.link/download and stay at home!');
-
 class ShareButton extends StatelessWidget {
+  void onPress(TapUpDetails e) {
+    print("ShareButton – pressed: ${e.globalPosition}");
+    Share.share(
+      'Check out this cool game: https://monsterjump.page.link/download and stay at home!',
+      sharePositionOrigin:
+          Rect.fromCenter(center: e.globalPosition, width: 100, height: 100),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +18,7 @@ class ShareButton extends StatelessWidget {
       child: Align(
         alignment: Alignment.centerRight,
         child: GestureDetector(
-          onTap: share,
+          onTapUp: onPress,
           child: Image.asset(
             'assets/images/ui/share_button.png',
             width: 165,
