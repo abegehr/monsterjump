@@ -134,7 +134,7 @@ class LandingPage extends StatelessWidget {
               GestureDetector(
                 onTap: goHome,
                 child: Image.asset(
-                  'assets/images/ui/game_play.png',
+                  'assets/images/cj/game_play.png',
                   width: 375,
                 ),
               ),
@@ -206,14 +206,14 @@ class LandingPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Image.asset(
-                      'assets/images/ui/ios_share.png',
+                      'assets/images/cj/ios_share.png',
                       height: 32,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: Image.asset(
-                      'assets/images/ui/android_settings.png',
+                      'assets/images/cj/android_settings.png',
                       height: 32,
                     ),
                   ),
