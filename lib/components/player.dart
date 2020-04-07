@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:html'; // TODO move to web only?
+//import 'dart:html'; // TODO move to web only.
 import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
@@ -10,13 +9,14 @@ import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:js/js.dart';
+//import 'package:js/js.dart'; // TODO move to web only.
 import 'package:monsterjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
+// TODO move to web only.
 // ignore: missing_js_lib_annotation
-@JS("requestDeviceMotionEventPermission")
-external void requestDeviceMotionEventPermission();
+//@JS("requestDeviceMotionEventPermission")
+//external void requestDeviceMotionEventPermission();
 
 class Player extends SpriteComponent {
   static final double size = 48.0;
@@ -31,7 +31,7 @@ class Player extends SpriteComponent {
   double horVel = 0;
 
   StreamSubscription gyroSubNative;
-  EventListener gyroListenerWeb;
+  //EventListener gyroListenerWeb; // TODO move to web only.
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(
@@ -50,7 +50,8 @@ class Player extends SpriteComponent {
         acceleration = Vector2(event.y * sensorScaleNative, 0);
       });
     } else {
-      // web
+      // web // TODO move to web only.
+      /*
       gyroListenerWeb = (event) {
         if (event is DeviceMotionEvent &&
             event.rotationRate != null &&
@@ -68,6 +69,7 @@ class Player extends SpriteComponent {
       requestDeviceMotionEventPermission();
 
       document.window.addEventListener('devicemotion', gyroListenerWeb);
+      */
     }
   }
 
@@ -76,8 +78,8 @@ class Player extends SpriteComponent {
       // native mobile
       if (gyroSubNative != null) gyroSubNative.cancel();
     } else {
-      // web
-      document.window.removeEventListener('devicemotion', gyroListenerWeb);
+      // web // TODO move to web only.
+      //document.window.removeEventListener('devicemotion', gyroListenerWeb);
     }
   }
 
