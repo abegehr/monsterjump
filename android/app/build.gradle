@@ -44,7 +44,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "app.coronajump.app"
+        applicationId "app.monsterjump.app"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode flutterVersionCode.toInteger()
