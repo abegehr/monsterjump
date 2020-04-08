@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info/device_info.dart';
 import 'package:flutter/foundation.dart';
+import 'dart:math' as Math;
 
 class Score {
   static Future<String> getUUID() async {
@@ -31,8 +32,27 @@ class Score {
     return uuid;
   }
 
+  static incrementGamesCounter() async {
+    try {
+      // Update games counter
+      const numShards = 10;
+      var shardId = (Math.Random().nextInt(numShards)).toString();
+      await Firestore.instance
+          .collection('stats')
+          .document('stat')
+          .collection('_counter_shards_')
+          .document(shardId)
+          .setData({"gamesCount": FieldValue.increment(1)});
+    } catch (e) {
+      print("incrementGamesCounter error: " + e.toString());
+    }
+  }
+
   static saveScore(int score) async {
     String uuid = await getUUID();
+
+    incrementGamesCounter();
+
     if (uuid != null)
       return Firestore.instance
           .collection('devices')

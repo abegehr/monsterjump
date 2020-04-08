@@ -2,6 +2,7 @@ import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:monsterjump/components/progress_bar.dart';
 import 'dart:math';
 
 class MenuOverlay extends StatelessWidget {
@@ -28,7 +29,8 @@ class MenuOverlay extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Align(
-                alignment: Alignment(-1.0, 1.0),
+                alignment: Alignment(-0.80, 0.5),
+
                 child: Image.asset(
                   'assets/images/ui/title.png',
                   width: 280,
@@ -78,7 +80,11 @@ class MenuOverlay extends StatelessWidget {
                 }),
             // PrivacyPolicyButton
             Expanded(
-              flex: 2,
+              flex: 1,
+              child: ProgressBar(),
+            ),
+            Expanded(
+              flex: 1,
               child: Align(
                 alignment: Alignment.center,
                 child: RaisedButton(

@@ -16,7 +16,7 @@ class ShareButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(5.0),
       child: Align(
-        alignment: Alignment.bottomRight,
+        alignment: Alignment.centerRight,
         child: GestureDetector(
           onTapUp: onPress,
           child: Image.asset(
