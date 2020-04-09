@@ -86,9 +86,8 @@ class Player extends SpriteComponent {
 
     // move with gyroscope
     Vector2 vel = body.body.linearVelocity;
-    if (horVel != 0)
-      body.body.linearVelocity =
-          Vector2(horVel.sign * min(horVel.abs(), maxHorVel), vel.y);
+    body.body.linearVelocity =
+        Vector2(horVel.sign * min(horVel.abs(), maxHorVel), vel.y);
   }
 
   void remove() {
