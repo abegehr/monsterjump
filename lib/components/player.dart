@@ -20,7 +20,7 @@ import 'package:sensors/sensors.dart';
 
 class Player extends SpriteComponent {
   static final double size = 48.0;
-  final double sensorScaleNative = 3;
+  final double sensorScaleNative = 0.7;
   final double sensorScaleWeb = -0.7;
   final double maxHorVel = 13;
 
