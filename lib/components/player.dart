@@ -88,7 +88,7 @@ class Player extends SpriteComponent {
     Vector2 vel = body.body.linearVelocity;
     if (horVel != 0)
       body.body.linearVelocity =
-          Vector2(horVel.sign * min(horVel, maxHorVel), vel.y);
+          Vector2(horVel.sign * min(horVel.abs(), maxHorVel), vel.y);
   }
 
   void remove() {
