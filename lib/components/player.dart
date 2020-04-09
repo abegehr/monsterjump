@@ -22,12 +22,10 @@ class Player extends SpriteComponent {
   static final double size = 48.0;
   final double sensorScaleNative = 3;
   final double sensorScaleWeb = -0.7;
-  final double horResistance = 0;
   final double maxHorVel = 13;
 
   PlayerBody body;
   bool willDestroy = false;
-  Vector2 acceleration = Vector2.zero();
   double horVel = 0;
 
   StreamSubscription gyroSubNative;
@@ -46,8 +44,6 @@ class Player extends SpriteComponent {
     if (!kIsWeb) {
       // nativemobile
       gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
-        //Adding up the scaled sensor data to the current acceleration
-        acceleration = Vector2(event.y * sensorScaleNative, 0);
       });
     } else {
       // web // TODO move to web only.
@@ -91,12 +87,6 @@ class Player extends SpriteComponent {
     Vector2 vel = body.body.linearVelocity;
     // linear velocity
     if (horVel != 0) body.body.linearVelocity = Vector2(horVel, vel.y);
-    // acceleration
-    double speed = vel.length;
-    Vector2 horResistanceVec =
-        Vector2(vel.x * pow(speed, 2) * horResistance, 0);
-    if (acceleration.length != 0)
-      body.body.applyForceToCenter(acceleration - horResistanceVec);
   }
 
   void remove() {
