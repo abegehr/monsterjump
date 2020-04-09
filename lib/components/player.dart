@@ -58,7 +58,6 @@ class Player extends SpriteComponent {
               event.interval;
 
           horVel += sensorScaleWeb * rot;
-          if (horVel.abs() > maxHorVel) horVel = horVel.sign * maxHorVel;
           print("horVel: $horVel");
         }
       };
@@ -87,8 +86,9 @@ class Player extends SpriteComponent {
 
     // move with gyroscope
     Vector2 vel = body.body.linearVelocity;
-    // linear velocity
-    if (horVel != 0) body.body.linearVelocity = Vector2(horVel, vel.y);
+    if (horVel != 0)
+      body.body.linearVelocity =
+          Vector2(horVel.sign * min(horVel, maxHorVel), vel.y);
   }
 
   void remove() {
