@@ -44,8 +44,8 @@ class Player extends SpriteComponent {
     if (!kIsWeb) {
       // nativemobile
       gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
-        // Setting horVel as scaled sensor data
-        horVel = event.y * sensorScaleNative;
+        // Add scaled sensor data to horVel
+        horVel += event.y * sensorScaleNative;
       });
     } else {
       // web // TODO move to web only.
