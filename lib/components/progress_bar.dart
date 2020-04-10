@@ -11,7 +11,7 @@ class ProgressBar extends StatefulWidget {
 }
 
 class ProgressBarState extends State<ProgressBar> {
-  Future<String> fetchData() async {
+  Future<int> fetchData() async {
     final response = await http.get('https://corona.lmao.ninja/countries');
 
     if (response.statusCode == 200) {
@@ -24,25 +24,30 @@ class ProgressBarState extends State<ProgressBar> {
       int i = 0;
       while (i < list.length) {
         var entry = list[i];
-        if (entry.name == 'Germany') return entry.todayCases.toString();
+        if (entry.name == 'Germany') return entry.todayCases;
         i++;
       }
-      return ' ';
     } else {
       throw Exception('Failed to fetch data');
     }
+    return -1;
   }
 
-  Future<String> fetchGamesCount() async {
+  Future<int> fetchGamesCount() {
     return Firestore.instance
         .collection('stats')
         .document('stat')
         .get()
         .then((docSnap) => docSnap != null ? docSnap.data['gamesCount'] : null)
-        .then((games) {
-      print("fetchGamesCount(): $games");
-      return games.toString();
+        .then((gamesCount) {
+      print("fetchGamesCount(): $gamesCount");
+      return gamesCount;
     });
+  }
+
+  Future<double> fetchProgress() {
+    return Future.wait([fetchGamesCount(), fetchData()])
+        .then((List<int> result) => result[0] / result[1]);
   }
 
   @override
@@ -72,7 +77,7 @@ class ProgressBarState extends State<ProgressBar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        FutureBuilder<String>(
+                        FutureBuilder<int>(
                           future: fetchGamesCount(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) print(snapshot.error);
@@ -108,7 +113,7 @@ class ProgressBarState extends State<ProgressBar> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        FutureBuilder<String>(
+                        FutureBuilder<int>(
                           future: fetchData(),
                           builder: (context, snapshot) {
                             if (snapshot.hasError) print(snapshot.error);
@@ -138,26 +143,30 @@ class ProgressBarState extends State<ProgressBar> {
               ),
               Expanded(
                 flex: 1,
-                child: CircularPercentIndicator(
-                  radius: 80.0,
-                  lineWidth: 10.0,
-                  animation: true,
-                  percent: 0,
-                  progressColor: Color(0xFF40DBFF),
-                  backgroundColor: Color(0xFFE1F5FE),
-                  animationDuration: 2000,
-                  animateFromLastPercent: true,
-                  circularStrokeCap: CircularStrokeCap.round,
-                  center: Text(
-                    "0%",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14.0,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              )
+                child: FutureBuilder<double>(
+                    future: fetchProgress(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) print(snapshot.error);
+                      return snapshot.hasData
+                          ? CircularPercentIndicator(
+                              radius: 80.0,
+                              lineWidth: 10.0,
+                              animation: true,
+                              percent: snapshot.data,
+                              progressColor: Color(0xFF40DBFF),
+                              backgroundColor: Color(0xFFE1F5FE),
+                              animationDuration: 2000,
+                              animateFromLastPercent: true,
+                              circularStrokeCap: CircularStrokeCap.round,
+                              center: Text(snapshot.data.toStringAsFixed(2),
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 14.0,
+                                    color: Colors.white,
+                                  )))
+                          : Center(child: CircularProgressIndicator());
+                    }),
+              ),
             ],
           ),
           Padding(
