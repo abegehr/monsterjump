@@ -30,7 +30,6 @@ class MenuOverlay extends StatelessWidget {
               flex: 3,
               child: Align(
                 alignment: Alignment(-0.80, 0.5),
-
                 child: Image.asset(
                   'assets/images/ui/title.png',
                   width: 280,
@@ -80,7 +79,7 @@ class MenuOverlay extends StatelessWidget {
                 }),
             // PrivacyPolicyButton
             Expanded(
-              flex: 1,
+              flex: 2,
               child: ProgressBar(),
             ),
             Expanded(
