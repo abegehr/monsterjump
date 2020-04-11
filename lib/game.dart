@@ -13,6 +13,7 @@ import 'package:wakelock/wakelock.dart';
 // overlays
 import 'package:monsterjump/overlays/menu_overlay.dart';
 import 'package:monsterjump/overlays/gameover_overlay.dart';
+import 'package:monsterjump/landing_page.dart';
 
 class CoronaJump extends BaseGame with HasWidgetsOverlay {
   Size screenSize;
@@ -31,11 +32,17 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     // background
     add(background);
 
-    // start menu
-    showMenuOverlay();
+    // landingpage
+    showLandingPage();
+  }
+
+  void showLandingPage() {
+    addWidgetOverlay(
+        "Page", LandingPage(goHome: showMenuOverlay)); //start: start
   }
 
   void showMenuOverlay() {
+    removeWidgetOverlay("Page");
     removeWidgetOverlay("Gameover");
     addWidgetOverlay("Menu", MenuOverlay(start: start));
     Admob.showBannerAd();
