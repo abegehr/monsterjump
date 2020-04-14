@@ -2,6 +2,7 @@ import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:monsterjump/components/sensors_test.dart'; //DEBUG
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
@@ -47,6 +48,7 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
+            SensorsTest(), //DEBUG
             // ShareButton
             Expanded(
               flex: 1,
