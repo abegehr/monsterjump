@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:html'; // TODO move to web only?
+//import 'dart:html'; // TODO move to web only.
 import 'dart:math';
 import 'dart:ui';
 import 'package:flame/components/component.dart';
@@ -10,28 +9,27 @@ import 'package:flame/box2d/box2d_component.dart';
 import 'package:box2d_flame/box2d.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
-import 'package:js/js.dart';
+//import 'package:js/js.dart'; // TODO move to web only.
 import 'package:monsterjump/utils/globals.dart';
 import 'package:sensors/sensors.dart';
 
+// TODO move to web only.
 // ignore: missing_js_lib_annotation
-@JS("requestDeviceMotionEventPermission")
-external void requestDeviceMotionEventPermission();
+//@JS("requestDeviceMotionEventPermission")
+//external void requestDeviceMotionEventPermission();
 
 class Player extends SpriteComponent {
   static final double size = 48.0;
-  final double sensorScaleNative = 3;
+  final double sensorScaleNative = 0.7;
   final double sensorScaleWeb = -0.7;
-  final double horResistance = 0;
   final double maxHorVel = 13;
 
   PlayerBody body;
   bool willDestroy = false;
-  Vector2 acceleration = Vector2.zero();
   double horVel = 0;
 
   StreamSubscription gyroSubNative;
-  EventListener gyroListenerWeb;
+  //EventListener gyroListenerWeb; // TODO move to web only.
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(
@@ -46,11 +44,12 @@ class Player extends SpriteComponent {
     if (!kIsWeb) {
       // nativemobile
       gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
-        //Adding up the scaled sensor data to the current acceleration
-        acceleration = Vector2(event.y * sensorScaleNative, 0);
+        // Add scaled sensor data to horVel
+        horVel += event.y * sensorScaleNative;
       });
     } else {
-      // web
+      // web // TODO move to web only.
+      /*
       gyroListenerWeb = (event) {
         if (event is DeviceMotionEvent &&
             event.rotationRate != null &&
@@ -59,7 +58,6 @@ class Player extends SpriteComponent {
               event.interval;
 
           horVel += sensorScaleWeb * rot;
-          if (horVel.abs() > maxHorVel) horVel = horVel.sign * maxHorVel;
           print("horVel: $horVel");
         }
       };
@@ -68,6 +66,7 @@ class Player extends SpriteComponent {
       requestDeviceMotionEventPermission();
 
       document.window.addEventListener('devicemotion', gyroListenerWeb);
+      */
     }
   }
 
@@ -76,8 +75,8 @@ class Player extends SpriteComponent {
       // native mobile
       if (gyroSubNative != null) gyroSubNative.cancel();
     } else {
-      // web
-      document.window.removeEventListener('devicemotion', gyroListenerWeb);
+      // web // TODO move to web only.
+      //document.window.removeEventListener('devicemotion', gyroListenerWeb);
     }
   }
 
@@ -87,14 +86,8 @@ class Player extends SpriteComponent {
 
     // move with gyroscope
     Vector2 vel = body.body.linearVelocity;
-    // linear velocity
-    if (horVel != 0) body.body.linearVelocity = Vector2(horVel, vel.y);
-    // acceleration
-    double speed = vel.length;
-    Vector2 horResistanceVec =
-        Vector2(vel.x * pow(speed, 2) * horResistance, 0);
-    if (acceleration.length != 0)
-      body.body.applyForceToCenter(acceleration - horResistanceVec);
+    body.body.linearVelocity =
+        Vector2(horVel.sign * min(horVel.abs(), maxHorVel), vel.y);
   }
 
   void remove() {
