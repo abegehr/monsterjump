@@ -15,6 +15,7 @@ class _SensorsTestState extends State<SensorsTest> {
   AccelerometerEvent accelerometerEvent;
   UserAccelerometerEvent userAccelerometerEvent;
   GyroscopeEvent gyroscopeEvent;
+  GyroscopeEvent gyroscopeEventSum;
 
   StreamSubscription accelerometerEventSub;
   StreamSubscription userAccelerometerEventSub;
@@ -36,6 +37,10 @@ class _SensorsTestState extends State<SensorsTest> {
     gyroscopeEventSub = gyroscopeEvents.listen((GyroscopeEvent event) {
       setState(() {
         gyroscopeEvent = event;
+        gyroscopeEventSum = (gyroscopeEventSum != null)
+            ? GyroscopeEvent(gyroscopeEventSum.x + event.x,
+                gyroscopeEventSum.y + event.y, gyroscopeEventSum.z + event.z)
+            : event;
       });
     });
   }
@@ -70,6 +75,8 @@ class _SensorsTestState extends State<SensorsTest> {
         buildEventData(userAccelerometerEvent),
         Text("GyroscopeEvent"),
         buildEventData(gyroscopeEvent),
+        Text("GyroscopeEventSum"),
+        buildEventData(gyroscopeEventSum),
       ],
     ));
   }
