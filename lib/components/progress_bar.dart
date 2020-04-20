@@ -12,7 +12,7 @@ class ProgressBar extends StatefulWidget {
 
 class ProgressBarState extends State<ProgressBar> {
   Future<int> fetchData() async {
-    final response = await http.get('https://corona.lmao.ninja/countries');
+    final response = await http.get('https://corona.lmao.ninja/v2/countries');
 
     if (response.statusCode == 200) {
       final parsedResponse =
@@ -147,6 +147,8 @@ class ProgressBarState extends State<ProgressBar> {
                     future: fetchProgress(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) print(snapshot.error);
+                      var value = snapshot.data;
+                      var percent = value * 100;
                       return snapshot.hasData
                           ? CircularPercentIndicator(
                               radius: 80.0,
@@ -158,7 +160,7 @@ class ProgressBarState extends State<ProgressBar> {
                               animationDuration: 2000,
                               animateFromLastPercent: true,
                               circularStrokeCap: CircularStrokeCap.round,
-                              center: Text(snapshot.data.toStringAsFixed(2),
+                              center: Text(percent.toStringAsFixed(1) + '%',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 14.0,
