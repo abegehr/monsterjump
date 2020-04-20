@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'dart:js' as js;
 import 'package:flutter/material.dart';
+import 'package:monsterjump/components/progress_bar.dart';
 import 'dart:math';
 
 class LandingPage extends StatelessWidget {
@@ -21,7 +22,7 @@ class LandingPage extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: ListView(
             scrollDirection: Axis.vertical,
             children: <Widget>[
@@ -77,8 +78,8 @@ class LandingPage extends StatelessWidget {
                   )),
               SizedBox(height: 80),
               Container(
-                height: 80,
-                color: Colors.blue,
+                height: 150,
+                child: ProgressBar(),
               ),
               SizedBox(height: 80),
               // Content "Unser Ziel"
