@@ -75,8 +75,8 @@ flutter:
     - assets/images/ui/play_button.png
     - assets/images/ui/try_again.png
     - assets/images/ui/menu_button.png
-    - assets/images/cj/ios_share.png
-    - assets/images/cj/android_settings.png
+    - assets/images/ui/playstore.png
+    - assets/images/ui/appstore.png
     - assets/images/cj/game_play.png
     - assets/images/tipps/1.png
     - assets/images/tipps/2.png
