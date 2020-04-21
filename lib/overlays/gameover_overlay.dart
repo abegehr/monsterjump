@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
@@ -6,8 +7,10 @@ class GameoverOverlay extends StatelessWidget {
   final Function restart;
   final Function goHome;
   final int score;
+  final int localHighScore;
 
-  GameoverOverlay({Key key, this.restart, this.goHome, this.score})
+  GameoverOverlay(
+      {Key key, this.restart, this.goHome, this.score, this.localHighScore})
       : super(key: key);
 
   @override
@@ -28,7 +31,9 @@ class GameoverOverlay extends StatelessWidget {
               builder: (BuildContext context, AsyncSnapshot<int> snap) {
                 String text = "";
                 int score = snap.data;
-                if (snap.hasData)
+                if (kIsWeb)
+                  text = "Local Personal HighScore: " + localHighScore.toString();
+                else if (snap.hasData)
                   text = score != null
                       ? "Personal HighScore: $score"
                       : "Personal HighScore: loading…";

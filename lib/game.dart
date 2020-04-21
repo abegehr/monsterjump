@@ -1,4 +1,6 @@
 import 'dart:ui';
+import 'package:flutter/foundation.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:monsterjump/components/level_wrapper.dart';
 import 'package:monsterjump/utils/admob.dart';
 import 'package:monsterjump/utils/score.dart';
@@ -24,8 +26,10 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   LevelWrapper level;
   double maxHeight = 0;
   int score = 0;
+  int localHighScore = 0;
+  FirebaseAnalytics analytics;
 
-  CoronaJump() {
+  CoronaJump({this.analytics}) {
     // Box2D
     box.initializeWorld();
 
@@ -41,17 +45,26 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
         "Page", LandingPage(goHome: showMenuOverlay)); //start: start
   }
 
+  // navigation
+
   void showMenuOverlay() {
     removeWidgetOverlay("Page");
     removeWidgetOverlay("Gameover");
-    addWidgetOverlay("Menu", MenuOverlay(start: start));
+    addWidgetOverlay(
+        "Menu", MenuOverlay(start: start, localHighScore: localHighScore));
     Admob.showBannerAd();
   }
 
   void showGameoverOverlay() {
     removeWidgetOverlay("Menu");
-    addWidgetOverlay("Gameover",
-        GameoverOverlay(restart: start, goHome: showMenuOverlay, score: score));
+    addWidgetOverlay(
+        "Gameover",
+        GameoverOverlay(
+          restart: start,
+          goHome: showMenuOverlay,
+          score: score,
+          localHighScore: localHighScore,
+        ));
     Admob.showBannerAd();
   }
 
@@ -62,6 +75,8 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
     Admob.loadBannerAd();
   }
 
+  // gameplay
+
   void start() {
     if (!playing) {
       print("START GAME");
@@ -71,19 +86,21 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
       // overlays
       hideOverlay();
-
       // background
       background.reset();
-
       // level
       add(level = new LevelWrapper(box));
-
       // player
       addPlayer();
       player.start();
 
+      // log start
+      analytics.logEvent(
+        name: 'gamestart',
+      );
+
       // To keep the screen on:
-      Wakelock.enable();
+      if (!kIsWeb) Wakelock.enable();
     }
   }
 
@@ -98,6 +115,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       playing = false;
 
       // save score
+      if (score > localHighScore) localHighScore = score;
       Score.saveScore(score);
 
       // overlay
@@ -107,10 +125,20 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       // level
       level.remove();
 
+      // log gameover
+      analytics.logEvent(
+        name: 'gameover',
+        parameters: <String, dynamic>{
+          'score': score,
+        },
+      );
+
       // To let the screen turn off again:
-      Wakelock.disable();
+      if (!kIsWeb) Wakelock.disable();
     }
   }
+
+  // rendering
 
   @override
   void render(Canvas canvas) {

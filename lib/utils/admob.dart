@@ -29,7 +29,7 @@ class Admob {
       if (Platform.isAndroid) {
         return 'ca-app-pub-2773918257223246~2092525035';
       } else if (Platform.isIOS) {
-        return 'ca-app-pub-2773918257223246~2647892952';
+        return 'ca-app-pub-2773918257223246~9983746474';
       } else {
         return null;
       }
@@ -49,7 +49,7 @@ class Admob {
       if (Platform.isAndroid) {
         return 'ca-app-pub-2773918257223246/1799282503';
       } else if (Platform.isIOS) {
-        return 'ca-app-pub-2773918257223246/6359482225';
+        return 'ca-app-pub-2773918257223246/1092144412';
       } else {
         return null;
       }
