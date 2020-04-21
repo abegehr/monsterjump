@@ -155,7 +155,7 @@ class LandingPage extends StatelessWidget {
               ),
               SizedBox(height: 110),
               // Content "Warum nicht als App"
-              Text('Warum nicht als App?',
+              Text('Corona Jump als App?',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 24,
@@ -165,133 +165,40 @@ class LandingPage extends StatelessWidget {
 
               SizedBox(height: 30),
               Text(
-                  ' Apple und Google gestatten keine Apps zum Thema “COVID-19” in ihren Stores, es sei denn sie sind von einer offiziellen Gesundheitsorganisation. Mehr weiter unten.',
+                  ' Apple und Google gestatten keine Apps mit Bezug zu “COVID-19” in ihren Stores, es sei denn sie sind von einer offiziellen Gesundheitsorganisation (mehr weiter unten). Deshalb haben wir einmal Corona Jump als Web-App und einmal "Monster Jump". ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w200,
                     color: Colors.white,
                   )),
-              SizedBox(height: 15),
-              Text(
-                  ' Außerdem muss man bei einer Web-App wie Corona Jump keine Updates runterladen. ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w200,
-                    color: Colors.white,
-                  )),
-
-              SizedBox(height: 110),
-              // Table manual header
-              Text('Corona Jump fürs Handy',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Impact',
-                    color: Colors.white,
-                  )),
-
-              SizedBox(height: 15),
-              Text(' Hol dir Corona Jump einfach auf dein Smartphone. ',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w200,
-                    color: Colors.white,
-                  )),
-
-              SizedBox(height: 30),
-              // Table manual
-              Table(children: [
-                TableRow(children: [
-                  Text("iOS",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      )),
-                  Text("Android",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.white,
-                      )),
-                ]),
-                TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Image.asset(
-                      'assets/images/cj/ios_share.png',
-                      height: 32,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                    child: Image.asset(
-                      'assets/images/cj/android_settings.png',
-                      height: 32,
-                    ),
-                  ),
-                ]),
-                TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text("Zum Home-Bildschirm",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text("Zum Startbildschirm hinzu",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white,
-                        )),
-                  ),
-                ]),
-                TableRow(children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text("Hinzufügen",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white,
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text("Hinzufügen",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.white,
-                        )),
-                  ),
-                ])
-              ]),
-              SizedBox(height: 110),
-              // Play Button #2
+              SizedBox(height: 80),
               GestureDetector(
-                onTap: goHome,
+                onTap: () {
+                  js.context.callMethod("open", [
+                    "https://play.google.com/store/apps/details?id=app.monsterjump.app"
+                  ]);
+                },
                 child: Image.asset(
-                  'assets/images/ui/play_button.png',
+                  'assets/images/ui/playstore.png',
                   width: 210,
                   height: 60,
                 ),
               ),
-              SizedBox(height: 110),
+              SizedBox(height: 30),
+              GestureDetector(
+                onTap: () {
+                  js.context.callMethod("open", [
+                    "https://apps.apple.com/us/app/monsterjump-go-high/id1502870226?l=de&ls=1"
+                  ]);
+                },
+                child: Image.asset(
+                  'assets/images/ui/appstore.png',
+                  width: 210,
+                  height: 60,
+                ),
+              ),
+              SizedBox(height: 80),
               // Content "Wie kann ich unterstützen?"
               Text('Wie kann ich mitmachen?',
                   textAlign: TextAlign.center,
@@ -327,6 +234,17 @@ class LandingPage extends StatelessWidget {
                     fontWeight: FontWeight.w200,
                     color: Colors.white,
                   )),
+              SizedBox(height: 110),
+
+              // Play Button #2
+              GestureDetector(
+                onTap: goHome,
+                child: Image.asset(
+                  'assets/images/ui/play_button.png',
+                  width: 210,
+                  height: 60,
+                ),
+              ),
               SizedBox(height: 110),
               // Content "Über uns"
               Text('Über uns:',
