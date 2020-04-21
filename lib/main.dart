@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:monsterjump/game.dart';
-import 'package:monsterjump/utils/score.dart';
 
 void main() {
   //Crashlytics.instance.enableInDevMode = true;
