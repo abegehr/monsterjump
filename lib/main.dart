@@ -15,7 +15,7 @@ void main() {
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
   // run in zone for stacktrace
-  runZoned<Future<void>>(() async {
+  runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // Admob setup
@@ -37,7 +37,7 @@ void main() {
 
     // run app
     runApp(GameContainer());
-  }, onError: Crashlytics.instance.recordError);
+  }, Crashlytics.instance.recordError);
 }
 
 class GameContainer extends StatelessWidget {
