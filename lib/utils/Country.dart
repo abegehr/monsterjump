@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 class Country {
-  // {"country":"China","cases":80849,"todayCases":25,"deaths":3199,"todayDeaths":10,"recovered":66915,"critical":3226}
+  // {"country":"China","cases":80849,"cases":25,"deaths":3199,"todayDeaths":10,"recovered":66915,"critical":3226}
   final String name;
-  final int todayCases;
+  final int cases;
   /*final int cases;
   final int deaths;
   final int todayDeaths;
@@ -12,19 +12,19 @@ class Country {
 
   Country({
     this.name,
-    this.todayCases,
+    this.cases,
   });
 
   factory Country.fromJson(Map<String, dynamic> json) {
     return Country(
       name: json['country'],
-      todayCases: json['todayCases'],
+      cases: json['cases'],
     );
   }
 
   Map<String, dynamic> toJson() => {
         'country': name,
-        'todayCases': todayCases,
+        'cases': cases,
       };
 
   @override

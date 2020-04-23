@@ -24,7 +24,7 @@ class ProgressBarState extends State<ProgressBar> {
       int i = 0;
       while (i < list.length) {
         var entry = list[i];
-        if (entry.name == 'Germany') return entry.todayCases;
+        if (entry.name == 'Germany') return entry.cases;
         i++;
       }
     } else {
@@ -60,15 +60,6 @@ class ProgressBarState extends State<ProgressBar> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                flex: 1,
-                child: Text('Fortschritt =',
-                    style: TextStyle(
-                      fontFamily: 'Impact',
-                      fontSize: 18,
-                      color: Colors.white,
-                    )),
-              ),
               Expanded(
                 flex: 2,
                 child: Column(
@@ -129,7 +120,7 @@ class ProgressBarState extends State<ProgressBar> {
                         ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(8, 4, 0, 0),
-                          child: Text('*neue Fälle in DE',
+                          child: Text('*Fälle in DE',
                               style: TextStyle(
                                 fontFamily: 'Impact',
                                 fontSize: 11,
