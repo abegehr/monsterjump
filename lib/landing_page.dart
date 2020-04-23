@@ -85,10 +85,8 @@ class LandingPage extends StatelessWidget {
                     color: Colors.white,
                   )),
 
-              Container(
-                height: 200,
-                child: ProgressBar(),
-              ),
+              ProgressBar(),
+
               SizedBox(height: 80),
               // Content "Unser Ziel"
               Text('Unser Ziel:',
