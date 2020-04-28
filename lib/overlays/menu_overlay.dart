@@ -61,7 +61,8 @@ class MenuOverlay extends StatelessWidget {
                   String text = "";
                   int score = snap.data;
                   if (kIsWeb)
-                    text = "Local Personal HighScore: " + localHighScore.toString();
+                    text = "Local Personal HighScore: " +
+                        localHighScore.toString();
                   else if (snap.hasData)
                     text = score != null
                         ? "Personal HighScore: $score"
