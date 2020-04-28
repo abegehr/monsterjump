@@ -3,7 +3,6 @@ import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:monsterjump/components/sensors_test.dart'; //DEBUG
 
 class MenuOverlay extends StatelessWidget {
   final Function start;
@@ -50,7 +49,6 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
-            SensorsTest(), //DEBUG
             // ShareButton
             Expanded(
               flex: 1,
@@ -63,7 +61,8 @@ class MenuOverlay extends StatelessWidget {
                   String text = "";
                   int score = snap.data;
                   if (kIsWeb)
-                    text = "Local Personal HighScore: " + localHighScore.toString();
+                    text = "Local Personal HighScore: " +
+                        localHighScore.toString();
                   else if (snap.hasData)
                     text = score != null
                         ? "Personal HighScore: $score"
