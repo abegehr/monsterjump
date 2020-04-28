@@ -20,7 +20,7 @@ import 'package:sensors/sensors.dart';
 
 class Player extends SpriteComponent {
   static final double size = 48.0;
-  final double sensorScaleNative = 0.7;
+  final double sensorScaleNative = 2;
   final double sensorScaleWeb = -0.7;
   final double maxHorVel = 13;
 
@@ -28,7 +28,7 @@ class Player extends SpriteComponent {
   bool willDestroy = false;
   double horVel = 0;
 
-  StreamSubscription gyroSubNative;
+  StreamSubscription accelerometerEventSubNative;
   //EventListener gyroListenerWeb; // TODO move to web only.
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
@@ -43,9 +43,10 @@ class Player extends SpriteComponent {
   void start() {
     if (!kIsWeb) {
       // nativemobile
-      gyroSubNative = gyroscopeEvents.listen((GyroscopeEvent event) {
+      accelerometerEventSubNative =
+          accelerometerEvents.listen((AccelerometerEvent event) {
         // Add scaled sensor data to horVel
-        horVel += event.y * sensorScaleNative;
+        horVel = -event.x * sensorScaleNative;
       });
     } else {
       // web // TODO move to web only.
@@ -73,7 +74,8 @@ class Player extends SpriteComponent {
   void stop() {
     if (!kIsWeb) {
       // native mobile
-      if (gyroSubNative != null) gyroSubNative.cancel();
+      if (accelerometerEventSubNative != null)
+        accelerometerEventSubNative.cancel();
     } else {
       // web // TODO move to web only.
       //document.window.removeEventListener('devicemotion', gyroListenerWeb);
