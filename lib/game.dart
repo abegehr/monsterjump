@@ -25,6 +25,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
   LevelWrapper level;
   double maxHeight = 0;
   int score = 0;
+  int localHighScore = 0;
   FirebaseAnalytics analytics;
 
   CoronaJump({this.analytics}) {
@@ -42,14 +43,21 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
 
   void showMenuOverlay() {
     removeWidgetOverlay("Gameover");
-    addWidgetOverlay("Menu", MenuOverlay(start: start));
+    addWidgetOverlay(
+        "Menu", MenuOverlay(start: start, localHighScore: localHighScore));
     Admob.showBannerAd();
   }
 
   void showGameoverOverlay() {
     removeWidgetOverlay("Menu");
-    addWidgetOverlay("Gameover",
-        GameoverOverlay(restart: start, goHome: showMenuOverlay, score: score));
+    addWidgetOverlay(
+        "Gameover",
+        GameoverOverlay(
+          restart: start,
+          goHome: showMenuOverlay,
+          score: score,
+          localHighScore: localHighScore,
+        ));
     Admob.showBannerAd();
   }
 
@@ -100,6 +108,7 @@ class CoronaJump extends BaseGame with HasWidgetsOverlay {
       playing = false;
 
       // save score
+      if (score > localHighScore) localHighScore = score;
       Score.saveScore(score);
 
       // overlay

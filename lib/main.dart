@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/util.dart';
 import 'package:monsterjump/game.dart';
-import 'package:monsterjump/utils/score.dart';
 
 void main() {
   //Crashlytics.instance.enableInDevMode = true;
@@ -16,7 +15,7 @@ void main() {
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
 
   // run in zone for stacktrace
-  runZoned<Future<void>>(() async {
+  runZonedGuarded<Future<void>>(() async {
     WidgetsFlutterBinding.ensureInitialized();
 
     // Admob setup
@@ -38,7 +37,7 @@ void main() {
 
     // run app
     runApp(GameContainer());
-  }, onError: Crashlytics.instance.recordError);
+  }, Crashlytics.instance.recordError);
 }
 
 class GameContainer extends StatelessWidget {
