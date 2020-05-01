@@ -7,7 +7,7 @@ import 'package:js/js.dart';
 external void requestDeviceMotionEventPermission();
 
 class MovementNative implements Movement {
-  final double sensorScaleWeb = -0.7;
+  final double sensorScaleWeb = 5;
 
   EventListener accelerometerListenerWeb;
 
