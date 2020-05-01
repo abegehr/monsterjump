@@ -21,7 +21,7 @@ class Player extends SpriteComponent {
 
   Player(Box2DComponent box, {double x: 0, double y: -160})
       : super.fromSprite(
-            Player.size, Player.size, new Sprite("monster/monster.png")) {
+            Player.size, Player.size, new Sprite("virus/virus.png")) {
     anchor = Anchor.center;
     this.x = x;
     this.y = y;

@@ -17,6 +17,7 @@ environment:
   sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
+  percent_indicator: "^2.1.1"
   flutter:
     sdk: flutter
 
@@ -66,7 +67,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/bg/background.png
-    - assets/images/monster/monster.png
+    - assets/images/virus/virus.png
     - assets/images/platform/platform.png
     - assets/images/ui/title.png
     - assets/images/ui/game_over.png
@@ -74,6 +75,19 @@ flutter:
     - assets/images/ui/play_button.png
     - assets/images/ui/try_again.png
     - assets/images/ui/menu_button.png
+    - assets/images/ui/playstore.png
+    - assets/images/ui/appstore.png
+    - assets/images/cj/game_play.png
+    - assets/images/tipps/1.png
+    - assets/images/tipps/2.png
+    - assets/images/tipps/3.png
+    - assets/images/tipps/4.png
+    - assets/images/tipps/5.png
+    - assets/images/subtitle/1.png
+    - assets/images/subtitle/2.png
+    - assets/images/subtitle/3.png
+    - assets/images/subtitle/4.png
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
