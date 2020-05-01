@@ -17,7 +17,7 @@ class MovementNative implements Movement {
           event.accelerationIncludingGravity != null &&
           event.accelerationIncludingGravity.x != null) {
         // Add scaled sensor data to horVel
-        double horVel = -event.accelerationIncludingGravity.x * sensorScaleWeb;
+        double horVel = event.accelerationIncludingGravity.x * sensorScaleWeb;
         // callback horizontal velocity
         cb(horVel);
       }
