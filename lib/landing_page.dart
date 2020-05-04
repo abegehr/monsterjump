@@ -26,7 +26,7 @@ class LandingPage extends StatelessWidget {
           child: ListView(
             scrollDirection: Axis.vertical,
             children: <Widget>[
-              SizedBox(height: 180),
+              SizedBox(height: 50),
 
               // Title
               Align(
@@ -107,7 +107,7 @@ class LandingPage extends StatelessWidget {
                   )),
               SizedBox(height: 30),
               Text(
-                  ' Wir teilen die Anzahl aller Spiele durch die tägliche Anzahl an neuen Infizierten in Deutschland, um den Fortschritt festzuhalten.  ',
+                  ' Wir teilen die Anzahl aller Spiele durch die aktuelle Zahl der Infizierten in Deutschland, um den Fortschritt festzuhalten.  ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontWeight: FontWeight.w200,
