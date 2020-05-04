@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:monsterjump/overlays/widgets/share_button.dart';
 import 'package:monsterjump/utils/score.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -55,11 +54,7 @@ class MenuOverlay extends StatelessWidget {
                 ),
               ),
             ),
-            // ShareButton
-            Expanded(
-              flex: 1,
-              child: ShareButton(),
-            ),
+
             // Highscore
             FutureBuilder(
                 future: Score.getHighscore(),
