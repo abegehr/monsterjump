@@ -19,7 +19,9 @@ class GameoverOverlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //Background
       decoration: new BoxDecoration(color: Color.fromRGBO(0, 0, 0, 0.3)),
+      //Menu Button
       child: Expanded(
         flex: 1,
         child: Column(
@@ -41,7 +43,7 @@ class GameoverOverlay extends StatelessWidget {
                 ),
               ),
             ),
-
+//Game Over png
             Expanded(
               flex: 3,
               child: Padding(
@@ -49,6 +51,7 @@ class GameoverOverlay extends StatelessWidget {
                 child: Image.asset('assets/images/ui/game_over.png'),
               ),
             ),
+            //Random Image
             Expanded(
               flex: 1,
               child: Padding(
@@ -67,9 +70,10 @@ class GameoverOverlay extends StatelessWidget {
                 ),
               ),
             ),
+            //ProgressBar
             Expanded(flex: 3, child: ProgressBar()),
 
-            // ShareButton
+            // Scores & ShareButton in Row
             Expanded(
               flex: 1,
               child: Padding(
@@ -120,6 +124,7 @@ class GameoverOverlay extends StatelessWidget {
                 ),
               ),
             ),
+            //Instagram png
             Expanded(
               flex: 1,
               child: GestureDetector(
@@ -131,7 +136,6 @@ class GameoverOverlay extends StatelessWidget {
                     'assets/images/cj/instagram.png',
                   )),
             ),
-            // HomeButton
           ],
         ),
       ),
