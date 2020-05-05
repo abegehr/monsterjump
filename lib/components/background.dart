@@ -7,7 +7,7 @@ import 'package:flame/components/mixins/tapable.dart';
 import 'package:flame/sprite.dart';
 import 'package:flame/anchor.dart';
 
-double bgAspectRatio = 14073 / 1125;
+double bgAspectRatio = 5420 / 750;
 
 class BackgroundTile extends SpriteComponent {
   BackgroundTile(double y)
