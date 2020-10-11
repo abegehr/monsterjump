@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "964026911169",
+    "firebase_url": "https://coronajump-22640.firebaseio.com",
+    "project_id": "coronajump-22640",
+    "storage_bucket": "coronajump-22640.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:964026911169:android:d753627956fad0b81d0740",
+        "android_client_info": {
+          "package_name": "app.monsterjump.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "964026911169-8euehqqn473mnc2j7ui674v1aos4pg2u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.monsterjump.app",
+            "certificate_hash": "cf05ead3334a3bcac4acdafa3c0a75c43fc05d71"
+          }
+        },
+        {
+          "client_id": "964026911169-7dl3r9ls9jqavnfe1m25l8k2636fgsmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.monsterjump.app",
+            "certificate_hash": "f1bbd6169c0c057ab1fd3a65f5b915cf06ce5303"
+          }
+        },
+        {
+          "client_id": "964026911169-pdkhlhu0ujt7h20utt4dkss21fnedec0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.monsterjump.app",
+            "certificate_hash": "5016b9de194236e44d76d378d044d25c64fb1861"
+          }
+        },
+        {
+          "client_id": "964026911169-eke49ca5h3493qfo8mpt4pd6r6d29jps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw4tv-oFnjjAW1Nby5ApdG2GFeYG8P0vY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "964026911169-eke49ca5h3493qfo8mpt4pd6r6d29jps.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "964026911169-7qqb15tublrl86ok7jtf3kpm7h95ldkb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.coronajump.app",
+                "app_store_id": "1502870226"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2773918257223246~2092525035"
+    }
+  ],
+  "configuration_version": "1"
+}

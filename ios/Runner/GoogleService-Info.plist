@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>964026911169-7qqb15tublrl86ok7jtf3kpm7h95ldkb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.964026911169-7qqb15tublrl86ok7jtf3kpm7h95ldkb</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>964026911169-8euehqqn473mnc2j7ui674v1aos4pg2u.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD74kFlSUleJinWDyz8BmNIkO_AEcvoQag</string>
+	<key>GCM_SENDER_ID</key>
+	<string>964026911169</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>app.coronajump.app</string>
+	<key>PROJECT_ID</key>
+	<string>coronajump-22640</string>
+	<key>STORAGE_BUCKET</key>
+	<string>coronajump-22640.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:964026911169:ios:8035a2a1f8d013121d0740</string>
+	<key>DATABASE_URL</key>
+	<string>https://coronajump-22640.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-2773918257223246~9983746474</string>
+</dict>
+</plist>
